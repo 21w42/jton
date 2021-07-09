@@ -1,0 +1,11 @@
+# Node modules
+node_modules
+
+# Yarn
+*.log
+
+# TypeScript Compilator
+tsconfig.*
+
+# Output
+dist
