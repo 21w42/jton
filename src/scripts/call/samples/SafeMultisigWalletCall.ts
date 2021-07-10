@@ -4,10 +4,11 @@ import {AbiContract, KeyPair} from '@tonclient/core/dist/modules'
 import {Contract} from '../../../contract'
 import {StringMap} from '../../../types'
 import {GiverSendEnum} from './GiverSendEnum'
+import {readAbi} from '../readers/readAbi'
 import {readInt} from '../readers/readInt'
 import {readBoolean} from '../readers/readBoolean'
+import {readJson} from '../readers/readJson'
 import {SafeMultisigWallet} from '../../../contracts'
-import fs from 'fs'
 import {SafeMultisigWalletCallEnum} from './SafeMultisigWalletCallEnum'
 
 export class SafeMultisigWalletCall extends Call {
@@ -77,12 +78,9 @@ export class SafeMultisigWalletCall extends Call {
         const value: number = readInt(map[SafeMultisigWalletCallEnum.VALUE])
         const bounce: boolean = readBoolean(map[SafeMultisigWalletCallEnum.BOUNCE])
         const flags: number = readInt(map[SafeMultisigWalletCallEnum.FLAGS])
-        const pathToAbi: string = map[SafeMultisigWalletCallEnum.PATH_TO_ABI]
+        const abi: AbiContract = readAbi(map[SafeMultisigWalletCallEnum.PATH_TO_ABI])
         const method: string = map[SafeMultisigWalletCallEnum.METHOD]
-        const parameters: string = map[SafeMultisigWalletCallEnum.PARAMETERS]
-        const input: Object = JSON.parse(parameters)
-        const text: string = fs.readFileSync(pathToAbi, { encoding: 'utf8'})
-        const abi: AbiContract = JSON.parse(text)
+        const input: Object = readJson(map[SafeMultisigWalletCallEnum.PARAMETERS])
         await contract.callAnotherContract(address, value, bounce, flags, abi, method, input, keys)
     }
 }
