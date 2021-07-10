@@ -8,7 +8,7 @@ import transferAbi from '../../contract/abi/transfer.abi.json'
 import {AccountType} from '../../contract'
 import {DeployMessages} from './constants/DeployMessages'
 import {B} from '../../utils'
-import {createClient, createRandomIfNotExist} from '../../utils'
+import {createClient, createRandomKeyFileIfNotExists} from '../../utils'
 
 export class Deploy {
     protected readonly _config: DeployConfig
@@ -41,7 +41,7 @@ export class Deploy {
      */
     public async run(): Promise<void> {
         const printer: Printer = new Printer(this._config.locale)
-        const keys: KeyPair = await createRandomIfNotExist(this._config.keys, this._client)
+        const keys: KeyPair = await createRandomKeyFileIfNotExists(this._config.keys, this._client)
         const contract: Contract = this._getContract(keys)
 
         /////////////

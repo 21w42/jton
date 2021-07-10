@@ -7,7 +7,7 @@ import {StringMap} from '../../types'
  * Wrapper for crypto.generate_random_sign_keys()
  * @param client
  */
-export async function random(client: TonClient): Promise<KeyPair> {
+export async function getRandomKeyPair(client: TonClient): Promise<KeyPair> {
     return await client.crypto.generate_random_sign_keys()
 }
 
@@ -17,23 +17,23 @@ export async function random(client: TonClient): Promise<KeyPair> {
  * Example:
  *     '/home/user/keys/GiverV2.keys.json'
  */
-export function read(file: string): KeyPair {
+export function readKeyFile(file: string): KeyPair {
     const text: string = fs.readFileSync(file, { encoding: 'utf8'})
     return JSON.parse(text)
 }
 
 /**
- * Create random keys if keys not exists.
+ * Create random keys if keys file not exists.
  * @param file Absolute path to file.
  * Example:
  *     '/home/user/keys/GiverV2.keys.json'
  * @param client
  */
-export async function createRandomIfNotExist(file: string, client: TonClient): Promise<KeyPair> {
+export async function createRandomKeyFileIfNotExists(file: string, client: TonClient): Promise<KeyPair> {
     if (fs.existsSync(file))
-        return read(file)
+        return readKeyFile(file)
 
-    const keys: KeyPair = await random(client)
+    const keys: KeyPair = await getRandomKeyPair(client)
     fs.writeFileSync(file, JSON.stringify(keys))
     return keys
 }
@@ -52,7 +52,7 @@ export async function createRandomIfNotExist(file: string, client: TonClient): P
  * Example:
  *     ${__dirname}/../library/keys/GiverV2.se.keys.json`
  */
-export function getKeys(key: string, keys: StringMap): string {
+export function filterKey(key: string, keys: StringMap): string {
     if (!keys.hasOwnProperty(key))
         throw new Error(`INVALID GIVER KEY ${key}`)
 

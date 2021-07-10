@@ -32,7 +32,7 @@ import {Config, NetConfig} from '../../config'
  *         giver: 'se'
  *     }
  */
-export function getConfig(config: Config): NetConfig {
+export function getNetConfig(config: Config): NetConfig {
     const PARAMETER: string = 'net'
     const ERROR_MESSAGE: string = 'UNKNOWN NETWORK'
     const net: string = process.env[PARAMETER] ?? config.defaultNet

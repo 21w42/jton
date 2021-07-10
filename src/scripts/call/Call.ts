@@ -9,7 +9,7 @@ import transferAbi from '../../contract/abi/transfer.abi.json'
 import colors from 'colors'
 import {CallMessages} from './constants/CallMessages'
 import {AccountType} from '../../contract'
-import {createClient, createRandomIfNotExist} from '../../utils'
+import {createClient, createRandomKeyFileIfNotExists} from '../../utils'
 import {StringMap} from '../../types'
 
 export class Call {
@@ -57,7 +57,7 @@ export class Call {
         if (this._names.length !== this._args.length)
             this._invalidArgumentsCountError(printer)
 
-        const keys: KeyPair = await createRandomIfNotExist(this._config.keys, this._client)
+        const keys: KeyPair = await createRandomKeyFileIfNotExists(this._config.keys, this._client)
         const contract: Contract = this._getContract(keys)
 
         ////////////////////////

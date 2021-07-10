@@ -22,8 +22,8 @@ export function x0(number: number | string): string {
  * Example:
  *     '7b0a0922...'
  */
-export function abi(abi: AbiContract): string {
-    return string(JSON.stringify(abi))
+export function abiToHex(abi: AbiContract): string {
+    return stringToHex(JSON.stringify(abi))
 }
 
 /**
@@ -35,7 +35,7 @@ export function abi(abi: AbiContract): string {
  * Example:
  *     '58595a313233'
  */
-export function string(string: string): string {
+export function stringToHex(string: string): string {
     return string.split('').map(x => x.charCodeAt(0).toString(16)).join('')
 }
 
@@ -48,8 +48,8 @@ export function string(string: string): string {
  * Example:
  *     ['58595a313233', '414243343536']
  */
-export function strings(strings: string[]): string[] {
-    return strings.map(x => string(x))
+export function stringsToHex(strings: string[]): string[] {
+    return strings.map(x => stringToHex(x))
 }
 
 /**
@@ -61,6 +61,6 @@ export function strings(strings: string[]): string[] {
  * Example:
  *     '0x3b9aca00'
  */
-export function number(number: number): string {
+export function numberToHex(number: number): string {
     return x0(number.toString(16))
 }

@@ -16,7 +16,7 @@ import {DeployedContractConfig} from './interfaces/DeployedContractConfig'
 import transferAbi from '../contract/abi/transfer.abi.json'
 import {AccountType} from './enums/AccountType'
 import {contractErrorMessages} from './contractErrorMessages'
-import {string} from '../utils'
+import {stringToHex} from '../utils'
 
 export class Contract {
     private readonly _client: TonClient
@@ -425,7 +425,7 @@ export class Contract {
             call_set: {
                 function_name: 'transfer',
                 input: {
-                    comment: string(comment)
+                    comment: stringToHex(comment)
                 }
             },
             is_internal: true
