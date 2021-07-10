@@ -15,7 +15,7 @@ import {ContractConfigInterface} from './interfaces/ContractConfigInterface'
 import {DeployedContractConfigInterface} from './interfaces/DeployedContractConfigInterface'
 import transferAbi from '../contract/abi/transfer.abi.json'
 import {AccountTypeEnum} from './enums/AccountTypeEnum'
-import {Hex} from '../utils/Hex'
+import {Hex} from '../utils'
 import {ContractErrorMessages} from './messages/ContractErrorMessages'
 
 export class Contract {
@@ -34,15 +34,15 @@ export class Contract {
      * PUBLIC *
      **********/
     /**
-     * @param client {TonClient}
-     * @param timeout {number}
+     * @param client
+     * @param timeout
      * Examples:
      *     3000
      *     30000
      *     60000
-     * @param config {ContractConfigInterface | DeployedContractConfigInterface}
+     * @param config
      * Examples:
-     *     // Already deployment contract
+     *     // Already deployed contract
      *     {
      *         abi: {'ABI version': 2, '...'}
      *         address: '0:7777777777777777777777777777777777777777777777777777777777777777'
@@ -73,15 +73,15 @@ export class Contract {
     }
 
     /**
-     * Called once. Use if you want to know the address of the contract before deployment.
+     * Calculates the address only once. Next time it returns the already calculated address.
+     * You can use if you want to know the address of the contract before deployment.
      * Example:
      *     const client: TonClient = Client.create(config.net.test)
-     *     const timeout: number = config.net.test.timeout
+     *     const timeout: number = 30_000
      *     const keys: KeyPair = await Keys.random(client)
      *     const root: ArtRoot = new ArtRoot(client, timeout, keys)
      *     const rootAddress: string = await root.address()
-     * @throws
-     * @return {Promise<string>}
+     * @return
      * Example:
      *     '0:97b53be2604579e89bd0077a5dcfbea857792eb2ff09849d14321fc2c167f29e'
      */
@@ -113,7 +113,7 @@ export class Contract {
      * Use this if you want to wait for a transaction from one contract to another.
      * Example:
      *     const client: TonClient = Client.create(config.net.test)
-     *     const timeout: number = config.net.test.timeout
+     *     const timeout: number = 30_000
      *     const sender: SenderContract = new SenderContract(client, timeout)
      *     const receiver: ReceiverContract = new ReceiverContract(client, timeout)
      *
@@ -122,7 +122,7 @@ export class Contract {
      *     const receiverAddress: string = await receiver.address()
      *     await sender.send(receiverAddress, 1_000_000_000)
      *     const waitingResult: boolean = await receiver.waitForTransaction(5000)
-     * @param {number} timeout. Time in milliseconds.
+     * @param timeout Time in milliseconds.
      * Examples:
      *     3000
      *     5000
@@ -155,7 +155,7 @@ export class Contract {
      * Return contract balance.
      * Example:
      *     const client: TonClient = Client.create(config.net.test)
-     *     const timeout: number = config.net.test.timeout
+     *     const timeout: number = 30_000
      *     const keys: KeyPair = await Keys.random(client)
      *     const safeMultisigWallet: SafeMultisigWallet = new SafeMultisigWallet(client, timeout, keys)
      *     const balance: string = await safeMultisigWallet.balance()
@@ -186,7 +186,6 @@ export class Contract {
      *     const keys: KeyPair = await Keys.random(client)
      *     const safeMultisigWallet: SafeMultisigWallet = new SafeMultisigWallet(client, timeout, keys)
      *     const accountType: AccountTypeEnum = await safeMultisigWallet.accountType()
-     * @return {Promise<AccountTypeEnum>}
      */
     public async accountType(): Promise<AccountTypeEnum> {
         const queryCollectionResult: ResultOfQueryCollection = await this._client.net.query_collection({
@@ -213,17 +212,15 @@ export class Contract {
      *************/
     /**
      * Run method locally.
-     * @param method {string} Method name.
+     * @param method Method name.
      * Example:
      *     'getHistory'
-     * @param input {Object}
+     * @param input
      * Example:
      *     {
      *         offset: 0,
      *         limit: 10
      *     }
-     * @protected
-     * @return {Promise<DecodedMessageBody>}
      */
     protected async _run(method: string, input: Object = {}): Promise<DecodedMessageBody> {
         //////////////
@@ -271,24 +268,21 @@ export class Contract {
 
     /**
      * External call.
-     * @param method {string} Method name.
+     * @param method Method name.
      * Example:
      *     'getHistory'
-     * @param input {Object}
+     * @param input
      * Example:
      *     {
      *         offset: 0,
      *         limit: 10
      *     }
-     * @param [keys] {KeyPair} Use if want call contact with another keys. Use this._keys by default.
+     * @param [keys] Use it if you want call contact with another keys. this._keys used by default.
      * Example:
      *     {
      *         public: '0x2ada2e65ab8eeab09490e3521415f45b6e42df9c760a639bcf53957550b25a16',
      *         secret: '0x172af540e43a524763dd53b26a066d472a97c4de37d5498170564510608250c3'
      *     }
-     * @throws
-     * @protected
-     * @return {Promise<ResultOfProcessMessage>}
      */
     protected async _call(method: string, input: Object = {}, keys?: KeyPair): Promise<ResultOfProcessMessage> {
         const keysPair: KeyPair | undefined = keys ?? this._keys
@@ -317,14 +311,12 @@ export class Contract {
 
     /**
      * Deploy.
-     * @param input {Object}
+     * @param input
      * Example:
      *     {
      *         count: 500
      *     }
-     * @protected
-     * @throws
-     * @return {Promise<boolean>}
+     * @return
      * Example:
      *     true
      */
@@ -389,19 +381,18 @@ export class Contract {
 
     /**
      * Generate payload message for internal call.
-     * @param abi {AbiContract}
+     * @param abi
      * Example:
      *     {'ABI version': 2, '...'}
-     * @param method {string}
+     * @param method
      * Example:
      *     'bet'
-     * @param input {Object}
+     * @param input
      * Example:
      *     {
      *         value: 1_000_000_000,
      *         luckyNumber: 50
      *     }
-     * @protected
      */
     protected async _getPayloadToCallAnotherContract(
         abi: AbiContract,
@@ -424,10 +415,9 @@ export class Contract {
 
     /**
      * Generate payload message with comment for transfer.
-     * @param comment {string}
+     * @param comment
      * Example:
      *     'for homeless'
-     * @protected
      */
     protected async _getPayloadToTransferWithComment(comment: string = ''): Promise<string> {
         const resultOfEncoding: ResultOfEncodeMessageBody = await this._client.abi.encode_message_body({

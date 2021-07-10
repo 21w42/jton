@@ -7,7 +7,7 @@ import {errorConsoleTerminal} from './terminal/errorConsoleTerminal'
 import colors from 'colors'
 import {ExtensionType} from './types/ExtensionType'
 import {ExportType} from './types/ExportType'
-import {StringMap} from '../../types/StringMap'
+import {StringMap} from '../../types'
 
 export class Make {
     private static readonly CONFIG = {
@@ -88,7 +88,6 @@ export class Make {
      * @param file {string} Relative path without '.sol'.
      * Example:
      *     '/home/user/Project/nifi/contracts/Root'
-     * @private
      */
     private async _compile(file: string): Promise<void> {
         await runCommand(errorConsoleTerminal, Make.COMMAND.SOL_COMPILE, {
@@ -102,7 +101,6 @@ export class Make {
      * @param file {string} Relative path without '.abi.json'.
      * Example:
      *     '/home/user/Project/nifi/contracts/Root'
-     * @private
      */
     private async _wrap(file: string): Promise<void> {
         await runCommand(errorConsoleTerminal, Make.COMMAND.JS_WRAP, {

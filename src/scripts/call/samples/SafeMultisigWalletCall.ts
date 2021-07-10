@@ -2,11 +2,11 @@ import {Call} from '../Call'
 import {CallConfigInterface} from '../interfaces/CallConfigInterface'
 import {AbiContract, KeyPair} from '@tonclient/core/dist/modules'
 import {Contract} from '../../../contract'
-import {StringMap} from '../../../types/StringMap'
+import {StringMap} from '../../../types'
 import {GiverSendEnum} from './GiverSendEnum'
 import {readInt} from '../readers/readInt'
 import {readBoolean} from '../readers/readBoolean'
-import {SafeMultisigWallet} from '../../../contracts/SafeMultisigWallet'
+import {SafeMultisigWallet} from '../../../contracts'
 import fs from 'fs'
 import {SafeMultisigWalletCallEnum} from './SafeMultisigWalletCallEnum'
 
@@ -35,8 +35,6 @@ export class SafeMultisigWalletCall extends Call {
      *         public: '0x2ada2e65ab8eeab09490e3521415f45b6e42df9c760a639bcf53957550b25a16',
      *         secret: '0x172af540e43a524763dd53b26a066d472a97c4de37d5498170564510608250c3'
      *     }
-     * @protected
-     * @return {Contract}
      */
     protected _getContract(keys: KeyPair): Contract {
         return new SafeMultisigWallet(this._client, this._config.net.timeout, keys)
@@ -49,8 +47,6 @@ export class SafeMultisigWalletCall extends Call {
      *     {
      *         address: '0x1111222233334444555566667777888899990000aaaabbbbccccddddeeeeffff'
      *     }
-     * @protected
-     * @return {Contract}
      */
     protected _getTargetContract(map: StringMap): Contract {
         return new Contract(this._client, this._config.net.timeout,{
@@ -75,8 +71,6 @@ export class SafeMultisigWalletCall extends Call {
      *         value: '1_000_000_000',
      *         bounce: 'false'
      *     }
-     * @protected
-     * @return {Promise<void>}
      */
     protected async _call(contract: SafeMultisigWallet, map: StringMap, keys: KeyPair): Promise<void> {
         const address: string = map[SafeMultisigWalletCallEnum.ADDRESS]

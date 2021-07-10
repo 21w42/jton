@@ -1,14 +1,14 @@
 import {CallConfigInterface} from './interfaces/CallConfigInterface'
 import {TonClient} from '@tonclient/core'
 import {libNode} from '@tonclient/lib-node'
-import {Client} from '../../utils/Client'
-import {InfoConfigInterface} from '../info/interfaces/InfoConfigInterface'
-import {Printer} from '../../printer/Printer'
+import {Client} from '../../utils'
+import {InfoConfigInterface} from '../info'
+import {Printer} from '../../printer'
 import {KeyPair} from '@tonclient/core/dist/modules'
-import {Keys} from '../../utils/Keys'
+import {Keys} from '../../utils'
 import {Contract} from '../../contract'
 import transferAbi from '../../contract/abi/transfer.abi.json'
-import {StringMap} from '../../types/StringMap'
+import {StringMap} from '../../types'
 import colors from 'colors'
 import {CallMessages} from './constants/CallMessages'
 import {AccountTypeEnum} from '../../contract'
@@ -109,7 +109,6 @@ export class Call {
     /**
      * Print error and exit.
      * @param printer {Printer}
-     * @private
      */
     private _invalidArgumentsCountError(printer: Printer): void {
         printer.print(CallMessages.INVALID_ARGUMENTS_COUNT)
@@ -123,7 +122,6 @@ export class Call {
      * Print error and exit.
      * @param printer {Printer}
      * @param contract {Contract}
-     * @private
      */
     private async _accountInsNotActiveError(printer: Printer, contract: Contract): Promise<void> {
         await printer.network(this._config.net.url)
@@ -140,7 +138,6 @@ export class Call {
      *         address: '0x01234...',
      *         value: '1_000_000_000'
      *     }
-     * @private
      */
     private _readArguments(): StringMap {
         const result: StringMap = {}
@@ -162,8 +159,6 @@ export class Call {
      *         public: '0x2ada2e65ab8eeab09490e3521415f45b6e42df9c760a639bcf53957550b25a16',
      *         secret: '0x172af540e43a524763dd53b26a066d472a97c4de37d5498170564510608250c3'
      *     }
-     * @protected
-     * @return {Contract}
      */
     protected _getContract(keys: KeyPair): Contract {
         return new Contract(this._client, this._config.net.timeout, {
@@ -180,8 +175,6 @@ export class Call {
      *     {
      *         address: '0x1111222233334444555566667777888899990000aaaabbbbccccddddeeeeffff'
      *     }
-     * @protected
-     * @return {Contract}
      */
     protected _getTargetContract(map: StringMap): Contract {
         return new Contract(this._client, this._config.net.timeout,{
@@ -206,8 +199,6 @@ export class Call {
      *         value: '1_000_000_000',
      *         bounce: 'false'
      *     }
-     * @protected
-     * @return {Promise<void>}
      */
     protected async _call(contract: Contract, map: StringMap, keys?: KeyPair): Promise<void> {
         ///////////////////////////////

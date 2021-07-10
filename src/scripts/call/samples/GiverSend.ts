@@ -3,8 +3,8 @@ import {CallConfigInterface} from '../interfaces/CallConfigInterface'
 import {GiverSendEnum} from './GiverSendEnum'
 import {KeyPair} from '@tonclient/core/dist/modules'
 import {Contract} from '../../../contract'
-import {GiverV2} from '../../../contracts/GiverV2'
-import {StringMap} from '../../../types/StringMap'
+import {GiverV2} from '../../../contracts'
+import {StringMap} from '../../../types'
 import {readInt} from '../readers/readInt'
 import {readBoolean} from '../readers/readBoolean'
 
@@ -33,8 +33,6 @@ export class GiverSend extends Call {
      *         public: '0x2ada2e65ab8eeab09490e3521415f45b6e42df9c760a639bcf53957550b25a16',
      *         secret: '0x172af540e43a524763dd53b26a066d472a97c4de37d5498170564510608250c3'
      *     }
-     * @protected
-     * @return {Contract}
      */
     protected _getContract(keys: KeyPair): Contract {
         return new GiverV2(this._client, this._config.net.timeout, keys)
@@ -47,8 +45,6 @@ export class GiverSend extends Call {
      *     {
      *         address: '0x1111222233334444555566667777888899990000aaaabbbbccccddddeeeeffff'
      *     }
-     * @protected
-     * @return {Contract}
      */
     protected _getTargetContract(map: StringMap): Contract {
         return new Contract(this._client, this._config.net.timeout,{
@@ -73,8 +69,6 @@ export class GiverSend extends Call {
      *         value: '1_000_000_000',
      *         bounce: 'false'
      *     }
-     * @protected
-     * @return {Promise<void>}
      */
     protected async _call(contract: GiverV2, map: StringMap, keys: KeyPair): Promise<void> {
         const address: string = map[GiverSendEnum.ADDRESS]

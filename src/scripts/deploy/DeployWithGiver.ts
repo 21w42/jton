@@ -1,16 +1,16 @@
 import {TonClient} from '@tonclient/core'
 import {libNode} from '@tonclient/lib-node'
-import {Client} from '../../utils/Client'
+import {Client} from '../../utils'
 import {KeyPair} from '@tonclient/core/dist/modules'
-import {Printer} from '../../printer/Printer'
-import {Keys} from '../../utils/Keys'
+import {Printer} from '../../printer'
+import {Keys} from '../../utils'
 import {Contract} from '../../contract'
 import transferAbi from '../../contract/abi/transfer.abi.json'
 import {AccountTypeEnum} from '../../contract'
 import {DeployMessages} from './constants/DeployMessages'
 import {B} from '../../constants'
 import {DeployWithGiverConfigInterface} from './interfaces/DeployWithGiverConfigInterface'
-import {GiverV2} from '../../contracts/GiverV2'
+import {GiverV2} from '../../contracts'
 
 export class DeployWithGiver {
     protected readonly _config: DeployWithGiverConfigInterface
@@ -155,8 +155,6 @@ export class DeployWithGiver {
      *         public: '0x2ada2e65ab8eeab09490e3521415f45b6e42df9c760a639bcf53957550b25a16',
      *         secret: '0x172af540e43a524763dd53b26a066d472a97c4de37d5498170564510608250c3'
      *     }
-     * @protected
-     * @return {Contract}
      */
     protected _getContract(keys: KeyPair): Contract {
         return new Contract(this._client, this._config.net.timeout, {
@@ -168,8 +166,7 @@ export class DeployWithGiver {
 
     /**
      * Deploy contract.
-     * @param contract {Contract}
-     * @protected
+     * @param contract
      */
     protected async _deploy(contract: Contract): Promise<void> {
         await contract.balance()
