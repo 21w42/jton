@@ -50,7 +50,7 @@ export class Make {
      *         export: 'es6-default'
      *     }
      */
-    public constructor(config: MakeConfigInterface) {
+    constructor(config: MakeConfigInterface) {
         this._config = config
         this._extension = config.extension ?? Make.CONFIG.EXTENSION
         this._export = config.export ?? Make.CONFIG.EXPORT

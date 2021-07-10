@@ -16,7 +16,7 @@ export class Printer {
      *     'EN'
      *     undefined
      */
-    public constructor(locale: string | undefined) {
+    constructor(locale: string | undefined) {
         this._locale = locale
     }
 

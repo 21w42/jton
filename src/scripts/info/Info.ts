@@ -24,7 +24,7 @@ export class Info {
      *         keys: `${__dirname}/../library/keys/GiverV2.se.keys.json`
      *     }
      */
-    public constructor(config: InfoConfigInterface) {
+    constructor(config: InfoConfigInterface) {
         TonClient.useBinaryLibrary(libNode)
         this._config = config
         this._client = Client.create(config.net.url)

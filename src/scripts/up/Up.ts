@@ -2,8 +2,8 @@ import {UpConfigInterface} from './interfaces/UpConfigInterface'
 import {consoleTerminal, runCommand} from 'tondev'
 import {TonClient} from '@tonclient/core'
 import {libNode} from '@tonclient/lib-node'
-import {Client} from '../../utils/Client'
-import {StringMap} from '../../types/StringMap'
+import {Client} from '../../utils'
+import {StringMap} from '../../types'
 
 export class Up {
     private static readonly COMMAND: StringMap = {
@@ -31,7 +31,7 @@ export class Up {
      *         }
      *     }
      */
-    public constructor(config: UpConfigInterface) {
+    constructor(config: UpConfigInterface) {
         this._config = config
     }
 

@@ -38,7 +38,7 @@ export class Call {
      *         flags
      *     ]
      */
-    public constructor(config: CallConfigInterface, names: string[]) {
+    constructor(config: CallConfigInterface, names: string[]) {
         TonClient.useBinaryLibrary(libNode)
         this._config = config
         this._names = names

@@ -4,7 +4,7 @@ import GiverV2Contract from './GiverV2/GiverV2'
 import {TonClient} from '@tonclient/core'
 
 export class GiverV2 extends Contract {
-    public constructor(client: TonClient, timeout: number, keys: KeyPair) {
+    constructor(client: TonClient, timeout: number, keys: KeyPair) {
         super(client, timeout, {
             abi: GiverV2Contract.abi,
             initialData: {},

@@ -4,7 +4,7 @@ import {AbiContract, KeyPair, ResultOfProcessMessage} from '@tonclient/core/dist
 import {TonClient} from '@tonclient/core'
 
 export class SafeMultisigWallet extends Contract {
-    public constructor(client: TonClient, timeout: number,  keys: KeyPair) {
+    constructor(client: TonClient, timeout: number,  keys: KeyPair) {
         super(client, timeout,{
             abi: SafeMultisigWalletContract.abi,
             tvc: SafeMultisigWalletContract.tvc,

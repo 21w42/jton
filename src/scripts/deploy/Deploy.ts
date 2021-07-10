@@ -31,7 +31,7 @@ export class Deploy {
      *         requiredForDeployment: 0.03
      *     }
      */
-    public constructor(config: DeployConfigInterface) {
+    constructor(config: DeployConfigInterface) {
         TonClient.useBinaryLibrary(libNode)
         this._config = config
         this._client = Client.create(config.net.url)

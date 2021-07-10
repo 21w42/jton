@@ -56,7 +56,7 @@ export class Contract {
      *         tvc: 'te6ccg...'
      *     }
      */
-    public constructor(
+    constructor(
         client: TonClient,
         timeout: number,
         config: ContractConfigInterface | DeployedContractConfigInterface

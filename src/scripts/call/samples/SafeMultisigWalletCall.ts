@@ -23,7 +23,7 @@ export class SafeMultisigWalletCall extends Call {
      *         keys: `${__dirname}/../library/keys/GiverV2.se.keys.json`
      *     }
      */
-    public constructor(config: CallConfigInterface) {
+    constructor(config: CallConfigInterface) {
         super(config, Object.values(SafeMultisigWalletCallEnum))
     }
 
