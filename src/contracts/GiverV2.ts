@@ -1,9 +1,9 @@
 import {KeyPair, ResultOfProcessMessage} from '@tonclient/core/dist/modules'
-import Contract from '../contract/Contract'
+import {Contract} from '../contract'
 import GiverV2Contract from './GiverV2/GiverV2'
 import {TonClient} from '@tonclient/core'
 
-export default class GiverV2 extends Contract {
+export class GiverV2 extends Contract {
     public constructor(client: TonClient, timeout: number, keys: KeyPair) {
         super(client, timeout, {
             abi: GiverV2Contract.abi,

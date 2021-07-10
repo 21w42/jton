@@ -4,7 +4,8 @@
   "description": "TypeScript library for compiling, deploying and testing Free TON smart contracts",
   "main": "dist/index",
   "scripts": {
-    "test": "jest --verbose"
+    "build": "yarn tsc --build",
+    "prepublishOnly": "yarn install && yarn tsc"
   },
   "repository": {
     "type": "git",
@@ -35,8 +36,7 @@
   },
   "homepage": "https://github.com/kokkekpek/jton#readme",
   "devDependencies": {
-    "jest": "^27.0.6",
-    "ts-jest": "^27.0.3",
+    "@types/node": "^16.3.1",
     "ts-node": "^10.0.0",
     "tsc": "^2.0.3",
     "typescript": "^4.3.5"

@@ -1,6 +1,6 @@
 import {NetConfigInterfaceMap} from '../types/NetConfigInterfaceMap'
 
-export default interface ConfigInterface {
+export interface ConfigInterface {
     net: NetConfigInterfaceMap
     defaultNet: string
 }

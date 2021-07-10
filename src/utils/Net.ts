@@ -1,7 +1,7 @@
-import NetConfigInterface from '../config/NetConfigInterface'
-import ConfigInterface from '../config/ConfigInterface'
+import {NetConfigInterface} from '../config'
+import {ConfigInterface} from '../config'
 
-export default class Net {
+export class Net {
     private static readonly PARAMETER: string = 'net'
     private static readonly ERROR_MESSAGE: string = 'UNKNOWN NETWORK'
 

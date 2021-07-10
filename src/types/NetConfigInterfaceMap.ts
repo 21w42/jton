@@ -1,3 +1,3 @@
-import NetConfigInterface from '../config/NetConfigInterface'
+import {NetConfigInterface} from '../config'
 
 export type NetConfigInterfaceMap = {[key: string]: NetConfigInterface}

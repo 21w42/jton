@@ -1,15 +1,15 @@
-import Call from '../Call'
-import CallConfigInterface from '../interfaces/CallConfigInterface'
+import {Call} from '../Call'
+import {CallConfigInterface} from '../interfaces/CallConfigInterface'
 import {SafeMultisigWalletSendEnum} from './SafeMultisigWalletSendEnum'
 import {KeyPair} from '@tonclient/core/dist/modules'
-import Contract from '../../../contract/Contract'
+import {Contract} from '../../../contract'
 import {StringMap} from '../../../types/StringMap'
 import {GiverSendEnum} from './GiverSendEnum'
-import readInt from '../readers/readInt'
-import readBoolean from '../readers/readBoolean'
-import SafeMultisigWallet from '../../../contracts/SafeMultisigWallet'
+import {readInt} from '../readers/readInt'
+import {readBoolean} from '../readers/readBoolean'
+import {SafeMultisigWallet} from '../../../contracts/SafeMultisigWallet'
 
-export default class SafeMultisigWalletSend extends Call {
+export class SafeMultisigWalletSend extends Call {
     /**
      * @param config {InfoConfigInterface}
      * Example:

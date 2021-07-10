@@ -1,3 +1,3 @@
-export default interface ColorFunctionInterface {
+export interface ColorFunctionInterface {
     (text: string): string
 }

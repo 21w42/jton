@@ -1,4 +1,4 @@
-export default interface NodeConfigInterface {
+export interface NodeConfigInterface {
     version: string
     port: string | number
     dbPort: string | number

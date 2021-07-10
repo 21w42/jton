@@ -1,9 +1,9 @@
-import Info from '../Info'
+import {Info} from '../Info'
 import {KeyPair} from '@tonclient/core/dist/modules'
-import Contract from '../../../contract/Contract'
-import SafeMultisigWallet from '../../../contracts/SafeMultisigWallet'
+import {Contract} from '../../../contract'
+import {SafeMultisigWallet} from '../../../contracts/SafeMultisigWallet'
 
-export default class SafeMultisigWalletInfo extends Info {
+export class SafeMultisigWalletInfo extends Info {
     /**
      * Create and return contract object.
      * @param keys {KeyPair}

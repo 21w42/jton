@@ -1,11 +1,11 @@
-import UpConfigInterface from './interfaces/UpConfigInterface'
+import {UpConfigInterface} from './interfaces/UpConfigInterface'
 import {consoleTerminal, runCommand} from 'tondev'
 import {TonClient} from '@tonclient/core'
 import {libNode} from '@tonclient/lib-node'
-import Client from '../../utils/Client'
+import {Client} from '../../utils/Client'
 import {StringMap} from '../../types/StringMap'
 
-export default class Up {
+export class Up {
     private static readonly COMMAND: StringMap = {
         SE_SET: 'se set',
         SE_START: 'se start'

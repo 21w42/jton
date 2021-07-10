@@ -1,6 +1,6 @@
 import {TonClient} from '@tonclient/core'
 
-export default class Client {
+export class Client {
     /**
      * Creates client.
      * @param url {string}

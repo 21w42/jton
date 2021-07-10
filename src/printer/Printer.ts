@@ -1,12 +1,12 @@
-import Contract from '../contract/Contract'
+import {Contract} from '../contract'
 import colors from 'colors'
-import contractTypes from './utils/contractTypes'
-import colorFunctions from './utils/colorFunctions'
-import ColorFunctionInterface from './interfaces/ColorFunctionInterface'
-import {AccountTypeEnum} from '../contract/enums/AccountTypeEnum'
-import B from '../constants/B'
+import {contractTypes} from './utils/contractTypes'
+import {colorFunctions} from './utils/colorFunctions'
+import {ColorFunctionInterface} from './interfaces/ColorFunctionInterface'
+import {AccountTypeEnum} from '../contract'
+import {B} from '../constants'
 
-export default class Printer {
+export class Printer {
     private readonly _locale: string | undefined
 
     /**

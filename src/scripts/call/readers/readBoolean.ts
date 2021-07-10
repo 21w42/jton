@@ -10,6 +10,6 @@
  *     false
  *     false
  */
-export default function (value: string): boolean {
+export function readBoolean(value: string): boolean {
     return value === 'true'
 }

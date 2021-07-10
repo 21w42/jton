@@ -11,14 +11,14 @@ import {
     ResultOfWaitForCollection
 } from '@tonclient/core/dist/modules'
 import {TonClient} from '@tonclient/core'
-import ContractConfigInterface from './interfaces/ContractConfigInterface'
-import DeployedContractConfigInterface from './interfaces/DeployedContractConfigInterface'
-import transferAbi from './src/contract/abi/transfer.abi.json'
+import {ContractConfigInterface} from './interfaces/ContractConfigInterface'
+import {DeployedContractConfigInterface} from './interfaces/DeployedContractConfigInterface'
+import transferAbi from '../contract/abi/transfer.abi.json'
 import {AccountTypeEnum} from './enums/AccountTypeEnum'
-import Hex from '../utils/Hex'
-import ContractErrorMessages from './messages/ContractErrorMessages'
+import {Hex} from '../utils/Hex'
+import {ContractErrorMessages} from './messages/ContractErrorMessages'
 
-export default class Contract {
+export class Contract {
     private readonly _client: TonClient
     private readonly _timeout: number
     private readonly _abi: Abi

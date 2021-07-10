@@ -1,17 +1,17 @@
 import {TonClient} from '@tonclient/core'
 import {libNode} from '@tonclient/lib-node'
-import Client from '../../utils/Client'
+import {Client} from '../../utils/Client'
 import {KeyPair} from '@tonclient/core/dist/modules'
-import Printer from '../../printer/Printer'
-import Keys from '../../utils/Keys'
-import DeployConfigInterface from './interfaces/DeployConfigInterface'
-import Contract from '../../contract/Contract'
-import transferAbi from './src/contract/abi/transfer.abi.json'
-import {AccountTypeEnum} from '../../contract/enums/AccountTypeEnum'
-import DeployMessages from './constants/DeployMessages'
-import B from '../../constants/B'
+import {Printer} from '../../printer/Printer'
+import {Keys} from '../../utils/Keys'
+import {DeployConfigInterface} from './interfaces/DeployConfigInterface'
+import {Contract} from '../../contract'
+import transferAbi from '../../contract/abi/transfer.abi.json'
+import {AccountTypeEnum} from '../../contract'
+import {DeployMessages} from './constants/DeployMessages'
+import {B} from '../../constants'
 
-export default class Deploy {
+export class Deploy {
     protected readonly _config: DeployConfigInterface
     protected readonly _client: TonClient
 

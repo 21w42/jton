@@ -1,14 +1,14 @@
-import Call from '../Call'
-import CallConfigInterface from '../interfaces/CallConfigInterface'
+import {Call} from '../Call'
+import {CallConfigInterface} from '../interfaces/CallConfigInterface'
 import {GiverSendEnum} from './GiverSendEnum'
 import {KeyPair} from '@tonclient/core/dist/modules'
-import Contract from '../../../contract/Contract'
-import GiverV2 from '../../../contracts/GiverV2'
+import {Contract} from '../../../contract'
+import {GiverV2} from '../../../contracts/GiverV2'
 import {StringMap} from '../../../types/StringMap'
-import readInt from '../readers/readInt'
-import readBoolean from '../readers/readBoolean'
+import {readInt} from '../readers/readInt'
+import {readBoolean} from '../readers/readBoolean'
 
-export default class GiverSend extends Call {
+export class GiverSend extends Call {
     /**
      * @param config {InfoConfigInterface}
      * Example:

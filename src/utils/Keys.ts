@@ -2,7 +2,7 @@ import {KeyPair} from '@tonclient/core/dist/modules'
 import {TonClient} from '@tonclient/core'
 import fs from 'fs'
 
-export default class Keys {
+export class Keys {
     /**
      * Wrapper for crypto.generate_random_sign_keys()
      * @return {Promise<KeyPair>}

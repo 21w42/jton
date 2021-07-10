@@ -1,9 +1,9 @@
 import {KeyPair} from '@tonclient/core/dist/modules'
-import Contract from '../../../contract/Contract'
-import GiverV2 from '../../../contracts/GiverV2'
-import Deploy from '../Deploy'
+import {Contract} from '../../../contract'
+import {GiverV2} from '../../../contracts/GiverV2'
+import {Deploy} from '../Deploy'
 
-export default class GiverV2Deploy extends Deploy {
+export class GiverV2Deploy extends Deploy {
     /**
      * Create and return contract object.
      * @param keys {KeyPair}

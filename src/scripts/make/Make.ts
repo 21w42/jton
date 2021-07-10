@@ -1,15 +1,15 @@
 import {TonClient} from '@tonclient/core'
 import {libNode} from '@tonclient/lib-node'
-import MakeConfigInterface from './interfaces/MakeConfigInterface'
+import {MakeConfigInterface} from './interfaces/MakeConfigInterface'
 import path from 'path'
 import {runCommand} from 'tondev'
-import errorConsoleTerminal from './terminal/errorConsoleTerminal'
+import {errorConsoleTerminal} from './terminal/errorConsoleTerminal'
 import colors from 'colors'
 import {ExtensionType} from './types/ExtensionType'
 import {ExportType} from './types/ExportType'
 import {StringMap} from '../../types/StringMap'
 
-export default class Make {
+export class Make {
     private static readonly CONFIG = {
         EXTENSION: 'ts' as ExtensionType,
         EXPORT: 'es6-default' as ExportType

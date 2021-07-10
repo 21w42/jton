@@ -1,18 +1,18 @@
 import {TonClient} from '@tonclient/core'
 import {libNode} from '@tonclient/lib-node'
-import Client from '../../utils/Client'
+import {Client} from '../../utils/Client'
 import {KeyPair} from '@tonclient/core/dist/modules'
-import Printer from '../../printer/Printer'
-import Keys from '../../utils/Keys'
-import Contract from '../../contract/Contract'
-import transferAbi from './src/contract/abi/transfer.abi.json'
-import {AccountTypeEnum} from '../../contract/enums/AccountTypeEnum'
-import DeployMessages from './constants/DeployMessages'
-import B from '../../constants/B'
-import DeployWithGiverConfigInterface from './interfaces/DeployWithGiverConfigInterface'
-import GiverV2 from '../../contracts/GiverV2'
+import {Printer} from '../../printer/Printer'
+import {Keys} from '../../utils/Keys'
+import {Contract} from '../../contract'
+import transferAbi from '../../contract/abi/transfer.abi.json'
+import {AccountTypeEnum} from '../../contract'
+import {DeployMessages} from './constants/DeployMessages'
+import {B} from '../../constants'
+import {DeployWithGiverConfigInterface} from './interfaces/DeployWithGiverConfigInterface'
+import {GiverV2} from '../../contracts/GiverV2'
 
-export default class DeployWithGiver {
+export class DeployWithGiver {
     protected readonly _config: DeployWithGiverConfigInterface
     protected readonly _client: TonClient
 

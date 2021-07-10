@@ -1,5 +1,5 @@
-import DeployConfigInterface from './DeployConfigInterface'
+import {DeployConfigInterface} from './DeployConfigInterface'
 
-export default interface DeployWithGiverConfigInterface extends DeployConfigInterface {
+export interface DeployWithGiverConfigInterface extends DeployConfigInterface {
     giverKeys: string
 }

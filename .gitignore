@@ -5,7 +5,10 @@ node_modules
 *.log
 
 # TypeScript Compilator
-tsconfig.*
+*.tsbuildinfo
 
 # Output
 dist
+
+# NPM
+package-lock.json

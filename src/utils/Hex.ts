@@ -1,6 +1,6 @@
 import {AbiContract} from '@tonclient/core/dist/modules'
 
-export default class Hex {
+export class Hex {
     /**
      * Add 0x to number or string.
      * @param {number} number

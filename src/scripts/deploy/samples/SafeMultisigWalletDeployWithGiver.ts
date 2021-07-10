@@ -1,10 +1,10 @@
 import {KeyPair} from '@tonclient/core/dist/modules'
-import Contract from '../../../contract/Contract'
-import DeployWithGiver from '../DeployWithGiver'
-import SafeMultisigWallet from '../../../contracts/SafeMultisigWallet'
-import Hex from '../../../utils/Hex'
+import {Contract} from '../../../contract'
+import {DeployWithGiver} from '../DeployWithGiver'
+import {SafeMultisigWallet} from '../../../contracts/SafeMultisigWallet'
+import {Hex} from '../../../utils/Hex'
 
-export default class SafeMultisigWalletDeployWithGiver extends DeployWithGiver {
+export class SafeMultisigWalletDeployWithGiver extends DeployWithGiver {
     private _keys: KeyPair = {
         public: '',
         secret: ''

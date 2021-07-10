@@ -1,6 +1,6 @@
-import NetConfigInterface from '../../../config/NetConfigInterface'
+import {NetConfigInterface} from '../../../config'
 
-export default interface DeployConfigInterface {
+export interface DeployConfigInterface {
     net: NetConfigInterface
     locale: string | undefined
     keys: string

@@ -1,13 +1,13 @@
-import Contract from '../contract/Contract'
-import safeMultisigWalletData from './SafeMultisigWallet/SafeMultisigWallet'
+import {Contract} from '../contract'
+import SafeMultisigWalletContract from './SafeMultisigWallet/SafeMultisigWallet'
 import {AbiContract, KeyPair, ResultOfProcessMessage} from '@tonclient/core/dist/modules'
 import {TonClient} from '@tonclient/core'
 
-export default class SafeMultisigWallet extends Contract {
+export class SafeMultisigWallet extends Contract {
     public constructor(client: TonClient, timeout: number,  keys: KeyPair) {
         super(client, timeout,{
-            abi: safeMultisigWalletData.abi,
-            tvc: safeMultisigWalletData.tvc,
+            abi: SafeMultisigWalletContract.abi,
+            tvc: SafeMultisigWalletContract.tvc,
             initialData: {},
             keys: keys
         })

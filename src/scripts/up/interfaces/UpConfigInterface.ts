@@ -1,7 +1,7 @@
-import NodeConfigInterface from '../../../config/NodeConfigInterface'
-import NetConfigInterface from '../../../config/NetConfigInterface'
+import {NodeConfigInterface} from '../../../config'
+import {NetConfigInterface} from '../../../config'
 
-export default interface UpConfigInterface {
+export interface UpConfigInterface {
     node: NodeConfigInterface
     net: NetConfigInterface
 }

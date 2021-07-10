@@ -1,9 +1,9 @@
-import Info from '../Info'
+import {Info} from '../Info'
 import {KeyPair} from '@tonclient/core/dist/modules'
-import Contract from '../../../contract/Contract'
-import GiverV2 from '../../../contracts/GiverV2'
+import {Contract} from '../../../contract'
+import {GiverV2} from '../../../contracts/GiverV2'
 
-export default class GiverV2Info extends Info {
+export class GiverV2Info extends Info {
     /**
      * Create and return contract object.
      * @param keys {KeyPair}

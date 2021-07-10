@@ -6,6 +6,6 @@
  * Example:
  *     1000000000
  */
-export default function (value: string): number {
+export function readInt(value: string): number {
     return parseInt(value.split('_').join(''))
 }

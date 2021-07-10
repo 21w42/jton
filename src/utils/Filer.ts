@@ -1,6 +1,6 @@
 import {StringMap} from '../types/StringMap'
 
-export default class Filer {
+export class Filer {
     private static readonly ERROR_MESSAGE: string = 'INVALID GIVER KEY'
 
     /**

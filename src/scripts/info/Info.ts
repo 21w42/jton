@@ -1,14 +1,14 @@
 import {TonClient} from '@tonclient/core'
 import {libNode} from '@tonclient/lib-node'
-import Client from '../../utils/Client'
-import InfoConfigInterface from './interfaces/InfoConfigInterface'
-import Contract from '../../contract/Contract'
-import transferAbi from './src/contract/abi/transfer.abi.json'
+import {Client} from '../../utils/Client'
+import {InfoConfigInterface} from './interfaces/InfoConfigInterface'
+import {Contract} from '../../contract'
+import transferAbi from '../../contract/abi/transfer.abi.json'
 import {KeyPair} from '@tonclient/core/dist/modules'
-import Keys from '../../utils/Keys'
-import Printer from '../../printer/Printer'
+import {Keys} from '../../utils/Keys'
+import {Printer} from '../../printer/Printer'
 
-export default class Info {
+export class Info {
     protected readonly _config: InfoConfigInterface
     protected readonly _client: TonClient
 

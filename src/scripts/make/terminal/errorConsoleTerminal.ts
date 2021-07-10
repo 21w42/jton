@@ -1,6 +1,6 @@
 import {Terminal} from 'tondev/dist/core'
 
-export default new class implements Terminal {
+export const errorConsoleTerminal: Terminal = new class implements Terminal {
     log(...args: any[]): void {
         ///////////////////////////////
         // Do nothing in strict mode //
