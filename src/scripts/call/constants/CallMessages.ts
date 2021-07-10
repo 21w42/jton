@@ -1,5 +1,5 @@
 import colors from 'colors'
-import {StringMap} from '../../../types/StringMap'
+import {StringMap} from '../../../types'
 
 export const CallMessages: StringMap =  {
     INVALID_ARGUMENTS_COUNT: colors.red('INVALID ARGUMENTS COUNT'),

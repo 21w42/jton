@@ -1,5 +1,5 @@
 import colors from 'colors'
-import {StringMap} from '../../../types/StringMap'
+import {StringMap} from '../../../types'
 
 export const DeployMessages: StringMap = {
     NOT_ENOUGH_BALANCE: colors.red('NOT ENOUGH BALANCE'),

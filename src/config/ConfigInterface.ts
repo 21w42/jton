@@ -1,4 +1,4 @@
-import {NetConfigInterfaceMap} from '../types/NetConfigInterfaceMap'
+import {NetConfigInterfaceMap} from '../types'
 
 export interface ConfigInterface {
     net: NetConfigInterfaceMap

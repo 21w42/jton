@@ -1,4 +1,4 @@
-import {StringMap} from '../types/StringMap'
+import {StringMap} from '../types'
 
 export class Filer {
     private static readonly ERROR_MESSAGE: string = 'INVALID GIVER KEY'

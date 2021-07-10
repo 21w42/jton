@@ -1,5 +1,5 @@
 import colors from 'colors'
-import {StringMap} from '../../types/StringMap'
+import {StringMap} from '../../types'
 
 export const ContractErrorMessages: StringMap = {
     CONTRACT_KEYS_IS_UNDEFINED: colors.red('CONTRACT KEYS IS UNDEFINED'),

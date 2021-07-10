@@ -1,5 +1,5 @@
 import colors from 'colors'
-import {ColorFunctionMap} from '../../types/ColorFunctionMap'
+import {ColorFunctionMap} from '../../types'
 
 export const colorFunctions: ColorFunctionMap = {
     '-1': colors.gray,

@@ -1,4 +1,4 @@
-import {StringMap} from '../../types/StringMap'
+import {StringMap} from '../../types'
 
 export const contractTypes: StringMap = {
     '-1': 'Not found',
