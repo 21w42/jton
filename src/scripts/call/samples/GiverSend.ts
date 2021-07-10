@@ -10,7 +10,7 @@ import {readBoolean} from '../readers/readBoolean'
 
 export class GiverSend extends Call {
     /**
-     * @param config {InfoConfigInterface}
+     * @param config
      * Example:
      *     {
      *         net: {
@@ -27,11 +27,11 @@ export class GiverSend extends Call {
 
     /**
      * Create and return contract object.
-     * @param keys {KeyPair}
+     * @param keys
      * Example:
      *     {
-     *         public: '0x123...',
-     *         secret: '0x456...'
+     *         public: '0x0000111122223333444455556666777788889999aaaabbbbccccddddeeeeffff',
+     *         secret: '0x0000000011111111222222223333333344444444555555556666666677777777'
      *     }
      */
     protected _getContract(keys: KeyPair): Contract {
@@ -40,7 +40,7 @@ export class GiverSend extends Call {
 
     /**
      * Create and return target contract object.
-     * @param map {StringMap}
+     * @param map
      * Example:
      *     {
      *         address: '0x1111222233334444555566667777888899990000aaaabbbbccccddddeeeeffff'
@@ -55,17 +55,17 @@ export class GiverSend extends Call {
 
     /**
      * Call the public method with an external message.
-     * @param contract {Contract} A contract on which we call the public method with an external message.
-     * @param keys {KeyPair}
+     * @param contract A contract on which we call the public method with an external message.
+     * @param keys
      * Example:
      *     {
-     *         public: '0x123...',
-     *         secret: '0x456...'
+     *         public: '0x0000111122223333444455556666777788889999aaaabbbbccccddddeeeeffff',
+     *         secret: '0x0000000011111111222222223333333344444444555555556666666677777777'
      *     }
-     * @param map {StringMap}
+     * @param map
      * Example:
      *     {
-     *         address: '0x123... ',
+     *         address: '0x0000111122223333444455556666777788889999aaaabbbbccccddddeeeeffff ',
      *         value: '1_000_000_000',
      *         bounce: 'false'
      *     }

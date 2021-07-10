@@ -16,7 +16,7 @@ export class Deploy {
     protected readonly _client: TonClient
 
     /**
-     * @param config {DeployConfigInterface}
+     * @param config
      * Example:
      *     {
      *         net: {
@@ -120,11 +120,11 @@ export class Deploy {
     //////////////////////
     /**
      * Create and return contract object.
-     * @param keys {KeyPair}
+     * @param keys
      * Example:
      *     {
-     *         public: '0x123...',
-     *         secret: '0x456...'
+     *         public: '0x0000111122223333444455556666777788889999aaaabbbbccccddddeeeeffff',
+     *         secret: '0x0000000011111111222222223333333344444444555555556666666677777777'
      *     }
      */
     protected _getContract(keys: KeyPair): Contract {
@@ -137,7 +137,7 @@ export class Deploy {
 
     /**
      * Deploy contract.
-     * @param contract {Contract}
+     * @param contract
      */
     protected async _deploy(contract: Contract): Promise<void> {
         await contract.balance()

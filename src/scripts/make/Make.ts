@@ -31,7 +31,7 @@ export class Make {
     private readonly _export: ExportType
 
     /**
-     * @param config {MakeConfigInterface} Config contains relative paths without `.sol` and `.tvc` extension.
+     * @param config Config contains relative paths without `.sol` and `.tvc` extension.
      * You can get compiler, linker and stdlib versions from `tondev sol version`
      * Example:
      *     {
@@ -85,7 +85,7 @@ export class Make {
 
     /**
      * Compile *.sol file.
-     * @param file {string} Relative path without '.sol'.
+     * @param file Relative path without '.sol'.
      * Example:
      *     '/home/user/Project/nifi/contracts/Root'
      */
@@ -98,7 +98,7 @@ export class Make {
 
     /**
      * Wrap *.abi.json file.
-     * @param file {string} Relative path without '.abi.json'.
+     * @param file Relative path without '.abi.json'.
      * Example:
      *     '/home/user/Project/nifi/contracts/Root'
      */

@@ -3,11 +3,10 @@ import {TonClient} from '@tonclient/core'
 export class Client {
     /**
      * Creates client.
-     * @param url {string}
+     * @param url
      * Examples:
      *     'http://localhost'
      *     'https://net.ton.dev'
-     * @return {TonClient}
      */
     public static create(url: string): TonClient {
         return new TonClient({

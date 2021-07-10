@@ -5,7 +5,6 @@ import fs from 'fs'
 export class Keys {
     /**
      * Wrapper for crypto.generate_random_sign_keys()
-     * @return {Promise<KeyPair>}
      */
     public static async random(client: TonClient): Promise<KeyPair> {
         return await client.crypto.generate_random_sign_keys()
@@ -13,10 +12,9 @@ export class Keys {
 
     /**
      * Read keys from *.json file.
-     * @param file {string} Absolute path to file.
+     * @param file Absolute path to file.
      * Example:
      *     '/home/user/keys/GiverV2.keys.json'
-     * @return {KeyPair}
      */
     public static read(file: string): KeyPair {
         const text: string = fs.readFileSync(file, { encoding: 'utf8'})
@@ -25,11 +23,10 @@ export class Keys {
 
     /**
      * Create random keys if keys not exists.
-     * @param file {string} Absolute path to file.
+     * @param file Absolute path to file.
      * Example:
      *     '/home/user/keys/GiverV2.keys.json'
-     * @param client {TonClient}
-     * @return {KeyPair}
+     * @param client
      */
     public static async createRandomIfNotExist(file: string, client: TonClient): Promise<KeyPair> {
         if (fs.existsSync(file))

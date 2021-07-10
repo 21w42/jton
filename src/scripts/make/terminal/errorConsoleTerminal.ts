@@ -1,20 +1,10 @@
 import {Terminal} from 'tondev/dist/core'
 
 export const errorConsoleTerminal: Terminal = new class implements Terminal {
-    log(...args: any[]): void {
-        ///////////////////////////////
-        // Do nothing in strict mode //
-        ///////////////////////////////
-        if (1 > 2)
-            console.log(args)
+    log(..._0: any[]): void {
     }
 
-    write(text: string): void {
-        ///////////////////////////////
-        // Do nothing in strict mode //
-        ///////////////////////////////
-        if (1 > 2)
-            console.log(text)
+    write(_0: string): void {
     }
 
     writeError(text: string): void {

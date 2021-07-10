@@ -1,10 +1,10 @@
 /**
- * @param value {string}
+ * @param value
  * Examples:
  *     'true'
  *     'false'
  *     '123'
- * @return {number}
+ * @return
  * Examples:
  *     true
  *     false

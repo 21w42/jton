@@ -20,7 +20,7 @@ export class Call {
     protected readonly _client: TonClient
 
     /**
-     * @param config {InfoConfigInterface}
+     * @param config
      * Example:
      *     {
      *         net: {
@@ -30,7 +30,7 @@ export class Call {
      *         locale: 'EN',
      *         keys: `${__dirname}/../library/keys/GiverV2.se.keys.json`
      *     }
-     * @param names {string[]}
+     * @param names
      * Example:
      *     [
      *         address,
@@ -108,7 +108,7 @@ export class Call {
 
     /**
      * Print error and exit.
-     * @param printer {Printer}
+     * @param printer
      */
     private _invalidArgumentsCountError(printer: Printer): void {
         printer.print(CallMessages.INVALID_ARGUMENTS_COUNT)
@@ -120,8 +120,8 @@ export class Call {
 
     /**
      * Print error and exit.
-     * @param printer {Printer}
-     * @param contract {Contract}
+     * @param printer
+     * @param contract
      */
     private async _accountInsNotActiveError(printer: Printer, contract: Contract): Promise<void> {
         await printer.network(this._config.net.url)
@@ -132,7 +132,7 @@ export class Call {
 
     /**
      * Read arguments from process.argv and return StringMap.
-     * @return {StringMap}
+     * @return
      * Example:
      *     {
      *         address: '0x01234...',
@@ -153,11 +153,11 @@ export class Call {
     //////////////////////
     /**
      * Create and return contract object.
-     * @param keys {KeyPair}
+     * @param keys
      * Example:
      *     {
-     *         public: '0x123...',
-     *         secret: '0x456...'
+     *         public: '0x0000111122223333444455556666777788889999aaaabbbbccccddddeeeeffff',
+     *         secret: '0x0000000011111111222222223333333344444444555555556666666677777777'
      *     }
      */
     protected _getContract(keys: KeyPair): Contract {
@@ -170,7 +170,7 @@ export class Call {
 
     /**
      * Create and return target contract object.
-     * @param map {StringMap}
+     * @param map
      * Example:
      *     {
      *         address: '0x1111222233334444555566667777888899990000aaaabbbbccccddddeeeeffff'
@@ -185,28 +185,22 @@ export class Call {
 
     /**
      * Call the public method with an external message.
-     * @param contract {Contract} A contract on which we call the public method with an external message.
-     * @param keys {KeyPair}
+     * @param _0 A contract on which we call the public method with an external message.
+     * @param _1
      * Example:
      *     {
-     *         public: '0x123...',
-     *         secret: '0x456...'
-     *     }
-     * @param map {StringMap}
-     * Example:
-     *     {
-     *         address: '0x123... ',
+     *         address: '0x0000111122223333444455556666777788889999aaaabbbbccccddddeeeeffff ',
      *         value: '1_000_000_000',
      *         bounce: 'false'
      *     }
+     * @param _2
+     * Example:
+     *     {
+     *         public: '0x0000111122223333444455556666777788889999aaaabbbbccccddddeeeeffff',
+     *         secret: '0x0000000011111111222222223333333344444444555555556666666677777777'
+     *     }
      */
-    protected async _call(contract: Contract, map: StringMap, keys?: KeyPair): Promise<void> {
-        ///////////////////////////////
-        // Do nothing in strict mode //
-        ///////////////////////////////
-        const balance: string = map['balance']
-        if (balance > await contract.balance() && keys)
-            keys.public = ''
+    protected async _call(_0: Contract, _1: StringMap, _2?: KeyPair): Promise<void> {
         return
     }
 }

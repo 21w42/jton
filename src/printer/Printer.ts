@@ -16,20 +16,22 @@ export class Printer {
      *     'EN'
      *     undefined
      */
-    constructor(locale: string | undefined) {
+    constructor(locale?: string) {
         this._locale = locale
     }
 
     /**
      * Print text.
-     * @param [text] {string}
+     * @param [text]
+     * Example:
+     *     'Hello, world!'
      */
     public print(text: string = ''): void {
         console.log(text)
     }
 
     /**
-     * @param url {string}
+     * @param url
      * Example:
      *     'http://localhost'
      */
@@ -39,8 +41,8 @@ export class Printer {
     }
 
     /**
-     * Read data from blockchain and log.
-     * @param contract {Contract}
+     * Read account data from blockchain and output in console.
+     * @param contract
      */
     public async account(contract: Contract): Promise<void> {
         const address: string = await contract.address()
@@ -55,11 +57,12 @@ export class Printer {
     }
 
     /**
-     * @param balance {string}
+     * Return balance in human readable format.
+     * @param balance
      * Examples:
-     *     '0x4563918243faa410'
+     *     '0x0000111122223333444455556666777788889999aaaabbbbccccddddeeeeffff8243faa410'
      *     '0x0'
-     * @return {string}
+     * @return
      * Example:
      *     '4,999,999,999.983658'
      *     '0'

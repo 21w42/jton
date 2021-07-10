@@ -15,7 +15,7 @@ export class Up {
 
     /**
      *
-     * @param config {UpConfigInterface}
+     * @param config
      * You can get version from `tondev se version`
      * Example:
      *     {

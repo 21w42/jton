@@ -4,16 +4,16 @@ export class Filer {
     private static readonly ERROR_MESSAGE: string = 'INVALID GIVER KEY'
 
     /**
-     * @param key {string}
+     * @param key
      * Example:
      *     'se'
-     * @param keys {StringMap}
+     * @param keys
      * Example:
      *     {
      *         se: `${__dirname}/../library/keys/GiverV2.se.keys.json`,
      *         dev: `${__dirname}/../keys/GiverV2.keys.json`
      *     }
-     * @return {string}
+     * @return
      * Example:
      *     ${__dirname}/../library/keys/GiverV2.se.keys.json`
      */

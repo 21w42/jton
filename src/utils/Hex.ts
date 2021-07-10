@@ -3,10 +3,10 @@ import {AbiContract} from '@tonclient/core/dist/modules'
 export class Hex {
     /**
      * Add 0x to number or string.
-     * @param {number} number
+     * @param number
      * Example:
      *     '123'
-     * @return {string}
+     * @return
      * Example:
      *     '0x123'
      */
@@ -16,10 +16,10 @@ export class Hex {
 
     /**
      * Convert abi to hex.
-     * @param {Object} abi
+     * @param abi
      * Example:
      *     '{ABI ver...'
-     * @return {string}
+     * @return
      * Example:
      *     '7b0a0922...'
      */
@@ -29,10 +29,10 @@ export class Hex {
 
     /**
      * Convert string to hex.
-     * @param {string} string
+     * @param string
      * Example:
      *     'XYZ123'
-     * @return {string}
+     * @return
      * Example:
      *     '58595a313233'
      */
@@ -42,10 +42,10 @@ export class Hex {
 
     /**
      * Convert array of strings to hex. Actual for string[] or bytes[] parameter in Solidity.
-     * @param {string[]} strings
+     * @param strings
      * Example:
      *     ['XYZ123', 'ABC456']
-     * @return {string}
+     * @return
      * Example:
      *     ['58595a313233', '414243343536']
      */
@@ -55,10 +55,10 @@ export class Hex {
 
     /**
      * Convert number to hex.
-     * @param {number} number
+     * @param number
      * Example:
      *     1_000_000_000
-     * @return {string}
+     * @return
      * Example:
      *     '0x3b9aca00'
      */

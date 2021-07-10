@@ -6,7 +6,7 @@ export class Net {
     private static readonly ERROR_MESSAGE: string = 'UNKNOWN NETWORK'
 
     /**
-     * @param config {NetConfigInterface}
+     * @param config
      * Example:
      *     {
      *         net: {
@@ -27,7 +27,7 @@ export class Net {
      *         },
      *         defaultNet: 'local'
      *     }
-     * @return {NetConfigInterface}
+     * @return
      * Example:
      *     {
      *         url: 'http://localhost:8080',

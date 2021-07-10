@@ -4,7 +4,7 @@ import {AbiContract, KeyPair, ResultOfProcessMessage} from '@tonclient/core/dist
 import {TonClient} from '@tonclient/core'
 
 export class SafeMultisigWallet extends Contract {
-    constructor(client: TonClient, timeout: number,  keys: KeyPair) {
+    constructor(client: TonClient, timeout: number, keys: KeyPair) {
         super(client, timeout,{
             abi: SafeMultisigWalletContract.abi,
             tvc: SafeMultisigWalletContract.tvc,
@@ -18,6 +18,17 @@ export class SafeMultisigWallet extends Contract {
     /**********
      * DEPLOY *
      **********/
+    /**
+     * @param owners Array of owner public keys
+     * Example:
+     *    [
+     *        '0x0000111122223333444455556666777788889999aaaabbbbccccddddeeeeffff',
+     *        '0x0000000011111111222222223333333344444444555555556666666677777777'
+     *    ]
+     * @param reqConfirms The amount of confirmation for the action.
+     * Example:
+     *     1
+     */
     public async deploy(owners: string[] | number[], reqConfirms: number): Promise<boolean> {
         return await this._deploy({
             owners: owners,

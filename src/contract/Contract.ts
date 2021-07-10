@@ -280,8 +280,8 @@ export class Contract {
      * @param [keys] Use it if you want call contact with another keys. this._keys used by default.
      * Example:
      *     {
-     *         public: '0x123...',
-     *         secret: '0x456...'
+     *         public: '0x0000111122223333444455556666777788889999aaaabbbbccccddddeeeeffff',
+     *         secret: '0x0000000011111111222222223333333344444444555555556666666677777777'
      *     }
      */
     protected async _call(method: string, input: Object = {}, keys?: KeyPair): Promise<ResultOfProcessMessage> {

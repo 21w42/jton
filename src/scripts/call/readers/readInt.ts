@@ -1,8 +1,8 @@
 /**
- * @param value {string}
+ * @param value
  * Example:
  *     '1_000_000_000'
- * @return {number}
+ * @return
  * Example:
  *     1000000000
  */
