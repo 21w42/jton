@@ -8,7 +8,7 @@ import {readAbi} from '../readers/readAbi'
 import {readInt} from '../readers/readInt'
 import {readBoolean} from '../readers/readBoolean'
 import {readJson} from '../readers/readJson'
-import {SafeMultisigWallet} from '../../../contracts'
+import {SafeMultisigWallet} from '../../../samples'
 import {SafeMultisigWalletCallEnum} from './SafeMultisigWalletCallEnum'
 
 export class SafeMultisigWalletCall extends Call {

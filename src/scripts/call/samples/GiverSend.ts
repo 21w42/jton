@@ -3,10 +3,10 @@ import {CallConfig} from '../interfaces/CallConfig'
 import {GiverSendEnum} from './GiverSendEnum'
 import {KeyPair} from '@tonclient/core/dist/modules'
 import {Contract} from '../../../contract'
-import {GiverV2} from '../../../contracts'
-import {StringMap} from '../../../types'
+import {GiverV2} from '../../../samples'
 import {readInt} from '../readers/readInt'
 import {readBoolean} from '../readers/readBoolean'
+import {StringMap} from '../../../types'
 
 export class GiverSend extends Call {
     /**

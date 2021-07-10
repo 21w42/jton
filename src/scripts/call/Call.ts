@@ -1,17 +1,16 @@
 import {CallConfig} from './interfaces/CallConfig'
 import {TonClient} from '@tonclient/core'
 import {libNode} from '@tonclient/lib-node'
-import {Client} from '../../utils'
 import {InfoConfig} from '../info'
 import {Printer} from '../../printer'
 import {KeyPair} from '@tonclient/core/dist/modules'
-import {Keys} from '../../utils'
 import {Contract} from '../../contract'
 import transferAbi from '../../contract/abi/transfer.abi.json'
-import {StringMap} from '../../types'
 import colors from 'colors'
 import {CallMessages} from './constants/CallMessages'
-import {AccountTypeEnum} from '../../contract'
+import {AccountType} from '../../contract'
+import {createClient, createRandomIfNotExist} from '../../utils'
+import {StringMap} from '../../types'
 
 export class Call {
     protected readonly _config: InfoConfig
@@ -43,7 +42,7 @@ export class Call {
         this._config = config
         this._names = names
         this._args = process.argv.slice(2)
-        this._client = Client.create(config.net.url)
+        this._client = createClient(config.net.url)
     }
 
     /**
@@ -58,14 +57,14 @@ export class Call {
         if (this._names.length !== this._args.length)
             this._invalidArgumentsCountError(printer)
 
-        const keys: KeyPair = await Keys.createRandomIfNotExist(this._config.keys, this._client)
+        const keys: KeyPair = await createRandomIfNotExist(this._config.keys, this._client)
         const contract: Contract = this._getContract(keys)
 
         ////////////////////////
         // Check account type //
         ////////////////////////
-        const accountType: AccountTypeEnum = await contract.accountType()
-        if (accountType !== AccountTypeEnum.ACTIVE)
+        const accountType: AccountType = await contract.accountType()
+        if (accountType !== AccountType.ACTIVE)
             await this._accountInsNotActiveError(printer, contract)
 
         const map: StringMap = this._readArguments()
@@ -131,7 +130,7 @@ export class Call {
     }
 
     /**
-     * Read arguments from process.argv and return StringMap.
+     * Read arguments from process.argv and return Index.
      * @return
      * Example:
      *     {

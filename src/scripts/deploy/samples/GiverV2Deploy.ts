@@ -1,6 +1,6 @@
 import {KeyPair} from '@tonclient/core/dist/modules'
 import {Contract} from '../../../contract'
-import {GiverV2} from '../../../contracts'
+import {GiverV2} from '../../../samples'
 import {Deploy} from '../Deploy'
 
 export class GiverV2Deploy extends Deploy {

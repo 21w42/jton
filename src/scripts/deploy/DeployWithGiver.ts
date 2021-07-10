@@ -1,16 +1,15 @@
 import {TonClient} from '@tonclient/core'
 import {libNode} from '@tonclient/lib-node'
-import {Client} from '../../utils'
 import {KeyPair} from '@tonclient/core/dist/modules'
 import {Printer} from '../../printer'
-import {Keys} from '../../utils'
 import {Contract} from '../../contract'
 import transferAbi from '../../contract/abi/transfer.abi.json'
-import {AccountTypeEnum} from '../../contract'
+import {AccountType} from '../../contract'
 import {DeployMessages} from './constants/DeployMessages'
-import {B} from '../../constants'
+import {B} from '../../utils'
 import {DeployWithGiverConfig} from './interfaces/DeployWithGiverConfig'
-import {GiverV2} from '../../contracts'
+import {GiverV2} from '../../samples'
+import {createClient, createRandomIfNotExist} from '../../utils'
 
 export class DeployWithGiver {
     protected readonly _config: DeployWithGiverConfig
@@ -36,7 +35,7 @@ export class DeployWithGiver {
     constructor(config: DeployWithGiverConfig) {
         TonClient.useBinaryLibrary(libNode)
         this._config = config
-        this._client = Client.create(config.net.url)
+        this._client = createClient(config.net.url)
     }
 
     /**
@@ -44,8 +43,8 @@ export class DeployWithGiver {
      */
     public async run(): Promise<void> {
         const printer: Printer = new Printer(this._config.locale)
-        const keys: KeyPair = await Keys.createRandomIfNotExist(this._config.keys, this._client)
-        const giverKeys: KeyPair = await Keys.createRandomIfNotExist(this._config.giverKeys, this._client)
+        const keys: KeyPair = await createRandomIfNotExist(this._config.keys, this._client)
+        const giverKeys: KeyPair = await createRandomIfNotExist(this._config.giverKeys, this._client)
         const giver: GiverV2 = new GiverV2(this._client, this._config.net.timeout, giverKeys)
         const contract: Contract = this._getContract(keys)
 
@@ -63,17 +62,17 @@ export class DeployWithGiver {
         ////////////////////////
         // Check account type //
         ////////////////////////
-        const contractType: AccountTypeEnum = await contract.accountType()
+        const contractType: AccountType = await contract.accountType()
         switch (contractType) {
-            case AccountTypeEnum.ACTIVE:
+            case AccountType.ACTIVE:
                 printer.print(DeployMessages.ALREADY_DEPLOYED)
                 this._client.close()
                 return
-            case AccountTypeEnum.FROZEN:
+            case AccountType.FROZEN:
                 printer.print(DeployMessages.FROZEN)
                 this._client.close()
                 return
-            case AccountTypeEnum.NON_EXIST:
+            case AccountType.NON_EXIST:
                 printer.print(DeployMessages.NON_EXIST)
                 this._client.close()
                 return

@@ -2,8 +2,8 @@ import {UpConfig} from './interfaces/UpConfig'
 import {consoleTerminal, runCommand} from 'tondev'
 import {TonClient} from '@tonclient/core'
 import {libNode} from '@tonclient/lib-node'
-import {Client} from '../../utils'
 import {StringMap} from '../../types'
+import {createClient} from '../../utils'
 
 export class Up {
     private static readonly COMMAND: StringMap = {
@@ -56,7 +56,7 @@ export class Up {
      */
     async _waitAnswerFromNode(): Promise<void> {
         TonClient.useBinaryLibrary(libNode)
-        const client: TonClient = Client.create(this._config.net.url)
+        const client: TonClient = createClient(this._config.net.url)
         await client.net.wait_for_collection({
             collection: 'accounts',
             result: 'id',

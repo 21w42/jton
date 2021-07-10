@@ -7,7 +7,7 @@ import {StringMap} from '../../../types'
 import {GiverSendEnum} from './GiverSendEnum'
 import {readInt} from '../readers/readInt'
 import {readBoolean} from '../readers/readBoolean'
-import {SafeMultisigWallet} from '../../../contracts'
+import {SafeMultisigWallet} from '../../../samples'
 
 export class SafeMultisigWalletSend extends Call {
     /**

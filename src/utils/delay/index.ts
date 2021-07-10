@@ -1,5 +1,5 @@
 /**
- * Promise what resolve after the specified number of milliseconds.
+ * A promise that will resolve in the specified number of milliseconds.
  * @param milliseconds
  * Example:
  *     1000

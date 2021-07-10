@@ -1,15 +1,14 @@
 import {TonClient} from '@tonclient/core'
 import {libNode} from '@tonclient/lib-node'
-import {Client} from '../../utils'
 import {KeyPair} from '@tonclient/core/dist/modules'
 import {Printer} from '../../printer'
-import {Keys} from '../../utils'
 import {DeployConfig} from './interfaces/DeployConfig'
 import {Contract} from '../../contract'
 import transferAbi from '../../contract/abi/transfer.abi.json'
-import {AccountTypeEnum} from '../../contract'
+import {AccountType} from '../../contract'
 import {DeployMessages} from './constants/DeployMessages'
-import {B} from '../../constants'
+import {B} from '../../utils'
+import {createClient, createRandomIfNotExist} from '../../utils'
 
 export class Deploy {
     protected readonly _config: DeployConfig
@@ -34,7 +33,7 @@ export class Deploy {
     constructor(config: DeployConfig) {
         TonClient.useBinaryLibrary(libNode)
         this._config = config
-        this._client = Client.create(config.net.url)
+        this._client = createClient(config.net.url)
     }
 
     /**
@@ -42,7 +41,7 @@ export class Deploy {
      */
     public async run(): Promise<void> {
         const printer: Printer = new Printer(this._config.locale)
-        const keys: KeyPair = await Keys.createRandomIfNotExist(this._config.keys, this._client)
+        const keys: KeyPair = await createRandomIfNotExist(this._config.keys, this._client)
         const contract: Contract = this._getContract(keys)
 
         /////////////
@@ -58,21 +57,21 @@ export class Deploy {
         ////////////////////////
         // Check account type //
         ////////////////////////
-        const contractType: AccountTypeEnum = await contract.accountType()
+        const contractType: AccountType = await contract.accountType()
         switch (contractType) {
-            case AccountTypeEnum.NOT_FOUND:
+            case AccountType.NOT_FOUND:
                 printer.print(DeployMessages.NOT_ENOUGH_BALANCE)
                 this._client.close()
                 return
-            case AccountTypeEnum.ACTIVE:
+            case AccountType.ACTIVE:
                 printer.print(DeployMessages.ALREADY_DEPLOYED)
                 this._client.close()
                 return
-            case AccountTypeEnum.FROZEN:
+            case AccountType.FROZEN:
                 printer.print(DeployMessages.FROZEN)
                 this._client.close()
                 return
-            case AccountTypeEnum.NON_EXIST:
+            case AccountType.NON_EXIST:
                 printer.print(DeployMessages.NON_EXIST)
                 this._client.close()
                 return

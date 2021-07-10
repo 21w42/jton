@@ -1,4 +1,4 @@
-export enum AccountTypeEnum {
+export enum AccountType {
     NOT_FOUND = -1,
     UN_INIT = 0,
     ACTIVE = 1,

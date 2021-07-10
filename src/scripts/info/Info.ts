@@ -1,12 +1,11 @@
 import {TonClient} from '@tonclient/core'
 import {libNode} from '@tonclient/lib-node'
-import {Client} from '../../utils'
 import {InfoConfig} from './interfaces/InfoConfig'
 import {Contract} from '../../contract'
 import transferAbi from '../../contract/abi/transfer.abi.json'
 import {KeyPair} from '@tonclient/core/dist/modules'
-import {Keys} from '../../utils'
 import {Printer} from '../../printer'
+import {createClient, createRandomIfNotExist} from '../../utils'
 
 export class Info {
     protected readonly _config: InfoConfig
@@ -27,7 +26,7 @@ export class Info {
     constructor(config: InfoConfig) {
         TonClient.useBinaryLibrary(libNode)
         this._config = config
-        this._client = Client.create(config.net.url)
+        this._client = createClient(config.net.url)
     }
 
     /**
@@ -35,7 +34,7 @@ export class Info {
      */
     async run(): Promise<void> {
         const printer: Printer = new Printer(this._config.locale)
-        const keys: KeyPair = await Keys.createRandomIfNotExist(this._config.keys, this._client)
+        const keys: KeyPair = await createRandomIfNotExist(this._config.keys, this._client)
         const contract: Contract = this._getContract(keys)
 
         /////////////

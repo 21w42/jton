@@ -1,7 +1,7 @@
 import {Info} from '../Info'
 import {KeyPair} from '@tonclient/core/dist/modules'
 import {Contract} from '../../../contract'
-import {GiverV2} from '../../../contracts'
+import {GiverV2} from '../../../samples'
 
 export class GiverV2Info extends Info {
     /**

@@ -3,8 +3,8 @@ import colors from 'colors'
 import {contractTypes} from './utils/contractTypes'
 import {colorFunctions} from './utils/colorFunctions'
 import {ColorFunction} from './interfaces/ColorFunction'
-import {AccountTypeEnum} from '../contract'
-import {B} from '../constants'
+import {AccountType} from '../contract'
+import {B} from '../utils'
 
 export class Printer {
     private readonly _locale: string | undefined
@@ -47,7 +47,7 @@ export class Printer {
     public async account(contract: Contract): Promise<void> {
         const address: string = await contract.address()
         const balance: string = await contract.balance()
-        const accountType: AccountTypeEnum = await contract.accountType()
+        const accountType: AccountType = await contract.accountType()
         const colorFunction: ColorFunction = colorFunctions[accountType.toString()]
         const balanceAndType: string = `${this._getBalance(balance)}   ${contractTypes[accountType.toString()]}`
         const contractName: string = contract.constructor.name

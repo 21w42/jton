@@ -14,9 +14,9 @@ import {TonClient} from '@tonclient/core'
 import {ContractConfig} from './interfaces/ContractConfig'
 import {DeployedContractConfig} from './interfaces/DeployedContractConfig'
 import transferAbi from '../contract/abi/transfer.abi.json'
-import {AccountTypeEnum} from './enums/AccountTypeEnum'
-import {Hex} from '../utils'
-import {ContractErrorMessages} from './messages/ContractErrorMessages'
+import {AccountType} from './enums/AccountType'
+import {contractErrorMessages} from './contractErrorMessages'
+import {string} from '../utils'
 
 export class Contract {
     private readonly _client: TonClient
@@ -90,10 +90,10 @@ export class Contract {
             return this._address
 
         if (!this._keys)
-            throw Error(ContractErrorMessages.CONTRACT_KEYS_IS_UNDEFINED)
+            throw Error(contractErrorMessages.CONTRACT_KEYS_IS_UNDEFINED)
 
         if (!this._tvc)
-            throw Error(ContractErrorMessages.CONTRACT_TVC_IS_UNDEFINED)
+            throw Error(contractErrorMessages.CONTRACT_TVC_IS_UNDEFINED)
 
         const encodedMessage: ResultOfEncodeMessage = await this._client.abi.encode_message({
             abi: this._abi,
@@ -182,9 +182,9 @@ export class Contract {
      *     const timeout: number = ...
      *     const keys: KeyPair = ...
      *     const safeMultisigWallet: SafeMultisigWallet = new SafeMultisigWallet(client, timeout, keys)
-     *     const accountType: AccountTypeEnum = await safeMultisigWallet.accountType()
+     *     const accountType: AccountType = await safeMultisigWallet.accountType()
      */
-    public async accountType(): Promise<AccountTypeEnum> {
+    public async accountType(): Promise<AccountType> {
         const queryCollectionResult: ResultOfQueryCollection = await this._client.net.query_collection({
             collection: 'accounts',
             filter: {
@@ -196,7 +196,7 @@ export class Contract {
         })
         const result: any[] = queryCollectionResult.result
         if (!result.length)
-            return AccountTypeEnum.NOT_FOUND
+            return AccountType.NOT_FOUND
 
         this._lastTransactionLogicTime = result[0]['last_trans_lt']
         return result[0]['acc_type']
@@ -285,7 +285,7 @@ export class Contract {
         const keysPair: KeyPair | undefined = keys ?? this._keys
 
         if (!keysPair)
-            throw Error(ContractErrorMessages.CONTRACT_KEYS_IS_UNDEFINED)
+            throw Error(contractErrorMessages.CONTRACT_KEYS_IS_UNDEFINED)
 
         const processMessageResult: ResultOfProcessMessage = await this._client.processing.process_message({
             message_encode_params: {
@@ -319,10 +319,10 @@ export class Contract {
      */
     protected async _deploy(input: Object = {}): Promise<boolean> {
         if (!this._keys)
-            throw Error(ContractErrorMessages.CONTRACT_KEYS_IS_UNDEFINED)
+            throw Error(contractErrorMessages.CONTRACT_KEYS_IS_UNDEFINED)
 
         if (!this._tvc)
-            throw Error(ContractErrorMessages.CONTRACT_TVC_IS_UNDEFINED)
+            throw Error(contractErrorMessages.CONTRACT_TVC_IS_UNDEFINED)
 
         /////////////////////////////
         // Waiting for balance > 0 //
@@ -425,7 +425,7 @@ export class Contract {
             call_set: {
                 function_name: 'transfer',
                 input: {
-                    comment: Hex.string(comment)
+                    comment: string(comment)
                 }
             },
             is_internal: true
