@@ -4,7 +4,7 @@
   "description": "Library on JavaScript for compiling, deploying and testing Free TON smart contracts.",
   "main": "dist/index",
   "scripts": {
-    "build": "yarn tsc --build",
+    "build": "tsc --build",
     "prepublishOnly": "yarn install && yarn tsc"
   },
   "repository": {
