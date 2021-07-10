@@ -83,7 +83,7 @@ export class Contract {
      *     const rootAddress: string = await root.address()
      * @return
      * Example:
-     *     '0:97b53be2604579e89bd0077a5dcfbea857792eb2ff09849d14321fc2c167f29e'
+     *     '0:97b53be2604579e89bd0077a5456456857792eb2ff09849d14321fc2c167f29e'
      */
     public async address(): Promise<string> {
         if (this._address)
@@ -280,8 +280,8 @@ export class Contract {
      * @param [keys] Use it if you want call contact with another keys. this._keys used by default.
      * Example:
      *     {
-     *         public: '0x2ada2e65ab8eeab09490e3521415f45b6e42df9c760a639bcf53957550b25a16',
-     *         secret: '0x172af540e43a524763dd53b26a066d472a97c4de37d5498170564510608250c3'
+     *         public: '0x123...',
+     *         secret: '0x456...'
      *     }
      */
     protected async _call(method: string, input: Object = {}, keys?: KeyPair): Promise<ResultOfProcessMessage> {
