@@ -76,9 +76,9 @@ export class Contract {
      * Calculates the address only once. Next time it returns the already calculated address.
      * You can use if you want to know the address of the contract before deployment.
      * Example:
-     *     const client: TonClient = Client.create(config.net.test)
-     *     const timeout: number = 30_000
-     *     const keys: KeyPair = await Keys.random(client)
+     *     const client: TonClient = ...
+     *     const timeout: number = ...
+     *     const keys: KeyPair = ...
      *     const root: ArtRoot = new ArtRoot(client, timeout, keys)
      *     const rootAddress: string = await root.address()
      * @return
@@ -112,15 +112,12 @@ export class Contract {
     /**
      * Use this if you want to wait for a transaction from one contract to another.
      * Example:
-     *     const client: TonClient = Client.create(config.net.test)
-     *     const timeout: number = 30_000
-     *     const sender: SenderContract = new SenderContract(client, timeout)
-     *     const receiver: ReceiverContract = new ReceiverContract(client, timeout)
-     *
-     *     // Deployment here...
-     *
-     *     const receiverAddress: string = await receiver.address()
-     *     await sender.send(receiverAddress, 1_000_000_000)
+     *     const client: TonClient = ...
+     *     const timeout: number = ...
+     *     const keys: KeyPair = ...
+     *     const sender: SenderContract = new SenderContract(client, timeout, keys)
+     *     const receiver: ReceiverContract = new ReceiverContract(client, timeout, keys)
+     *     await sender.send(await receiver.address(), 1_000_000_000)
      *     const waitingResult: boolean = await receiver.waitForTransaction(5000)
      * @param timeout Time in milliseconds.
      * Examples:
@@ -154,9 +151,9 @@ export class Contract {
     /**
      * Return contract balance.
      * Example:
-     *     const client: TonClient = Client.create(config.net.test)
-     *     const timeout: number = 30_000
-     *     const keys: KeyPair = await Keys.random(client)
+     *     const client: TonClient = ...
+     *     const timeout: number = ...
+     *     const keys: KeyPair = ...
      *     const safeMultisigWallet: SafeMultisigWallet = new SafeMultisigWallet(client, timeout, keys)
      *     const balance: string = await safeMultisigWallet.balance()
      */
@@ -181,9 +178,9 @@ export class Contract {
     /**
      * Return contract account type.
      * Example:
-     *     const client: TonClient = Client.create(config.net.test)
-     *     const timeout: number = config.net.test.timeout
-     *     const keys: KeyPair = await Keys.random(client)
+     *     const client: TonClient = ...
+     *     const timeout: number = ...
+     *     const keys: KeyPair = ...
      *     const safeMultisigWallet: SafeMultisigWallet = new SafeMultisigWallet(client, timeout, keys)
      *     const accountType: AccountTypeEnum = await safeMultisigWallet.accountType()
      */
