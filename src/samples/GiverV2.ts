@@ -45,7 +45,12 @@ export class GiverV2 extends Contract {
      *         secret: '0x0000000011111111222222223333333344444444555555556666666677777777'
      *     }
      */
-    public sendTransaction(dest: string, value: number, bounce: boolean = false, keys?: KeyPair): Promise<ResultOfProcessMessage> {
+    public sendTransaction(
+        dest: string,
+        value: number,
+        bounce: boolean = false,
+        keys?: KeyPair
+    ): Promise<ResultOfProcessMessage> {
         return this._call('sendTransaction', {
             dest: dest,
             value: value,

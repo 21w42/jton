@@ -60,7 +60,7 @@ export class Printer {
      * Return balance in human readable format.
      * @param balance
      * Examples:
-     *     '0x0000111122223333444455556666777788889999aaaabbbbccccddddeeeeffff8243faa410'
+     *     '0x4563918243faa410'
      *     '0x0'
      * @return
      * Example:
