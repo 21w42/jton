@@ -1,7 +1,7 @@
 {
   "name": "jton",
   "version": "0.0.2",
-  "description": "Library on JavaScript for compiling, deploying and testing Free TON smart contracts.",
+  "description": "Library for compiling, deploying and testing Free TON smart contracts.",
   "main": "dist/index",
   "scripts": {
     "build": "tsc --build",
