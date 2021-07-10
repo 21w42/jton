@@ -1,3 +1,3 @@
 export {ColorFunctionMap} from './ColorFunctionMap'
-export {NetConfigInterfaceMap} from './NetConfigInterfaceMap'
+export {NetConfigMap} from './NetConfigMap'
 export {StringMap} from './StringMap'

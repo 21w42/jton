@@ -1,6 +1,6 @@
 import {TonClient} from '@tonclient/core'
 import {libNode} from '@tonclient/lib-node'
-import {MakeConfigInterface} from './interfaces/MakeConfigInterface'
+import {MakeConfig} from './interfaces/MakeConfig'
 import path from 'path'
 import {runCommand} from 'tondev'
 import {errorConsoleTerminal} from './terminal/errorConsoleTerminal'
@@ -26,7 +26,7 @@ export class Make {
         ABI_JSON: 'abi.json',
     }
 
-    private readonly _config: MakeConfigInterface
+    private readonly _config: MakeConfig
     private readonly _extension: ExtensionType
     private readonly _export: ExportType
 
@@ -50,7 +50,7 @@ export class Make {
      *         export: 'es6-default'
      *     }
      */
-    constructor(config: MakeConfigInterface) {
+    constructor(config: MakeConfig) {
         this._config = config
         this._extension = config.extension ?? Make.CONFIG.EXTENSION
         this._export = config.export ?? Make.CONFIG.EXPORT

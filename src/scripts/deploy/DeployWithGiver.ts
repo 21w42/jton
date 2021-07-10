@@ -9,11 +9,11 @@ import transferAbi from '../../contract/abi/transfer.abi.json'
 import {AccountTypeEnum} from '../../contract'
 import {DeployMessages} from './constants/DeployMessages'
 import {B} from '../../constants'
-import {DeployWithGiverConfigInterface} from './interfaces/DeployWithGiverConfigInterface'
+import {DeployWithGiverConfig} from './interfaces/DeployWithGiverConfig'
 import {GiverV2} from '../../contracts'
 
 export class DeployWithGiver {
-    protected readonly _config: DeployWithGiverConfigInterface
+    protected readonly _config: DeployWithGiverConfig
     protected readonly _client: TonClient
 
     /**
@@ -33,7 +33,7 @@ export class DeployWithGiver {
      *         giverKeys: `${__dirname}/../keys/GiverV2.keys.json`
      *     }
      */
-    constructor(config: DeployWithGiverConfigInterface) {
+    constructor(config: DeployWithGiverConfig) {
         TonClient.useBinaryLibrary(libNode)
         this._config = config
         this._client = Client.create(config.net.url)

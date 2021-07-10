@@ -1,4 +1,4 @@
-export interface NetConfigInterface {
+export interface NetConfig {
     url: string
     timeout: number
     transactionFee: number

@@ -11,8 +11,8 @@ import {
     ResultOfWaitForCollection
 } from '@tonclient/core/dist/modules'
 import {TonClient} from '@tonclient/core'
-import {ContractConfigInterface} from './interfaces/ContractConfigInterface'
-import {DeployedContractConfigInterface} from './interfaces/DeployedContractConfigInterface'
+import {ContractConfig} from './interfaces/ContractConfig'
+import {DeployedContractConfig} from './interfaces/DeployedContractConfig'
 import transferAbi from '../contract/abi/transfer.abi.json'
 import {AccountTypeEnum} from './enums/AccountTypeEnum'
 import {Hex} from '../utils'
@@ -59,7 +59,7 @@ export class Contract {
     constructor(
         client: TonClient,
         timeout: number,
-        config: ContractConfigInterface | DeployedContractConfigInterface
+        config: ContractConfig | DeployedContractConfig
     )
     {
         this._client = client

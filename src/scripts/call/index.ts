@@ -1,4 +1,4 @@
-export {CallConfigInterface} from './interfaces/CallConfigInterface'
+export {CallConfig} from './interfaces/CallConfig'
 export {readAbi} from './readers/readAbi'
 export {readBoolean} from './readers/readBoolean'
 export {readInt} from './readers/readInt'

@@ -1,4 +1,4 @@
-import {UpConfigInterface} from './interfaces/UpConfigInterface'
+import {UpConfig} from './interfaces/UpConfig'
 import {consoleTerminal, runCommand} from 'tondev'
 import {TonClient} from '@tonclient/core'
 import {libNode} from '@tonclient/lib-node'
@@ -11,7 +11,7 @@ export class Up {
         SE_START: 'se start'
     }
 
-    private readonly _config: UpConfigInterface
+    private readonly _config: UpConfig
 
     /**
      *
@@ -31,7 +31,7 @@ export class Up {
      *         }
      *     }
      */
-    constructor(config: UpConfigInterface) {
+    constructor(config: UpConfig) {
         this._config = config
     }
 

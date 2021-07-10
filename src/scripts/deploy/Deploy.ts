@@ -4,7 +4,7 @@ import {Client} from '../../utils'
 import {KeyPair} from '@tonclient/core/dist/modules'
 import {Printer} from '../../printer'
 import {Keys} from '../../utils'
-import {DeployConfigInterface} from './interfaces/DeployConfigInterface'
+import {DeployConfig} from './interfaces/DeployConfig'
 import {Contract} from '../../contract'
 import transferAbi from '../../contract/abi/transfer.abi.json'
 import {AccountTypeEnum} from '../../contract'
@@ -12,7 +12,7 @@ import {DeployMessages} from './constants/DeployMessages'
 import {B} from '../../constants'
 
 export class Deploy {
-    protected readonly _config: DeployConfigInterface
+    protected readonly _config: DeployConfig
     protected readonly _client: TonClient
 
     /**
@@ -31,7 +31,7 @@ export class Deploy {
      *         requiredForDeployment: 0.03
      *     }
      */
-    constructor(config: DeployConfigInterface) {
+    constructor(config: DeployConfig) {
         TonClient.useBinaryLibrary(libNode)
         this._config = config
         this._client = Client.create(config.net.url)

@@ -2,7 +2,7 @@ import {Contract} from '../contract'
 import colors from 'colors'
 import {contractTypes} from './utils/contractTypes'
 import {colorFunctions} from './utils/colorFunctions'
-import {ColorFunctionInterface} from './interfaces/ColorFunctionInterface'
+import {ColorFunction} from './interfaces/ColorFunction'
 import {AccountTypeEnum} from '../contract'
 import {B} from '../constants'
 
@@ -48,7 +48,7 @@ export class Printer {
         const address: string = await contract.address()
         const balance: string = await contract.balance()
         const accountType: AccountTypeEnum = await contract.accountType()
-        const colorFunction: ColorFunctionInterface = colorFunctions[accountType.toString()]
+        const colorFunction: ColorFunction = colorFunctions[accountType.toString()]
         const balanceAndType: string = `${this._getBalance(balance)}   ${contractTypes[accountType.toString()]}`
         const contractName: string = contract.constructor.name
         console.log(`${colors.gray(contractName)}`)

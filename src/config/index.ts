@@ -1,3 +1,3 @@
-export {ConfigInterface} from './ConfigInterface'
-export {NetConfigInterface} from './NetConfigInterface'
-export {NodeConfigInterface} from './NodeConfigInterface'
+export {Config} from './Config'
+export {NetConfig} from './NetConfig'
+export {NodeConfig} from './NodeConfig'

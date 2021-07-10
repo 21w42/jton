@@ -1,5 +1,5 @@
-export {DeployConfigInterface} from './interfaces/DeployConfigInterface'
-export {DeployWithGiverConfigInterface} from './interfaces/DeployWithGiverConfigInterface'
+export {DeployConfig} from './interfaces/DeployConfig'
+export {DeployWithGiverConfig} from './interfaces/DeployWithGiverConfig'
 export {GiverV2Deploy} from './samples/GiverV2Deploy'
 export {SafeMultisigWalletDeployWithGiver} from './samples/SafeMultisigWalletDeployWithGiver'
 export {Deploy} from './Deploy'

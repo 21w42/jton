@@ -1,8 +1,8 @@
-import {CallConfigInterface} from './interfaces/CallConfigInterface'
+import {CallConfig} from './interfaces/CallConfig'
 import {TonClient} from '@tonclient/core'
 import {libNode} from '@tonclient/lib-node'
 import {Client} from '../../utils'
-import {InfoConfigInterface} from '../info'
+import {InfoConfig} from '../info'
 import {Printer} from '../../printer'
 import {KeyPair} from '@tonclient/core/dist/modules'
 import {Keys} from '../../utils'
@@ -14,7 +14,7 @@ import {CallMessages} from './constants/CallMessages'
 import {AccountTypeEnum} from '../../contract'
 
 export class Call {
-    protected readonly _config: InfoConfigInterface
+    protected readonly _config: InfoConfig
     protected readonly _names: string[]
     protected readonly _args: string[]
     protected readonly _client: TonClient
@@ -38,7 +38,7 @@ export class Call {
      *         flags
      *     ]
      */
-    constructor(config: CallConfigInterface, names: string[]) {
+    constructor(config: CallConfig, names: string[]) {
         TonClient.useBinaryLibrary(libNode)
         this._config = config
         this._names = names

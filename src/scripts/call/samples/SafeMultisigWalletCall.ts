@@ -1,5 +1,5 @@
 import {Call} from '../Call'
-import {CallConfigInterface} from '../interfaces/CallConfigInterface'
+import {CallConfig} from '../interfaces/CallConfig'
 import {AbiContract, KeyPair} from '@tonclient/core/dist/modules'
 import {Contract} from '../../../contract'
 import {StringMap} from '../../../types'
@@ -24,7 +24,7 @@ export class SafeMultisigWalletCall extends Call {
      *         keys: `${__dirname}/../library/keys/GiverV2.se.keys.json`
      *     }
      */
-    constructor(config: CallConfigInterface) {
+    constructor(config: CallConfig) {
         super(config, Object.values(SafeMultisigWalletCallEnum))
     }
 

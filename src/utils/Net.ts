@@ -1,5 +1,5 @@
-import {NetConfigInterface} from '../config'
-import {ConfigInterface} from '../config'
+import {NetConfig} from '../config'
+import {Config} from '../config'
 
 export class Net {
     private static readonly PARAMETER: string = 'net'
@@ -37,7 +37,7 @@ export class Net {
      *         giver: 'se'
      *     }
      */
-    public static getConfig(config: ConfigInterface): NetConfigInterface {
+    public static getConfig(config: Config): NetConfig {
         const net: string = process.env[Net.PARAMETER] ?? config.defaultNet
         if (!config.net.hasOwnProperty(net))
             throw new Error(`${Net.ERROR_MESSAGE} ${net}`)
