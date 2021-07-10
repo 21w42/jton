@@ -11,7 +11,7 @@
 
 "@tonclient/core@^1", "@tonclient/core@^1.19.0":
   version "1.19.0"
-  resolved "https://registry.npmjs.org/@tonclient/core/-/core-1.19.0.tgz"
+  resolved "https://registry.yarnpkg.com/@tonclient/core/-/core-1.19.0.tgz#291d6cbf792774f90db45f4726a62572acba4187"
   integrity sha512-xW+CtJahZEhlD+l4ap1ilrzCedNouTfdTTA1bpvFv0FYTpUilJi138gZGq6MWY1kbfgqLG5VXAB2ClUeSqTQbw==
 
 "@tonclient/lib-node@^1":
@@ -41,7 +41,7 @@
 
 "@types/node@^16.3.1":
   version "16.3.1"
-  resolved "https://registry.npmjs.org/@types/node/-/node-16.3.1.tgz"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-16.3.1.tgz#24691fa2b0c3ec8c0d34bfcfd495edac5593ebb4"
   integrity sha512-N87VuQi7HEeRJkhzovao/JviiqKjDKMVKxKMfUvSKw+MbkbW8R0nA3fi/MQhhlxV2fQ+2ReM+/Nt4efdrJx3zA==
 
 ajv@^6.12.3:
@@ -170,7 +170,7 @@ chownr@^1.1.1:
 
 colors@^1.4.0:
   version "1.4.0"
-  resolved "https://registry.npmjs.org/colors/-/colors-1.4.0.tgz"
+  resolved "https://registry.yarnpkg.com/colors/-/colors-1.4.0.tgz#c50491479d4c1bdaed2c9ced32cf7c7dc2360f78"
   integrity sha512-a+UqTh4kgZg/SlGvfbzDHpgRu7AAQOmmqRHJnxhRZICKFUT91brVhNNt58CMWU9PsBbv3PDCZUHbVxuDiH2mtA==
 
 combined-stream@^1.0.6, combined-stream@~1.0.6:
@@ -659,7 +659,7 @@ tar-stream@^2.0.0:
 
 tondev@^0.7.4:
   version "0.7.4"
-  resolved "https://registry.npmjs.org/tondev/-/tondev-0.7.4.tgz"
+  resolved "https://registry.yarnpkg.com/tondev/-/tondev-0.7.4.tgz#3f4389604f2d384105a221408215c5ce89009340"
   integrity sha512-XcmJZV5qRDcqbUrcQponglee7rDqD7zsvg6n99eBYVvCbwEarD4cipc50oYik4+ufzYKrbWCPXszp6QjT9A1ug==
   dependencies:
     "@tonclient/appkit" "^0"
@@ -684,10 +684,10 @@ tough-cookie@~2.5.0:
   resolved "https://registry.npmjs.org/traverse/-/traverse-0.3.9.tgz"
   integrity sha1-cXuPIgzAu3tE5AUUwisui7xw2Lk=
 
-ts-node@^10.0.0:
-  version "10.0.0"
-  resolved "https://registry.npmjs.org/ts-node/-/ts-node-10.0.0.tgz"
-  integrity sha512-ROWeOIUvfFbPZkoDis0L/55Fk+6gFQNZwwKPLinacRl6tsxstTF1DbAcLKkovwnpKMVvOMHP1TIbnwXwtLg1gg==
+ts-node@^10.1.0:
+  version "10.1.0"
+  resolved "https://registry.yarnpkg.com/ts-node/-/ts-node-10.1.0.tgz#e656d8ad3b61106938a867f69c39a8ba6efc966e"
+  integrity sha512-6szn3+J9WyG2hE+5W8e0ruZrzyk1uFLYye6IGMBadnOzDh8aP7t8CbFpsfCiEx2+wMixAhjFt7lOZC4+l+WbEA==
   dependencies:
     "@tsconfig/node10" "^1.0.7"
     "@tsconfig/node12" "^1.0.7"
@@ -702,7 +702,7 @@ ts-node@^10.0.0:
 
 tsc@^2.0.3:
   version "2.0.3"
-  resolved "https://registry.npmjs.org/tsc/-/tsc-2.0.3.tgz"
+  resolved "https://registry.yarnpkg.com/tsc/-/tsc-2.0.3.tgz#037fe579e3bd67a5cbdaa604b43c6c1991b04bef"
   integrity sha512-SN+9zBUtrpUcOpaUO7GjkEHgWtf22c7FKbKCA4e858eEM7Qz86rRDpgOU2lBIDf0fLCsEg65ms899UMUIB2+Ow==
 
 tunnel-agent@^0.6.0:
@@ -719,7 +719,7 @@ tweetnacl@^0.14.3, tweetnacl@~0.14.0:
 
 typescript@^4.3.5:
   version "4.3.5"
-  resolved "https://registry.npmjs.org/typescript/-/typescript-4.3.5.tgz"
+  resolved "https://registry.yarnpkg.com/typescript/-/typescript-4.3.5.tgz#4d1c37cc16e893973c45a06886b7113234f119f4"
   integrity sha512-DqQgihaQ9cUrskJo9kIyW/+g0Vxsk8cDtZ52a3NGh0YNTfpUSArXSohyUGnvbPazEPLu398C0UxmKSOrPumUzA==
 
 universalify@^2.0.0:
