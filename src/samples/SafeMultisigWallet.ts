@@ -18,7 +18,7 @@ export class SafeMultisigWallet extends Contract {
      * DEPLOY *
      **********/
     /**
-     * @param owners Array of owner public keys
+     * @param owners Array of public keys.
      * Example:
      *    [
      *        '0x0000111122223333444455556666777788889999aaaabbbbccccddddeeeeffff',

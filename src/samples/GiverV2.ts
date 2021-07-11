@@ -28,7 +28,7 @@ export class GiverV2 extends Contract {
     /**
      * @param dest Destination address.
      * Example:
-     *     '0x0000111122223333444455556666777788889999aaaabbbbccccddddeeeeffff'
+     *     '0:0000111122223333444455556666777788889999aaaabbbbccccddddeeeeffff'
      * @param value Value in nano crystals.
      * Example:
      *     1_000_000_000

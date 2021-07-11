@@ -128,7 +128,7 @@ export class Call {
      * @return
      * Example:
      *     {
-     *         address: '0x01234...',
+     *         address: '0:01234...',
      *         value: '1_000_000_000'
      *     }
      */
@@ -156,7 +156,7 @@ export class Call {
         return new Contract(this._client, this._config.net.timeout, {
             abi: transferAbi,
             keys: keys,
-            address: '0x0000000000000000000000000000000000000000000000000000000000000000'
+            address: '0:0000000000000000000000000000000000000000000000000000000000000000'
         })
     }
 
@@ -165,7 +165,7 @@ export class Call {
      * @param map
      * Example:
      *     {
-     *         address: '0x1111222233334444555566667777888899990000aaaabbbbccccddddeeeeffff'
+     *         address: '0:0000111122223333444455556666777788889999aaaabbbbccccddddeeeeffff'
      *     }
      */
     protected _getTargetContract(map: StringMap): Contract {
@@ -181,7 +181,7 @@ export class Call {
      * @param _1
      * Example:
      *     {
-     *         address: '0x0000111122223333444455556666777788889999aaaabbbbccccddddeeeeffff ',
+     *         address: '0:0000111122223333444455556666777788889999aaaabbbbccccddddeeeeffff ',
      *         value: '1_000_000_000',
      *         bounce: 'false'
      *     }

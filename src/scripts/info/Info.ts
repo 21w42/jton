@@ -65,7 +65,7 @@ export class Info {
         return new Contract(this._client, this._config.net.timeout, {
             abi: transferAbi,
             keys: keys,
-            address: '0x0000000000000000000000000000000000000000000000000000000000000000'
+            address: '0:0000000000000000000000000000000000000000000000000000000000000000'
         })
     }
 }
