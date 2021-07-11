@@ -52,9 +52,9 @@ export class Info {
 
 
 
-    //////////////////////
-    // MUST BE OVERRIDE //
-    //////////////////////
+    ////////////////////////
+    // MUST BE OVERRIDDEN //
+    ////////////////////////
     /**
      * Create and return contract object.
      * @param keys

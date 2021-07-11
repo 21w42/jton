@@ -143,9 +143,9 @@ export class DeployWithGiver {
 
 
 
-    //////////////////////
-    // MUST BE OVERRIDE //
-    //////////////////////
+    ////////////////////////
+    // MUST BE OVERRIDDEN //
+    ////////////////////////
     /**
      * Create and return contract object.
      * @param keys
