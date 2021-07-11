@@ -12,11 +12,10 @@ import {GiverV2} from '../../samples'
 import {createClient, createRandomKeyFileIfNotExists} from '../../utils'
 
 export class DeployWithGiver {
-    protected readonly _config: DeployWithGiverConfig
     protected readonly _client: TonClient
 
     /**
-     * @param config
+     * @param _config
      * Example:
      *     {
      *         net: {
@@ -32,10 +31,9 @@ export class DeployWithGiver {
      *         giverKeys: `${__dirname}/../keys/GiverV2.keys.json`
      *     }
      */
-    constructor(config: DeployWithGiverConfig) {
+    constructor(protected readonly _config: DeployWithGiverConfig) {
         TonClient.useBinaryLibrary(libNode)
-        this._config = config
-        this._client = createClient(config.net.url)
+        this._client = createClient(this._config.net.url)
     }
 
     /**

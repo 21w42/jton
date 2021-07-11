@@ -6,16 +6,14 @@ import {StringMap} from '../../types'
 import {createClient} from '../../utils'
 
 export class Up {
-    private static readonly COMMAND: StringMap = {
-        SE_SET: 'se set',
-        SE_START: 'se start'
+    private static readonly SE: StringMap = {
+        SET: 'se set',
+        START: 'se start'
     }
-
-    private readonly _config: UpConfig
 
     /**
      *
-     * @param config
+     * @param _config
      * You can get version from `tondev se version`
      * Example:
      *     {
@@ -31,21 +29,19 @@ export class Up {
      *         }
      *     }
      */
-    constructor(config: UpConfig) {
-        this._config = config
-    }
+    constructor(private readonly _config: UpConfig) {}
 
     /**
      * Run command.
      */
     async run(): Promise<void> {
-        await runCommand(consoleTerminal, Up.COMMAND.SE_SET, {
+        await runCommand(consoleTerminal, Up.SE.SET, {
             version: this._config.node.version,
             port: this._config.node.port,
             dbPort: this._config.node.dbPort,
             instance: this._config.node.instance
         })
-        await runCommand(consoleTerminal, Up.COMMAND.SE_START, {
+        await runCommand(consoleTerminal, Up.SE.START, {
             instance: this._config.node.instance
         })
         await this._waitAnswerFromNode()

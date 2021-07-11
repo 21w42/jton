@@ -19,8 +19,6 @@ import {contractErrorMessages} from './contractErrorMessages'
 import {stringToHex} from '../utils'
 
 export class Contract {
-    private readonly _client: TonClient
-    private readonly _timeout: number
     private readonly _abi: Abi
     private readonly _initialData: Object | undefined
     private readonly _keys: KeyPair | undefined
@@ -34,8 +32,8 @@ export class Contract {
      * PUBLIC *
      **********/
     /**
-     * @param client
-     * @param timeout
+     * @param _client
+     * @param _timeout
      * Examples:
      *     3000
      *     30000
@@ -57,13 +55,11 @@ export class Contract {
      *     }
      */
     constructor(
-        client: TonClient,
-        timeout: number,
+        private readonly _client: TonClient,
+        private readonly _timeout: number,
         config: ContractConfig | DeployedContractConfig
     )
     {
-        this._client = client
-        this._timeout = timeout
         this._abi = Contract._getAbi(config.abi)
         this._initialData = config.initialData
         this._tvc = config.tvc

@@ -10,28 +10,23 @@ import {ExportType} from './types/ExportType'
 import {StringMap} from '../../types'
 
 export class Make {
-    private static readonly CONFIG = {
-        EXTENSION: 'ts' as ExtensionType,
-        EXPORT: 'es6-default' as ExportType
-    }
-
+    private static readonly EXTENSION: ExtensionType = 'ts'
+    private static readonly EXPORT: ExportType = 'es6-default'
     private static readonly COMMAND: StringMap = {
         SOL_SET: 'sol set',
         SOL_COMPILE: 'sol compile',
         JS_WRAP: 'js wrap'
     }
-
-    private static readonly EXTENSION: StringMap = {
+    private static readonly FILE: StringMap = {
         SOL: 'sol',
         ABI_JSON: 'abi.json',
     }
 
-    private readonly _config: MakeConfig
     private readonly _extension: ExtensionType
     private readonly _export: ExportType
 
     /**
-     * @param config Config contains relative paths without `.sol` and `.tvc` extension.
+     * @param _config Config contains relative paths without `.sol` and `.tvc` extension.
      * You can get compiler, linker and stdlib versions from `tondev sol version`
      * Example:
      *     {
@@ -50,10 +45,9 @@ export class Make {
      *         export: 'es6-default'
      *     }
      */
-    constructor(config: MakeConfig) {
-        this._config = config
-        this._extension = config.extension ?? Make.CONFIG.EXTENSION
-        this._export = config.export ?? Make.CONFIG.EXPORT
+    constructor(private readonly _config: MakeConfig) {
+        this._extension = this._config.extension ?? Make.EXTENSION
+        this._export = this._config.export ?? Make.EXPORT
         TonClient.useBinaryLibrary(libNode)
     }
 
@@ -91,7 +85,7 @@ export class Make {
      */
     private async _compile(file: string): Promise<void> {
         await runCommand(errorConsoleTerminal, Make.COMMAND.SOL_COMPILE, {
-            file: path.resolve(this._config.root, `${file}.${Make.EXTENSION.SOL}`),
+            file: path.resolve(this._config.root, `${file}.${Make.FILE.SOL}`),
             outputDir: path.resolve(this._config.root, path.parse(file).dir)
         })
     }
@@ -104,7 +98,7 @@ export class Make {
      */
     private async _wrap(file: string): Promise<void> {
         await runCommand(errorConsoleTerminal, Make.COMMAND.JS_WRAP, {
-            file: path.resolve(this._config.root, `${file}.${Make.EXTENSION.ABI_JSON}`),
+            file: path.resolve(this._config.root, `${file}.${Make.FILE.ABI_JSON}`),
             export: this._export,
             output: `${path.basename(file)}.${this._extension}`
         })

@@ -1,7 +1,6 @@
 import {CallConfig} from './interfaces/CallConfig'
 import {TonClient} from '@tonclient/core'
 import {libNode} from '@tonclient/lib-node'
-import {InfoConfig} from '../info'
 import {Printer} from '../../printer'
 import {KeyPair} from '@tonclient/core/dist/modules'
 import {Contract} from '../../contract'
@@ -13,13 +12,11 @@ import {createClient, createRandomKeyFileIfNotExists} from '../../utils'
 import {StringMap} from '../../types'
 
 export class Call {
-    protected readonly _config: InfoConfig
-    protected readonly _names: string[]
     protected readonly _args: string[]
     protected readonly _client: TonClient
 
     /**
-     * @param config
+     * @param _config
      * Example:
      *     {
      *         net: {
@@ -29,7 +26,7 @@ export class Call {
      *         locale: 'EN',
      *         keys: `${__dirname}/../library/keys/GiverV2.se.keys.json`
      *     }
-     * @param names
+     * @param _names
      * Example:
      *     [
      *         address,
@@ -37,12 +34,10 @@ export class Call {
      *         flags
      *     ]
      */
-    constructor(config: CallConfig, names: string[]) {
+    constructor(protected readonly _config: CallConfig, protected readonly _names: string[]) {
         TonClient.useBinaryLibrary(libNode)
-        this._config = config
-        this._names = names
         this._args = process.argv.slice(2)
-        this._client = createClient(config.net.url)
+        this._client = createClient(this._config.net.url)
     }
 
     /**

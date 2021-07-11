@@ -11,11 +11,10 @@ import {B} from '../../utils'
 import {createClient, createRandomKeyFileIfNotExists} from '../../utils'
 
 export class Deploy {
-    protected readonly _config: DeployConfig
     protected readonly _client: TonClient
 
     /**
-     * @param config
+     * @param _config
      * Example:
      *     {
      *         net: {
@@ -30,10 +29,9 @@ export class Deploy {
      *         requiredForDeployment: 0.03
      *     }
      */
-    constructor(config: DeployConfig) {
+    constructor(protected readonly _config: DeployConfig) {
         TonClient.useBinaryLibrary(libNode)
-        this._config = config
-        this._client = createClient(config.net.url)
+        this._client = createClient(this._config.net.url)
     }
 
     /**

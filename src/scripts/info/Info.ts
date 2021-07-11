@@ -8,11 +8,10 @@ import {Printer} from '../../printer'
 import {createClient, createRandomKeyFileIfNotExists} from '../../utils'
 
 export class Info {
-    protected readonly _config: InfoConfig
     protected readonly _client: TonClient
 
     /**
-     * @param config
+     * @param _config
      * Example:
      *     {
      *         net: {
@@ -23,10 +22,9 @@ export class Info {
      *         keys: `${__dirname}/../library/keys/GiverV2.se.keys.json`
      *     }
      */
-    constructor(config: InfoConfig) {
+    constructor(protected readonly _config: InfoConfig) {
         TonClient.useBinaryLibrary(libNode)
-        this._config = config
-        this._client = createClient(config.net.url)
+        this._client = createClient(this._config.net.url)
     }
 
     /**

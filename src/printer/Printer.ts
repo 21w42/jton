@@ -7,18 +7,14 @@ import {AccountType} from '../contract'
 import {B} from '../utils'
 
 export class Printer {
-    private readonly _locale: string | undefined
-
     /**
-     * @param locale One or more BCP 47 extension sequences or `undefined`
+     * @param _locale One or more BCP 47 extension sequences or `undefined`
      * Examples:
      *     'RU'
      *     'EN'
      *     undefined
      */
-    constructor(locale?: string) {
-        this._locale = locale
-    }
+    constructor(private readonly _locale?: string) {}
 
     /**
      * Print text.
