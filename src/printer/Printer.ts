@@ -1,9 +1,8 @@
-import {Contract} from '../contract'
+import {AccountType, Contract} from '../contract'
 import colors from 'colors'
 import {contractTypes} from './utils/contractTypes'
 import {colorFunctions} from './utils/colorFunctions'
 import {ColorFunction} from './interfaces/ColorFunction'
-import {AccountType} from '../contract'
 import {B} from '../utils'
 
 export class Printer {
@@ -14,7 +13,8 @@ export class Printer {
      *     'EN'
      *     undefined
      */
-    constructor(private readonly _locale?: string) {}
+    constructor(private readonly _locale?: string) {
+    }
 
     /**
      * Print text.

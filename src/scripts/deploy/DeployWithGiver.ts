@@ -2,14 +2,12 @@ import {TonClient} from '@tonclient/core'
 import {libNode} from '@tonclient/lib-node'
 import {KeyPair} from '@tonclient/core/dist/modules'
 import {Printer} from '../../printer'
-import {Contract} from '../../contract'
+import {AccountType, Contract} from '../../contract'
 import transferAbi from '../../contract/abi/transfer.abi.json'
-import {AccountType} from '../../contract'
 import {DeployMessages} from './constants/DeployMessages'
-import {B} from '../../utils'
+import {B, createClient, createRandomKeyFileIfNotExists} from '../../utils'
 import {DeployWithGiverConfig} from './interfaces/DeployWithGiverConfig'
 import {GiverV2} from '../../samples'
-import {createClient, createRandomKeyFileIfNotExists} from '../../utils'
 
 export class DeployWithGiver {
     protected readonly _client: TonClient
@@ -138,7 +136,6 @@ export class DeployWithGiver {
 
         this._client.close()
     }
-
 
 
     ////////////////////////

@@ -3,12 +3,10 @@ import {libNode} from '@tonclient/lib-node'
 import {KeyPair} from '@tonclient/core/dist/modules'
 import {Printer} from '../../printer'
 import {DeployConfig} from './interfaces/DeployConfig'
-import {Contract} from '../../contract'
+import {AccountType, Contract} from '../../contract'
 import transferAbi from '../../contract/abi/transfer.abi.json'
-import {AccountType} from '../../contract'
 import {DeployMessages} from './constants/DeployMessages'
-import {B} from '../../utils'
-import {createClient, createRandomKeyFileIfNotExists} from '../../utils'
+import {B, createClient, createRandomKeyFileIfNotExists} from '../../utils'
 
 export class Deploy {
     protected readonly _client: TonClient
@@ -109,7 +107,6 @@ export class Deploy {
 
         this._client.close()
     }
-
 
 
     ////////////////////////

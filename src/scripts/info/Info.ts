@@ -49,7 +49,6 @@ export class Info {
     }
 
 
-
     ////////////////////////
     // MUST BE OVERRIDDEN //
     ////////////////////////

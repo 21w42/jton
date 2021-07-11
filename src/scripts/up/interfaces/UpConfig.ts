@@ -1,5 +1,4 @@
-import {NodeConfig} from '../../../config'
-import {NetConfig} from '../../../config'
+import {NetConfig, NodeConfig} from '../../../config'
 
 export interface UpConfig {
     node: NodeConfig

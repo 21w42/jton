@@ -18,7 +18,7 @@ export async function getRandomKeyPair(client: TonClient): Promise<KeyPair> {
  *     '/home/user/keys/GiverV2.keys.json'
  */
 export function readKeyFile(file: string): KeyPair {
-    const text: string = fs.readFileSync(file, { encoding: 'utf8'})
+    const text: string = fs.readFileSync(file, {encoding: 'utf8'})
     return JSON.parse(text)
 }
 

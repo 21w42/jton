@@ -50,7 +50,7 @@ export class SafeMultisigWalletCall extends Call {
      *     }
      */
     protected _getTargetContract(map: StringMap): Contract {
-        return new Contract(this._client, this._config.net.timeout,{
+        return new Contract(this._client, this._config.net.timeout, {
             abi: {},
             address: map[GiverSendEnum.ADDRESS]
         })

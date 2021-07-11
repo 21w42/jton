@@ -1,6 +1,6 @@
 import colors, {Color} from 'colors'
 
-type ColorFunctionMap = {[key: string]: Color}
+type ColorFunctionMap = { [key: string]: Color }
 export const colorFunctions: ColorFunctionMap = {
     '-1': colors.gray,
     '0': colors.yellow,

@@ -5,14 +5,13 @@ import {TonClient} from '@tonclient/core'
 
 export class SafeMultisigWallet extends Contract {
     constructor(client: TonClient, timeout: number, keys: KeyPair) {
-        super(client, timeout,{
+        super(client, timeout, {
             abi: SafeMultisigWalletContract.abi,
             tvc: SafeMultisigWalletContract.tvc,
             initialData: {},
             keys: keys
         })
     }
-
 
 
     /**********
@@ -35,7 +34,6 @@ export class SafeMultisigWallet extends Contract {
             reqConfirms: reqConfirms
         })
     }
-
 
 
     /**********

@@ -1,5 +1,5 @@
 export type ExtensionType =
-    'ts'  | // TypeScript
+    'ts' | // TypeScript
     'tsx' | // TypeScript XML
-    'js'  | // JavaScript
+    'js' | // JavaScript
     'jsx'   // JavaScript XML

@@ -29,7 +29,8 @@ export class Up {
      *         }
      *     }
      */
-    constructor(private readonly _config: UpConfig) {}
+    constructor(private readonly _config: UpConfig) {
+    }
 
     /**
      * Run command.

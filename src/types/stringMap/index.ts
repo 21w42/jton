@@ -1,1 +1,1 @@
-export type StringMap = {[key: string]: string}
+export type StringMap = { [key: string]: string }

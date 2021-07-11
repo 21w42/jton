@@ -27,7 +27,6 @@ export class Contract {
     private _lastTransactionLogicTime: number
 
 
-
     /**********
      * PUBLIC *
      **********/
@@ -58,8 +57,7 @@ export class Contract {
         private readonly _client: TonClient,
         private readonly _timeout: number,
         config: ContractConfig | DeployedContractConfig
-    )
-    {
+    ) {
         this._abi = Contract._getAbi(config.abi)
         this._initialData = config.initialData
         this._tvc = config.tvc
@@ -197,7 +195,6 @@ export class Contract {
         this._lastTransactionLogicTime = result[0]['last_trans_lt']
         return result[0]['acc_type']
     }
-
 
 
     /*************
@@ -428,7 +425,6 @@ export class Contract {
         })
         return resultOfEncoding.body
     }
-
 
 
     /***********
