@@ -1,6 +1,6 @@
 {
   "name": "jton",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "Library for compiling, deploying and testing Free TON smart contracts.",
   "main": "dist/index",
   "scripts": {
@@ -44,6 +44,7 @@
   "dependencies": {
     "@tonclient/core": "^1.19.0",
     "colors": "^1.4.0",
+    "fast-glob": "^3.2.7",
     "tondev": "^0.7.4"
   }
 }
