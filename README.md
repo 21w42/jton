@@ -31,3 +31,12 @@ npm i jton
 ## Example
 ![SimpleWallet](docs/images/simple-wallet.svg)
 [SimpleWallet](https://github.com/kokkekpek/simple-wallet-smart-contract)
+
+## TODO
+* Use [endpoints](https://github.com/tonlabs/TON-SDK/blob/master/docs/mod_client.md#NetworkConfig) instead network url.
+* Scripts for test. [Example from SimpleWallet](https://github.com/kokkekpek/simple-wallet-smart-contract/blob/master/tests/__utils/prepareTest.ts).
+* Tests coverage.
+* Make possible use custom giver.
+* More methods for SafeMultisigWallet and GiverV2.
+* Create separate repository and move SafeMultisigWallet and GiverV2 into.
+* Refactoring. Move away from classes towards functions where possible.
