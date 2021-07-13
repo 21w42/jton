@@ -4,6 +4,7 @@ import FastGlob from 'fast-glob'
 import colors from 'colors'
 import path from 'path'
 import {CopyConfig} from './interfaces/CopyConfig'
+import {Printer} from '../../printer'
 
 /**
  * Search example files, copy and rename.
@@ -27,6 +28,7 @@ import {CopyConfig} from './interfaces/CopyConfig'
  * @see https://github.com/mrmlnc/fast-glob
  */
 export async function copy(config: CopyConfig): Promise<void> {
+    const printer: Printer = new Printer()
     const source: string[] = Array.isArray(config.source) ? [...config.source] : [config.source]
     const words: string[] = Array.isArray(config.words) ? [...new Set(config.words)] : [config.words]
     const files: string[] = FastGlob.sync(source)
@@ -45,7 +47,7 @@ export async function copy(config: CopyConfig): Promise<void> {
                 else {
                     const fileBaseName: string = path.basename(file)
                     const newFileBaseName: string = path.basename(newFile)
-                    console.log(`${colors.green(fileBaseName)} > ${colors.green(newFileBaseName)}`)
+                    printer.print(`${colors.green(fileBaseName)} > ${colors.green(newFileBaseName)}`)
                 }
             })
         }
