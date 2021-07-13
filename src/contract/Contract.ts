@@ -195,10 +195,6 @@ export class Contract {
         return result[0]['acc_type']
     }
 
-
-    /*************
-     * PROTECTED *
-     *************/
     /**
      * Run method locally.
      * @param method Method name.
@@ -211,7 +207,7 @@ export class Contract {
      *         limit: 10
      *     }
      */
-    protected async _run(method: string, input: Object = {}): Promise<DecodedMessageBody> {
+    public async run(method: string, input: Object = {}): Promise<DecodedMessageBody> {
         //////////////
         // Read boc //
         //////////////
@@ -273,7 +269,7 @@ export class Contract {
      *         secret: '0x0000000011111111222222223333333344444444555555556666666677777777'
      *     }
      */
-    protected async _call(method: string, input: Object = {}, keys?: KeyPair): Promise<ResultOfProcessMessage> {
+    public async call(method: string, input: Object = {}, keys?: KeyPair): Promise<ResultOfProcessMessage> {
         const keysPair: KeyPair | undefined = keys ?? this._keys
 
         if (!keysPair)
@@ -309,7 +305,7 @@ export class Contract {
      * Example:
      *     true
      */
-    protected async _deploy(input: Object = {}): Promise<boolean> {
+    public async deploy(input: Object = {}): Promise<boolean> {
         if (!this._keys)
             throw Error(contractErrorMessages.CONTRACT_KEYS_IS_UNDEFINED)
 
@@ -368,6 +364,10 @@ export class Contract {
         return await this.waitForTransaction()
     }
 
+
+    /*************
+     * PROTECTED *
+     *************/
     /**
      * Generate payload message for internal call.
      * @param abi

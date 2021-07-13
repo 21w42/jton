@@ -133,7 +133,7 @@ export class Deploy {
      * Deploy contract.
      * @param contract
      */
-    protected async _deploy(contract: Contract): Promise<void> {
-        await contract.balance()
+    protected async _deploy(contract: Contract): Promise<boolean> {
+        return await contract.deploy()
     }
 }

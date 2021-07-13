@@ -1,13 +1,12 @@
 import {TonClient} from '@tonclient/core'
 import {libNode} from '@tonclient/lib-node'
-import {KeyPair} from '@tonclient/core/dist/modules'
+import {KeyPair, ResultOfProcessMessage} from '@tonclient/core/dist/modules'
 import {Printer} from '../../printer'
 import {AccountType, Contract} from '../../contract'
 import transferAbi from '../../contract/abi/transfer.abi.json'
 import {DeployMessages} from './constants/DeployMessages'
 import {B, createClient, createKeysOrRead} from '../../utils'
 import {DeployWithGiverConfig} from './interfaces/DeployWithGiverConfig'
-import {GiverV2} from '../../samples'
 
 export class DeployWithGiver {
     protected readonly _client: TonClient
@@ -41,7 +40,7 @@ export class DeployWithGiver {
         const printer: Printer = new Printer(this._config.locale)
         const keys: KeyPair = await createKeysOrRead(this._config.keys, this._client)
         const giverKeys: KeyPair = await createKeysOrRead(this._config.giverKeys, this._client)
-        const giver: GiverV2 = new GiverV2(this._client, this._config.net.timeout, giverKeys)
+        const giver: Contract = this._getGiver(giverKeys)
         const contract: Contract = this._getContract(keys)
 
         /////////////
@@ -98,7 +97,7 @@ export class DeployWithGiver {
             /////////////
             // Sending //
             /////////////
-            await giver.sendTransaction(await contract.address(), needSendToTarget)
+            await this._send(giver, await contract.address(), needSendToTarget)
             await contract.waitForTransaction()
 
             //////////
@@ -159,10 +158,44 @@ export class DeployWithGiver {
     }
 
     /**
+     * Create and return giver object.
+     * @param keys
+     * Example:
+     *     {
+     *         public: '0x0000111122223333444455556666777788889999aaaabbbbccccddddeeeeffff',
+     *         secret: '0x0000000011111111222222223333333344444444555555556666666677777777'
+     *     }
+     */
+    protected _getGiver(keys: KeyPair): Contract {
+        return new Contract(this._client, this._config.net.timeout, {
+            abi: transferAbi,
+            keys: keys,
+            address: '0:0000000000000000000000000000000000000000000000000000000000000000'
+        })
+    }
+
+    /**
+     * @param giver
+     * @param address
+     * Example:
+     *     '0:0000000000000000000000000000000000000000000000000000000000000000'
+     * @param needSendToTarget
+     * Example:
+     *     1_000_000_000
+     */
+    protected async _send(giver: Contract, address: string, needSendToTarget: number): Promise<ResultOfProcessMessage> {
+        return await giver.call('sendTransaction', {
+            dest: address,
+            value: needSendToTarget,
+            bounce: false
+        })
+    }
+
+    /**
      * Deploy contract.
      * @param contract
      */
-    protected async _deploy(contract: Contract): Promise<void> {
-        await contract.balance()
+    protected async _deploy(contract: Contract): Promise<boolean> {
+        return await contract.deploy()
     }
 }

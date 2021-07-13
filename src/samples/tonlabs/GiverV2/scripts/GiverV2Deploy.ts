@@ -1,9 +1,9 @@
-import {Info} from '../Info'
 import {KeyPair} from '@tonclient/core/dist/modules'
-import {Contract} from '../../../contract'
-import {GiverV2} from '../../../samples'
+import {Contract} from '../../../../contract'
+import {GiverV2} from '../GiverV2'
+import {Deploy} from '../../../../scripts'
 
-export class GiverV2Info extends Info {
+export class GiverV2Deploy extends Deploy {
     /**
      * Create and return contract object.
      * @param keys
@@ -15,5 +15,13 @@ export class GiverV2Info extends Info {
      */
     protected _getContract(keys: KeyPair): Contract {
         return new GiverV2(this._client, this._config.net.timeout, keys)
+    }
+
+    /**
+     * Deploy contract.
+     * @param contract
+     */
+    protected async _deploy(contract: GiverV2): Promise<boolean> {
+        return await contract.deploy()
     }
 }

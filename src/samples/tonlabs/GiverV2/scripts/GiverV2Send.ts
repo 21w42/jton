@@ -1,17 +1,16 @@
-import {Call} from '../Call'
-import {CallConfig} from '../interfaces/CallConfig'
-import {AbiContract, KeyPair} from '@tonclient/core/dist/modules'
-import {Contract} from '../../../contract'
-import {StringMap} from '../../../types'
-import {GiverSendEnum} from './GiverSendEnum'
-import {readAbi} from '../readers/readAbi'
-import {readInt} from '../readers/readInt'
-import {readBoolean} from '../readers/readBoolean'
-import {readJson} from '../readers/readJson'
-import {SafeMultisigWallet} from '../../../samples'
-import {SafeMultisigWalletCallEnum} from './SafeMultisigWalletCallEnum'
+import {Call, CallConfig, readBoolean, readInt} from '../../../../scripts'
+import {KeyPair} from '@tonclient/core/dist/modules'
+import {Contract} from '../../../../contract'
+import {StringMap} from '../../../../types'
+import {GiverV2} from '../GiverV2'
 
-export class SafeMultisigWalletCall extends Call {
+enum PARAMETERS {
+    ADDRESS = 'address',
+    VALUE = 'value',
+    BOUNCE = 'bounce'
+}
+
+export class GiverV2Send extends Call {
     /**
      * @param config
      * Example:
@@ -25,7 +24,7 @@ export class SafeMultisigWalletCall extends Call {
      *     }
      */
     constructor(config: CallConfig) {
-        super(config, Object.values(SafeMultisigWalletCallEnum))
+        super(config, Object.values(PARAMETERS))
     }
 
     /**
@@ -38,7 +37,7 @@ export class SafeMultisigWalletCall extends Call {
      *     }
      */
     protected _getContract(keys: KeyPair): Contract {
-        return new SafeMultisigWallet(this._client, this._config.net.timeout, keys)
+        return new GiverV2(this._client, this._config.net.timeout, keys)
     }
 
     /**
@@ -52,7 +51,7 @@ export class SafeMultisigWalletCall extends Call {
     protected _getTargetContract(map: StringMap): Contract {
         return new Contract(this._client, this._config.net.timeout, {
             abi: {},
-            address: map[GiverSendEnum.ADDRESS]
+            address: map[PARAMETERS.ADDRESS]
         })
     }
 
@@ -73,14 +72,14 @@ export class SafeMultisigWalletCall extends Call {
      *         bounce: 'false'
      *     }
      */
-    protected async _call(contract: SafeMultisigWallet, map: StringMap, keys: KeyPair): Promise<void> {
-        const address: string = map[SafeMultisigWalletCallEnum.ADDRESS]
-        const value: number = readInt(map[SafeMultisigWalletCallEnum.VALUE])
-        const bounce: boolean = readBoolean(map[SafeMultisigWalletCallEnum.BOUNCE])
-        const flags: number = readInt(map[SafeMultisigWalletCallEnum.FLAGS])
-        const abi: AbiContract = readAbi(map[SafeMultisigWalletCallEnum.PATH_TO_ABI])
-        const method: string = map[SafeMultisigWalletCallEnum.METHOD]
-        const input: Object = readJson(map[SafeMultisigWalletCallEnum.PARAMETERS])
-        await contract.callAnotherContract(address, value, bounce, flags, abi, method, input, keys)
+    protected async _call(contract: GiverV2, map: StringMap, keys: KeyPair): Promise<void> {
+        const address: string = map[PARAMETERS.ADDRESS]
+        const value: number = readInt(map[PARAMETERS.VALUE])
+        const bounce: boolean = readBoolean(map[PARAMETERS.BOUNCE])
+        await contract.sendTransaction({
+            dest: address,
+            value: value,
+            bounce: bounce
+        }, keys)
     }
 }

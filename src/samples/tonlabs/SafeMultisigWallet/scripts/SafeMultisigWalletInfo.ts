@@ -1,7 +1,7 @@
-import {Info} from '../Info'
+import {Info} from '../../../../scripts'
+import {Contract} from '../../../../contract'
+import {SafeMultisigWallet} from '../../../index'
 import {KeyPair} from '@tonclient/core/dist/modules'
-import {Contract} from '../../../contract'
-import {SafeMultisigWallet} from '../../../samples'
 
 export class SafeMultisigWalletInfo extends Info {
     /**

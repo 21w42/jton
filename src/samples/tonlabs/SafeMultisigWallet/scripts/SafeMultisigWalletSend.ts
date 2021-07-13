@@ -1,13 +1,16 @@
-import {Call} from '../Call'
-import {CallConfig} from '../interfaces/CallConfig'
-import {SafeMultisigWalletSendEnum} from './SafeMultisigWalletSendEnum'
+import {Call, CallConfig, readBoolean, readInt} from '../../../../scripts'
 import {KeyPair} from '@tonclient/core/dist/modules'
-import {Contract} from '../../../contract'
-import {StringMap} from '../../../types'
-import {GiverSendEnum} from './GiverSendEnum'
-import {readInt} from '../readers/readInt'
-import {readBoolean} from '../readers/readBoolean'
-import {SafeMultisigWallet} from '../../../samples'
+import {Contract} from '../../../../contract'
+import {StringMap} from '../../../../types'
+import {SafeMultisigWallet} from '../../../index'
+
+export enum PARAMETERS {
+    ADDRESS = 'address',
+    VALUE = 'value',
+    BOUNCE = 'bounce',
+    FLAGS = 'flags',
+    COMMENT = 'comment'
+}
 
 export class SafeMultisigWalletSend extends Call {
     /**
@@ -23,7 +26,7 @@ export class SafeMultisigWalletSend extends Call {
      *     }
      */
     constructor(config: CallConfig) {
-        super(config, Object.values(SafeMultisigWalletSendEnum))
+        super(config, Object.values(PARAMETERS))
     }
 
     /**
@@ -50,7 +53,7 @@ export class SafeMultisigWalletSend extends Call {
     protected _getTargetContract(map: StringMap): Contract {
         return new Contract(this._client, this._config.net.timeout, {
             abi: {},
-            address: map[GiverSendEnum.ADDRESS]
+            address: map[PARAMETERS.ADDRESS]
         })
     }
 
@@ -72,11 +75,11 @@ export class SafeMultisigWalletSend extends Call {
      *     }
      */
     protected async _call(contract: SafeMultisigWallet, map: StringMap, keys?: KeyPair): Promise<void> {
-        const address: string = map[SafeMultisigWalletSendEnum.ADDRESS]
-        const value: number = readInt(map[SafeMultisigWalletSendEnum.VALUE])
-        const bounce: boolean = readBoolean(map[SafeMultisigWalletSendEnum.BOUNCE])
-        const flags: number = readInt(map[SafeMultisigWalletSendEnum.FLAGS])
-        const comment: string = map[SafeMultisigWalletSendEnum.COMMENT]
+        const address: string = map[PARAMETERS.ADDRESS]
+        const value: number = readInt(map[PARAMETERS.VALUE])
+        const bounce: boolean = readBoolean(map[PARAMETERS.BOUNCE])
+        const flags: number = readInt(map[PARAMETERS.FLAGS])
+        const comment: string = map[PARAMETERS.COMMENT]
         await contract.sendTransactionWithComment(address, value, bounce, flags, comment, keys)
     }
 }

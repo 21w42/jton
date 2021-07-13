@@ -1,10 +1,10 @@
 import {KeyPair} from '@tonclient/core/dist/modules'
-import {Contract} from '../../../contract'
-import {DeployWithGiver} from '../DeployWithGiver'
-import {SafeMultisigWallet} from '../../../samples'
-import {x0} from '../../../utils'
+import {SafeMultisigWallet} from '../../../index'
+import {x0} from '../../../../utils'
+import {DeployWithGiverV2} from '../../GiverV2/deploy/DeployWithGiverV2'
+import {Contract} from '../../../../contract'
 
-export class SafeMultisigWalletDeployWithGiver extends DeployWithGiver {
+export class SafeMultisigWalletDeployWithGiverV2 extends DeployWithGiverV2 {
     private _keys: KeyPair = {
         public: '',
         secret: ''
@@ -28,7 +28,10 @@ export class SafeMultisigWalletDeployWithGiver extends DeployWithGiver {
      * Deploy contract.
      * @param contract
      */
-    protected async _deploy(contract: SafeMultisigWallet): Promise<void> {
-        await contract.deploy([x0(this._keys.public)], 1)
+    protected async _deploy(contract: SafeMultisigWallet): Promise<boolean> {
+        return await contract.deploy({
+            owners: [x0(this._keys.public)],
+            reqConfirms: 1
+        })
     }
 }
