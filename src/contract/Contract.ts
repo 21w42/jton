@@ -24,7 +24,7 @@ export class Contract {
     private readonly _keys: KeyPair | undefined
     private readonly _tvc: string | undefined
     private _address: string | undefined
-    private _lastTransactionLogicTime: number
+    private _lastTransactionLogicTime: number = 0
 
 
     /**********
@@ -63,7 +63,6 @@ export class Contract {
         this._tvc = config.tvc
         this._keys = config.keys
         this._address = config.address
-        this._lastTransactionLogicTime = 0
     }
 
     /**
