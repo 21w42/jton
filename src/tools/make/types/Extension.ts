@@ -1,4 +1,4 @@
-export type ExtensionType =
+export type Extension =
     'ts' | // TypeScript
     'tsx' | // TypeScript XML
     'js' | // JavaScript

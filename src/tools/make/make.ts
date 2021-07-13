@@ -5,13 +5,13 @@ import path from 'path'
 import {runCommand} from 'tondev'
 import {errorConsoleTerminal} from './terminal/errorConsoleTerminal'
 import colors from 'colors'
-import {ExtensionType} from './types/ExtensionType'
-import {ExportType} from './types/ExportType'
+import {Extension} from './types/Extension'
+import {Export} from './types/Export'
 import {StringMap} from '../../types'
 import {Printer} from '../../printer'
 
-const EXTENSION: ExtensionType = 'ts'
-const EXPORT: ExportType = 'es6-default'
+const EXTENSION: Extension = 'ts'
+const EXPORT: Export = 'es6-default'
 const COMMAND: StringMap = {
     SOL_SET: 'sol set',
     SOL_COMPILE: 'sol compile',
@@ -44,8 +44,8 @@ const FILE: StringMap = {
  */
 export async function make(config: MakeConfig): Promise<void> {
     const printer: Printer = new Printer()
-    const extension: ExtensionType = config.extension ?? EXTENSION
-    const exp: ExportType = config.export ?? EXPORT
+    const extension: Extension = config.extension ?? EXTENSION
+    const exp: Export = config.export ?? EXPORT
     TonClient.useBinaryLibrary(libNode)
 
     await runCommand(errorConsoleTerminal, COMMAND.SOL_SET, {
@@ -98,7 +98,7 @@ async function compile(root: string, file: string): Promise<void> {
  * Example:
  *     '/home/user/Project/nifi/contracts/Root'
  */
-async function wrap(root: string, exp: ExportType, extension: ExtensionType, file: string): Promise<void> {
+async function wrap(root: string, exp: Export, extension: Extension, file: string): Promise<void> {
     await runCommand(errorConsoleTerminal, COMMAND.JS_WRAP, {
         file: path.resolve(root, `${file}.${FILE.ABI_JSON}`),
         export: exp,

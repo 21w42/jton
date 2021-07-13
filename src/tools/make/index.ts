@@ -1,5 +1,5 @@
 export {MakeConfig} from './interfaces/MakeConfig'
 export {errorConsoleTerminal} from './terminal/errorConsoleTerminal'
-export {ExportType} from './types/ExportType'
-export {ExtensionType} from './types/ExtensionType'
+export {Export} from './types/Export'
+export {Extension} from './types/Extension'
 export {make} from './make'

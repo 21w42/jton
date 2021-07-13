@@ -1,5 +1,5 @@
-import {ExtensionType} from '../types/ExtensionType'
-import {ExportType} from '../types/ExportType'
+import {Extension} from '../types/Extension'
+import {Export} from '../types/Export'
 
 export interface MakeConfig {
     root: string,
@@ -8,6 +8,6 @@ export interface MakeConfig {
     compiler?: string
     linker?: string
     stdlib?: string
-    extension?: ExtensionType
-    export?: ExportType
+    extension?: Extension
+    export?: Export
 }
