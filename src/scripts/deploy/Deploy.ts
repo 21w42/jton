@@ -6,7 +6,7 @@ import {DeployConfig} from './interfaces/DeployConfig'
 import {AccountType, Contract} from '../../contract'
 import transferAbi from '../../contract/abi/transfer.abi.json'
 import {DeployMessages} from './constants/DeployMessages'
-import {B, createClient, createRandomKeyFileIfNotExists} from '../../utils'
+import {B, createClient, createKeysOrRead} from '../../utils'
 
 export class Deploy {
     protected readonly _client: TonClient
@@ -37,7 +37,7 @@ export class Deploy {
      */
     public async run(): Promise<void> {
         const printer: Printer = new Printer(this._config.locale)
-        const keys: KeyPair = await createRandomKeyFileIfNotExists(this._config.keys, this._client)
+        const keys: KeyPair = await createKeysOrRead(this._config.keys, this._client)
         const contract: Contract = this._getContract(keys)
 
         /////////////

@@ -5,7 +5,7 @@ import {Contract} from '../../contract'
 import transferAbi from '../../contract/abi/transfer.abi.json'
 import {KeyPair} from '@tonclient/core/dist/modules'
 import {Printer} from '../../printer'
-import {createClient, createRandomKeyFileIfNotExists} from '../../utils'
+import {createClient, createKeysOrRead} from '../../utils'
 
 export class Info {
     protected readonly _client: TonClient
@@ -32,7 +32,7 @@ export class Info {
      */
     async run(): Promise<void> {
         const printer: Printer = new Printer(this._config.locale)
-        const keys: KeyPair = await createRandomKeyFileIfNotExists(this._config.keys, this._client)
+        const keys: KeyPair = await createKeysOrRead(this._config.keys, this._client)
         const contract: Contract = this._getContract(keys)
 
         /////////////

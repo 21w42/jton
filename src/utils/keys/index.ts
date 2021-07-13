@@ -12,26 +12,26 @@ export async function getRandomKeyPair(client: TonClient): Promise<KeyPair> {
 }
 
 /**
- * Read keys from `*.json` file.
+ * Read keys from `*.keys.json` file.
  * @param file Absolute path to file.
  * Example:
  *     '/home/user/keys/GiverV2.keys.json'
  */
-export function readKeyFile(file: string): KeyPair {
+export function readKeys(file: string): KeyPair {
     const text: string = fs.readFileSync(file, {encoding: 'utf8'})
     return JSON.parse(text)
 }
 
 /**
- * Create random keys if keys file not exists.
+ * Create random keys if keys file not exists. If file exists calls readKeys().
  * @param file Absolute path to file.
  * Example:
  *     '/home/user/keys/GiverV2.keys.json'
  * @param client
  */
-export async function createRandomKeyFileIfNotExists(file: string, client: TonClient): Promise<KeyPair> {
+export async function createKeysOrRead(file: string, client: TonClient): Promise<KeyPair> {
     if (fs.existsSync(file))
-        return readKeyFile(file)
+        return readKeys(file)
 
     const keys: KeyPair = await getRandomKeyPair(client)
     fs.writeFileSync(file, JSON.stringify(keys))
@@ -39,22 +39,24 @@ export async function createRandomKeyFileIfNotExists(file: string, client: TonCl
 }
 
 /**
- * @param key
- * Example:
- *     'se'
- * @param keys
+ * Select keys path by name or throw error.
+ * @param map
  * Example:
  *     {
- *         se: `${__dirname}/../node_modules/jton/dist/contract/keys/GiverV2.se.keys.json`,
+ *         se: `${__dirname}/../keys/GiverV2.se.keys.json`,
  *         dev: `${__dirname}/../keys/GiverV2.keys.json`
  *     }
+ * @param name
+ * Example:
+ *     'se'
  * @return
  * Example:
- *     ${__dirname}/../library/keys/GiverV2.se.keys.json`
+ *    `${__dirname}/../keys/GiverV2.se.keys.json`,
  */
-export function filterKey(key: string, keys: StringMap): string {
-    if (!keys.hasOwnProperty(key))
-        throw new Error(`INVALID GIVER KEY ${key}`)
+export function getKeysByName(map: StringMap, name: string): string {
+    const ERROR_MESSAGE: string = 'INVALID KEY NAME'
+    if (!map.hasOwnProperty(name))
+        throw new Error(`${ERROR_MESSAGE} ${name}`)
 
-    return keys[key]
+    return map[name]
 }

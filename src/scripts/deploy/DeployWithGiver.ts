@@ -5,7 +5,7 @@ import {Printer} from '../../printer'
 import {AccountType, Contract} from '../../contract'
 import transferAbi from '../../contract/abi/transfer.abi.json'
 import {DeployMessages} from './constants/DeployMessages'
-import {B, createClient, createRandomKeyFileIfNotExists} from '../../utils'
+import {B, createClient, createKeysOrRead} from '../../utils'
 import {DeployWithGiverConfig} from './interfaces/DeployWithGiverConfig'
 import {GiverV2} from '../../samples'
 
@@ -39,8 +39,8 @@ export class DeployWithGiver {
      */
     public async run(): Promise<void> {
         const printer: Printer = new Printer(this._config.locale)
-        const keys: KeyPair = await createRandomKeyFileIfNotExists(this._config.keys, this._client)
-        const giverKeys: KeyPair = await createRandomKeyFileIfNotExists(this._config.giverKeys, this._client)
+        const keys: KeyPair = await createKeysOrRead(this._config.keys, this._client)
+        const giverKeys: KeyPair = await createKeysOrRead(this._config.giverKeys, this._client)
         const giver: GiverV2 = new GiverV2(this._client, this._config.net.timeout, giverKeys)
         const contract: Contract = this._getContract(keys)
 
