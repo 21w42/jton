@@ -39,4 +39,3 @@ npm i jton
 * Make possible use custom giver.
 * More methods for SafeMultisigWallet and GiverV2.
 * Create separate repository and move SafeMultisigWallet and GiverV2 into.
-* Refactoring. Move away from classes towards functions where possible.
