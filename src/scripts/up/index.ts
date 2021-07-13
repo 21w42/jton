@@ -1,2 +1,2 @@
 export {UpConfig} from './interfaces/UpConfig'
-export {Up} from './Up'
+export {up} from './up'
