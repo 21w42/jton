@@ -34,7 +34,6 @@ npm i jton
 
 ## TODO
 * Use [endpoints](https://github.com/tonlabs/TON-SDK/blob/master/docs/mod_client.md#NetworkConfig) instead network url.
-* Scripts for test. [Example from SimpleWallet](https://github.com/kokkekpek/simple-wallet-smart-contract/blob/master/tests/__utils/prepareTest.ts).
 * Tests coverage.
 * More methods for SafeMultisigWallet.
 * Create separate repository and move SafeMultisigWallet and GiverV2 into.
