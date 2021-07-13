@@ -1,6 +1,3 @@
 export * from './call'
-export * from './copy'
 export * from './deploy'
 export * from './info'
-export * from './make'
-export * from './up'
