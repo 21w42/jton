@@ -33,7 +33,7 @@ export class Deploy {
     }
 
     /**
-     * Execute script.
+     * Run command.
      */
     public async run(): Promise<void> {
         const printer: Printer = new Printer(this._config.locale)
