@@ -1,10 +1,22 @@
 import {TonClient} from '@tonclient/core'
 import {libNode} from '@tonclient/lib-node'
 import {KeyPair} from '@tonclient/core/dist/modules'
-import {TestKit} from './TestKit'
 import {createClient, getKeysByName, getNetConfig, readKeys} from '../../utils'
 import {Config, NetConfig} from '../../config'
 import {StringMap} from '../../types'
+import {Contract} from '../../contract'
+
+export interface TestKit {
+    client: TonClient
+    timeout: number
+    giverKeys: KeyPair
+}
+
+export interface TestGiverKit {
+    client: TonClient
+    timeout: number
+    giver: Contract
+}
 
 export function prepare(config: Config, keysMap: StringMap): TestKit {
     TonClient.useBinaryLibrary(libNode)

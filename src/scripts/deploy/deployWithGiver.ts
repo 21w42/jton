@@ -2,12 +2,15 @@ import {TonClient} from '@tonclient/core'
 import {libNode} from '@tonclient/lib-node'
 import {KeyPair} from '@tonclient/core/dist/modules'
 import {Printer} from '../../printer'
-import {AccountType, Contract} from '../../contract'
+import {AccountType, Contract, ResultOfCall} from '../../contract'
 import transferAbi from '../../contract/abi/transfer.abi.json'
-import {DeployMessages} from './constants/DeployMessages'
 import {B, createClient, createKeysOrRead} from '../../utils'
-import {DeployWithGiverConfig} from './interfaces/DeployWithGiverConfig'
-import {ResultOfCall} from '../../contract/interfaces/ResultOfCall'
+import {messages} from './messages'
+import {DeployConfig} from './deploy'
+
+export interface DeployWithGiverConfig extends DeployConfig {
+    giverKeys: string
+}
 
 export class DeployWithGiver {
     protected readonly _client: TonClient
@@ -60,16 +63,16 @@ export class DeployWithGiver {
         ////////////////////////
         const contractType: AccountType = await contract.accountType()
         switch (contractType) {
-            case AccountType.ACTIVE:
-                printer.print(DeployMessages.ALREADY_DEPLOYED)
+            case AccountType.active:
+                printer.print(messages.ALREADY_DEPLOYED)
                 this._client.close()
                 return
-            case AccountType.FROZEN:
-                printer.print(DeployMessages.FROZEN)
+            case AccountType.frozen:
+                printer.print(messages.FROZEN)
                 this._client.close()
                 return
-            case AccountType.NON_EXIST:
-                printer.print(DeployMessages.NON_EXIST)
+            case AccountType.nonExist:
+                printer.print(messages.NON_EXIST)
                 this._client.close()
                 return
         }
@@ -85,7 +88,7 @@ export class DeployWithGiver {
             const needSendToTarget: number = requiredBalance - balance
             const needHaveOnGiver: number = needSendToTarget + this._config.net.transactionFee * B
             if (giverBalance < needHaveOnGiver) {
-                printer.print(DeployMessages.NOT_ENOUGH_BALANCE)
+                printer.print(messages.NOT_ENOUGH_BALANCE)
                 this._client.close()
                 return
             }
@@ -93,7 +96,7 @@ export class DeployWithGiver {
             //////////
             // Mark //
             //////////
-            printer.print(DeployMessages.SENDING)
+            printer.print(messages.SENDING)
 
             /////////////
             // Sending //
@@ -104,7 +107,7 @@ export class DeployWithGiver {
             //////////
             // Mark //
             //////////
-            printer.print(`${DeployMessages.SENT}\n`)
+            printer.print(`${messages.SENT}\n`)
 
             ////////////////////
             // Contracts data //
@@ -116,7 +119,7 @@ export class DeployWithGiver {
         //////////
         // Mark //
         //////////
-        printer.print(DeployMessages.DEPLOYING)
+        printer.print(messages.DEPLOYING)
 
         ///////////////
         // Deploying //
@@ -126,7 +129,7 @@ export class DeployWithGiver {
         //////////
         // Mark //
         //////////
-        printer.print(`${DeployMessages.DEPLOYED}\n`)
+        printer.print(`${messages.DEPLOYED}\n`)
 
         ////////////////////
         // Contracts data //

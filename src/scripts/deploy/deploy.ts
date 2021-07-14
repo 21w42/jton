@@ -2,11 +2,18 @@ import {TonClient} from '@tonclient/core'
 import {libNode} from '@tonclient/lib-node'
 import {KeyPair} from '@tonclient/core/dist/modules'
 import {Printer} from '../../printer'
-import {DeployConfig} from './interfaces/DeployConfig'
 import {AccountType, Contract} from '../../contract'
 import transferAbi from '../../contract/abi/transfer.abi.json'
-import {DeployMessages} from './constants/DeployMessages'
 import {B, createClient, createKeysOrRead} from '../../utils'
+import {messages} from './messages'
+import {NetConfig} from '../../config'
+
+export interface DeployConfig {
+    net: NetConfig
+    locale: string | undefined
+    keys: string
+    requiredForDeployment: number
+}
 
 export class Deploy {
     protected readonly _client: TonClient
@@ -55,20 +62,20 @@ export class Deploy {
         ////////////////////////
         const contractType: AccountType = await contract.accountType()
         switch (contractType) {
-            case AccountType.NOT_FOUND:
-                printer.print(DeployMessages.NOT_ENOUGH_BALANCE)
+            case AccountType.notFound:
+                printer.print(messages.NOT_ENOUGH_BALANCE)
                 this._client.close()
                 return
-            case AccountType.ACTIVE:
-                printer.print(DeployMessages.ALREADY_DEPLOYED)
+            case AccountType.active:
+                printer.print(messages.ALREADY_DEPLOYED)
                 this._client.close()
                 return
-            case AccountType.FROZEN:
-                printer.print(DeployMessages.FROZEN)
+            case AccountType.frozen:
+                printer.print(messages.FROZEN)
                 this._client.close()
                 return
-            case AccountType.NON_EXIST:
-                printer.print(DeployMessages.NON_EXIST)
+            case AccountType.nonExist:
+                printer.print(messages.NON_EXIST)
                 this._client.close()
                 return
         }
@@ -80,7 +87,7 @@ export class Deploy {
         const requiredBalance: number = this._config.requiredForDeployment * B
         const tolerance: number = this._config.net.tolerance * B
         if (balance < requiredBalance - tolerance) {
-            printer.print(DeployMessages.NOT_ENOUGH_BALANCE)
+            printer.print(messages.NOT_ENOUGH_BALANCE)
             this._client.close()
             return
         }
@@ -88,7 +95,7 @@ export class Deploy {
         //////////
         // Mark //
         //////////
-        printer.print(DeployMessages.DEPLOYING)
+        printer.print(messages.DEPLOYING)
 
         ///////////////
         // Deploying //
@@ -98,7 +105,7 @@ export class Deploy {
         //////////
         // Mark //
         //////////
-        printer.print(`${DeployMessages.DEPLOYED}\n`)
+        printer.print(`${messages.DEPLOYED}\n`)
 
         ///////////////////
         // Contract data //

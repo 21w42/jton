@@ -1,1 +1,1 @@
-export * from './stringMap'
+export type StringMap = { [key: string]: string }

@@ -1,7 +1,7 @@
 import colors from 'colors'
-import {StringMap} from '../../../types'
+import {StringMap} from '../../types'
 
-export const DeployMessages: StringMap = {
+export const messages: StringMap = {
     NOT_ENOUGH_BALANCE: colors.red('NOT ENOUGH BALANCE'),
     ALREADY_DEPLOYED: colors.green('CONTRACT ALREADY DEPLOYED'),
     FROZEN: colors.red('ACCOUNT FROZEN'),
