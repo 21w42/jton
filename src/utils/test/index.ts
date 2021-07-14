@@ -1,7 +1,7 @@
 import {TonClient} from '@tonclient/core'
 import {libNode} from '@tonclient/lib-node'
 import {KeyPair} from '@tonclient/core/dist/modules'
-import {createClient, getKeysByName, getNetConfig, readKeys} from '../../utils'
+import {createClient, getKeysByName, getNetConfig, readKeys} from '../index'
 import {Config, NetConfig} from '../../config'
 import {StringMap} from '../../types'
 import {Contract} from '../../contract'

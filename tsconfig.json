@@ -8,7 +8,6 @@
     "moduleResolution": "node",
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
-    "composite": true,
     "declaration": true,
     "declarationMap": true,
     "removeComments": false,
