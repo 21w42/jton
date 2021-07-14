@@ -196,7 +196,7 @@ export class Call {
      * @param _1
      * Example:
      *     {
-     *         address: '0:0000111122223333444455556666777788889999aaaabbbbccccddddeeeeffff ',
+     *         address: '0:0000111122223333444455556666777788889999aaaabbbbccccddddeeeeffff',
      *         value: '1_000_000_000',
      *         bounce: 'false'
      *     }
