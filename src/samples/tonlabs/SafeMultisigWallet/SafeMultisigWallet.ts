@@ -1,7 +1,15 @@
 import {Contract} from '../../../contract'
 import SafeMultisigWalletContract from './code/SafeMultisigWallet'
-import {AbiContract, KeyPair, ResultOfProcessMessage} from '@tonclient/core/dist/modules'
+import {AbiContract, KeyPair} from '@tonclient/core/dist/modules'
 import {TonClient} from '@tonclient/core'
+import {ResultOfCall} from '../../../contract/interfaces/ResultOfCall'
+import {
+    ConfirmTransactionIn,
+    DeployIn,
+    SendTransactionIn,
+    SubmitTransactionIn,
+    SubmitTransactionResult
+} from './interfaces'
 
 /**
  * @see https://github.com/tonlabs/ton-labs-contracts/tree/master/solidity/safemultisig
@@ -11,20 +19,6 @@ export class SafeMultisigWallet extends Contract {
         acceptTransfer: 'acceptTransfer'
     }
 
-    /**
-     * @param client
-     * @param timeout
-     * Examples:
-     *     3000
-     *     30000
-     *     60000
-     * @param keys
-     * Example:
-     *     {
-     *         public: '0x0000111122223333444455556666777788889999aaaabbbbccccddddeeeeffff',
-     *         secret: '0x0000000011111111222222223333333344444444555555556666666677777777'
-     *     }
-     */
     constructor(client: TonClient, timeout: number, keys: KeyPair) {
         super(client, timeout, {
             abi: SafeMultisigWalletContract.abi,
@@ -38,30 +32,14 @@ export class SafeMultisigWallet extends Contract {
     /**********
      * DEPLOY *
      **********/
-    /**
-     * @param config
-     * Example:
-     *     {
-     *         owners: [
-     *            '0x0000111122223333444455556666777788889999aaaabbbbccccddddeeeeffff',
-     *            '0x0000000011111111222222223333333344444444555555556666666677777777'
-     *        ],
-     *        reqConfirms: 1
-     *     }
-     */
-    public async deploy(
-        config: {
-            owners: string[] | number[],
-            reqConfirms: number
-        }
-    ): Promise<boolean> {
-        return await super.deploy(config)
+    public async deploy(input: DeployIn): Promise<boolean> {
+        return await super.deploy(input)
     }
 
 
-    /**********
-     * PUBLIC *
-     **********/
+    /**************
+     * DECORATORS *
+     **************/
     public async callAnotherContract(
         dest: string,
         value: number,
@@ -71,7 +49,7 @@ export class SafeMultisigWallet extends Contract {
         method: string,
         input: Object,
         keys?: KeyPair
-    ): Promise<ResultOfProcessMessage> {
+    ): Promise<ResultOfCall> {
         const payload: string = await this._getPayloadToCallAnotherContract(abi, method, input)
         return await this.sendTransaction(
             {
@@ -92,10 +70,9 @@ export class SafeMultisigWallet extends Contract {
         flags: number,
         comment: string,
         keys?: KeyPair
-    ): Promise<ResultOfProcessMessage> {
+    ): Promise<ResultOfCall> {
         const payload: string = await this._getPayloadToTransferWithComment(comment)
-        return await this.sendTransaction(
-            {
+        return await this.sendTransaction({
                 dest,
                 value,
                 bounce,
@@ -106,16 +83,39 @@ export class SafeMultisigWallet extends Contract {
         )
     }
 
-    public async sendTransaction(
-        input: {
-            dest: string,
-            value: number,
-            bounce: boolean,
-            flags: number,
-            payload: string
-        },
+    public async submitTransactionWithComment(
+        dest: string,
+        value: number,
+        bounce: boolean,
+        allBalance: boolean,
+        comment: string,
         keys?: KeyPair
-    ): Promise<ResultOfProcessMessage> {
+    ): Promise<SubmitTransactionResult> {
+        const payload: string = await this._getPayloadToTransferWithComment(comment)
+        return await this.submitTransaction({
+                dest,
+                value,
+                bounce,
+                allBalance,
+                payload
+            },
+            keys
+        )
+    }
+
+
+    /**********
+     * PUBLIC *
+     **********/
+    public async sendTransaction(input: SendTransactionIn, keys?: KeyPair): Promise<ResultOfCall> {
         return await this.call('sendTransaction', input, keys)
+    }
+
+    public async submitTransaction(input: SubmitTransactionIn, keys?: KeyPair): Promise<SubmitTransactionResult> {
+        return await this.call('submitTransaction', input, keys)
+    }
+
+    public async confirmTransaction(input: ConfirmTransactionIn, keys?: KeyPair): Promise<ResultOfCall> {
+        return await this.call('confirmTransaction', input, keys)
     }
 }

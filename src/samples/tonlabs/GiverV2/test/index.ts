@@ -4,6 +4,8 @@ import {StringMap} from '../../../../types'
 import {prepare} from '../../../../scripts'
 import {GiverV2} from '../GiverV2'
 
+export {TestGiverV2Kit}
+
 export function prepareGiverV2(config: Config, keysMap: StringMap): TestGiverV2Kit {
     const {client, timeout, giverKeys} = prepare(config, keysMap)
     return {

@@ -1,6 +1,7 @@
 import SafeMultisigWalletContract from './code/SafeMultisigWallet'
 
 export {SafeMultisigWalletContract}
+export * from './interfaces'
 export {SafeMultisigWalletCall} from './scripts/SafeMultisigWalletCall'
 export {SafeMultisigWalletDeployWithGiverV2} from './scripts/SafeMultisigWalletDeployWithGiverV2'
 export {SafeMultisigWalletInfo} from './scripts/SafeMultisigWalletInfo'

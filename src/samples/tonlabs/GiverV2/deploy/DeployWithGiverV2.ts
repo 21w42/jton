@@ -1,7 +1,8 @@
 import {DeployWithGiver} from '../../../../scripts'
-import {KeyPair, ResultOfProcessMessage} from '@tonclient/core/dist/modules'
+import {KeyPair} from '@tonclient/core/dist/modules'
 import {Contract} from '../../../../contract'
 import {GiverV2} from '../GiverV2'
+import {ResultOfCall} from '../../../../contract/interfaces/ResultOfCall'
 
 export class DeployWithGiverV2 extends DeployWithGiver {
     /**
@@ -26,7 +27,7 @@ export class DeployWithGiverV2 extends DeployWithGiver {
      * Example:
      *     1_000_000_000
      */
-    protected async _send(giver: GiverV2, address: string, needSendToTarget: number): Promise<ResultOfProcessMessage> {
+    protected async _send(giver: GiverV2, address: string, needSendToTarget: number): Promise<ResultOfCall> {
         return await giver.sendTransaction({
             dest: address,
             value: needSendToTarget

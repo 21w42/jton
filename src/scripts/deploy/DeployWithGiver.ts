@@ -1,12 +1,13 @@
 import {TonClient} from '@tonclient/core'
 import {libNode} from '@tonclient/lib-node'
-import {KeyPair, ResultOfProcessMessage} from '@tonclient/core/dist/modules'
+import {KeyPair} from '@tonclient/core/dist/modules'
 import {Printer} from '../../printer'
 import {AccountType, Contract} from '../../contract'
 import transferAbi from '../../contract/abi/transfer.abi.json'
 import {DeployMessages} from './constants/DeployMessages'
 import {B, createClient, createKeysOrRead} from '../../utils'
 import {DeployWithGiverConfig} from './interfaces/DeployWithGiverConfig'
+import {ResultOfCall} from '../../contract/interfaces/ResultOfCall'
 
 export class DeployWithGiver {
     protected readonly _client: TonClient
@@ -183,7 +184,7 @@ export class DeployWithGiver {
      * Example:
      *     1_000_000_000
      */
-    protected async _send(giver: Contract, address: string, needSendToTarget: number): Promise<ResultOfProcessMessage> {
+    protected async _send(giver: Contract, address: string, needSendToTarget: number): Promise<ResultOfCall> {
         return await giver.call('sendTransaction', {
             dest: address,
             value: needSendToTarget,

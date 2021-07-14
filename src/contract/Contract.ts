@@ -17,6 +17,7 @@ import transferAbi from '../contract/abi/transfer.abi.json'
 import {AccountType} from './enums/AccountType'
 import {contractErrorMessages} from './contractErrorMessages'
 import {stringToHex} from '../utils'
+import {ResultOfCall} from './interfaces/ResultOfCall'
 
 export class Contract {
     private readonly _abi: Abi
@@ -269,13 +270,13 @@ export class Contract {
      *         secret: '0x0000000011111111222222223333333344444444555555556666666677777777'
      *     }
      */
-    public async call(method: string, input: Object = {}, keys?: KeyPair): Promise<ResultOfProcessMessage> {
+    public async call(method: string, input: Object = {}, keys?: KeyPair): Promise<ResultOfCall> {
         const keysPair: KeyPair | undefined = keys ?? this._keys
 
         if (!keysPair)
             throw Error(contractErrorMessages.CONTRACT_KEYS_IS_UNDEFINED)
 
-        const processMessageResult: ResultOfProcessMessage = await this._client.processing.process_message({
+        const processOfMessageResult: ResultOfProcessMessage = await this._client.processing.process_message({
             message_encode_params: {
                 abi: this._abi,
                 signer: {
@@ -291,7 +292,10 @@ export class Contract {
             send_events: false
         })
         await this.waitForTransaction()
-        return processMessageResult
+        return {
+            out: processOfMessageResult.decoded ? processOfMessageResult.decoded.output ?? {} : {},
+            result: processOfMessageResult
+        }
     }
 
     /**
