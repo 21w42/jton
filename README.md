@@ -35,4 +35,3 @@ npm i jton
 ## TODO
 * Use [endpoints](https://github.com/tonlabs/TON-SDK/blob/master/docs/mod_client.md#NetworkConfig) instead network url.
 * Tests coverage.
-* Create separate repository and move SafeMultisigWallet and GiverV2 into.

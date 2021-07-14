@@ -1,7 +1,6 @@
 export * from './config'
 export * from './contract'
 export * from './printer'
-export * from './samples'
 export * from './scripts'
 export * from './tools'
 export * from './types'
