@@ -5,10 +5,10 @@ import {TonClient} from '@tonclient/core'
 import {ResultOfCall} from '../../../contract/interfaces/ResultOfCall'
 import {
     ConfirmTransactionIn,
-    DeployIn,
-    SendTransactionIn,
-    SubmitTransactionIn,
-    SubmitTransactionResult
+    SafeMultisigWalletDeployIn,
+    SafeMultisigWalletSendTransactionIn,
+    SafeMultisigWalletSubmitTransactionIn,
+    SafeMultisigWalletSubmitTransactionResult
 } from './interfaces'
 
 /**
@@ -32,7 +32,7 @@ export class SafeMultisigWallet extends Contract {
     /**********
      * DEPLOY *
      **********/
-    public async deploy(input: DeployIn): Promise<boolean> {
+    public async deploy(input: SafeMultisigWalletDeployIn): Promise<boolean> {
         return await super.deploy(input)
     }
 
@@ -90,7 +90,7 @@ export class SafeMultisigWallet extends Contract {
         allBalance: boolean,
         comment: string,
         keys?: KeyPair
-    ): Promise<SubmitTransactionResult> {
+    ): Promise<SafeMultisigWalletSubmitTransactionResult> {
         const payload: string = await this._getPayloadToTransferWithComment(comment)
         return await this.submitTransaction({
                 dest,
@@ -107,11 +107,11 @@ export class SafeMultisigWallet extends Contract {
     /**********
      * PUBLIC *
      **********/
-    public async sendTransaction(input: SendTransactionIn, keys?: KeyPair): Promise<ResultOfCall> {
+    public async sendTransaction(input: SafeMultisigWalletSendTransactionIn, keys?: KeyPair): Promise<ResultOfCall> {
         return await this.call('sendTransaction', input, keys)
     }
 
-    public async submitTransaction(input: SubmitTransactionIn, keys?: KeyPair): Promise<SubmitTransactionResult> {
+    public async submitTransaction(input: SafeMultisigWalletSubmitTransactionIn, keys?: KeyPair): Promise<SafeMultisigWalletSubmitTransactionResult> {
         return await this.call('submitTransaction', input, keys)
     }
 

@@ -1,12 +1,12 @@
 import {ResultOfCall} from '../../../../contract/interfaces/ResultOfCall'
 
-export interface DeployIn {
+export interface SafeMultisigWalletDeployIn {
     owners: string[] | number[],
     reqConfirms: number
 }
 
 
-export interface SendTransactionIn {
+export interface SafeMultisigWalletSendTransactionIn {
     dest: string
     value: number
     bounce: boolean
@@ -15,7 +15,7 @@ export interface SendTransactionIn {
 }
 
 
-export interface SubmitTransactionIn {
+export interface SafeMultisigWalletSubmitTransactionIn {
     dest: string
     value: number
     bounce: boolean
@@ -23,7 +23,7 @@ export interface SubmitTransactionIn {
     payload: string
 }
 
-export interface SubmitTransactionResult extends ResultOfCall {
+export interface SafeMultisigWalletSubmitTransactionResult extends ResultOfCall {
     out: SubmitTransactionOut
 }
 
