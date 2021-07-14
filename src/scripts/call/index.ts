@@ -9,6 +9,8 @@ import {createClient, createKeysOrRead} from '../../utils'
 import {StringMap} from '../../types'
 import {NetConfig} from '../../config'
 
+export * from './readers'
+
 export interface CallConfig {
     net: NetConfig
     locale: string | undefined
