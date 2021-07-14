@@ -86,16 +86,16 @@ export async function make(config: MakeConfig): Promise<void> {
         stdlib: config.stdlib
     })
 
-    const files: string[] = config.compile ?? []
-    for (let i = 0; i < compile.length; i++) {
-        const file = files[i]
+    const compileFiles: string[] = config.compile ?? []
+    for (let i = 0; i < compileFiles.length; i++) {
+        const file = compileFiles[i]
         await compile(config.root, file)
         await wrap(config.root, exp, extension, file)
         printer.print(colors.green(file))
     }
 
     const wrapFiles: string[] = config.wrap ?? []
-    for (let i = 0; i < wrap.length; i++) {
+    for (let i = 0; i < wrapFiles.length; i++) {
         const file = wrapFiles[i]
         await wrap(config.root, exp, extension, file)
         printer.print(colors.green(file))
