@@ -30,10 +30,15 @@
   dependencies:
     "@tonclient/core" "^1"
 
-"@tonclient/core@^1", "@tonclient/core@^1.19.0":
+"@tonclient/core@^1":
   version "1.19.0"
   resolved "https://registry.yarnpkg.com/@tonclient/core/-/core-1.19.0.tgz#291d6cbf792774f90db45f4726a62572acba4187"
   integrity sha512-xW+CtJahZEhlD+l4ap1ilrzCedNouTfdTTA1bpvFv0FYTpUilJi138gZGq6MWY1kbfgqLG5VXAB2ClUeSqTQbw==
+
+"@tonclient/core@^1.20.0":
+  version "1.20.0"
+  resolved "https://registry.yarnpkg.com/@tonclient/core/-/core-1.20.0.tgz#cd9d684dac606437c3b524c13899150dfe04b0c3"
+  integrity sha512-k3EMn5A1phmlEO+8+KGnVri4ta+x9/40c7F9MBaPLUCBR3YB2PGEsnOaEfGbS/ktbcLaqB/ibFFWy/AgFnCQxQ==
 
 "@tonclient/lib-node@^1":
   version "1.19.0"
@@ -60,10 +65,10 @@
   resolved "https://registry.yarnpkg.com/@tsconfig/node16/-/node16-1.0.1.tgz#a6ca6a9a0ff366af433f42f5f0e124794ff6b8f1"
   integrity sha512-FTgBI767POY/lKNDNbIzgAX6miIDBs6NTCbdlDb8TrWovHsSvaVIZDlTqym29C6UqhzwcJx4CYr+AlrMywA0cA==
 
-"@types/node@^16.3.2":
-  version "16.3.2"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-16.3.2.tgz#655432817f83b51ac869c2d51dd8305fb8342e16"
-  integrity sha512-jJs9ErFLP403I+hMLGnqDRWT0RYKSvArxuBVh2veudHV7ifEC1WAmjJADacZ7mRbA2nWgHtn8xyECMAot0SkAw==
+"@types/node@^16.4.0":
+  version "16.4.0"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-16.4.0.tgz#2c219eaa3b8d1e4d04f4dd6e40bc68c7467d5272"
+  integrity sha512-HrJuE7Mlqcjj+00JqMWpZ3tY8w7EUd+S0U3L1+PQSWiXZbOgyQDvi+ogoUxaHApPJq5diKxYBQwA3iIlNcPqOg==
 
 ajv@^6.12.3:
   version "6.12.6"
