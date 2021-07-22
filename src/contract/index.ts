@@ -8,8 +8,7 @@ import {
     ResultOfEncodeMessageBody,
     ResultOfProcessMessage,
     ResultOfQueryCollection,
-    ResultOfRunTvm,
-    ResultOfWaitForCollection
+    ResultOfRunTvm
 } from '@tonclient/core/dist/modules'
 import {TonClient} from '@tonclient/core'
 import {stringToHex} from '../utils'
@@ -339,11 +338,8 @@ export class Contract {
      *     {
      *         count: 500
      *     }
-     * @return
-     * Example:
-     *     true
      */
-    public async deploy(input: Object = {}): Promise<boolean> {
+    public async deploy(input: Object = {}): Promise<ResultOfProcessMessage> {
         if (!this._keys)
             throw Error(messages.CONTRACT_KEYS_IS_UNDEFINED)
 
@@ -353,7 +349,7 @@ export class Contract {
         /////////////////////////////
         // Waiting for balance > 0 //
         /////////////////////////////
-        const waitingNoCodeCollectionResult: ResultOfWaitForCollection = await this._client.net.wait_for_collection({
+        await this._client.net.wait_for_collection({
             collection: 'accounts',
             filter: {
                 id: {
@@ -371,35 +367,30 @@ export class Contract {
             },
             result: 'last_trans_lt'
         })
-        this._lastTransactionLogicTime = waitingNoCodeCollectionResult.result['last_trans_lt']
 
         ////////////
         // Deploy //
         ////////////
-        const encodedMessage: ResultOfEncodeMessage = await this._client.abi.encode_message({
-            abi: this._abi,
-            signer: {
-                type: 'Keys',
-                keys: this._keys
+        const resultOfProcessMessage: ResultOfProcessMessage = await this._client.processing.process_message({
+            message_encode_params: {
+                abi: this._abi,
+                signer: {
+                    type: 'Keys',
+                    keys: this._keys
+                },
+                deploy_set: {
+                    tvc: this._tvc,
+                    initial_data: this._initialData
+                },
+                call_set: {
+                    function_name: 'constructor',
+                    input: input
+                }
             },
-            deploy_set: {
-                tvc: this._tvc,
-                initial_data: this._initialData
-            },
-            call_set: {
-                function_name: 'constructor',
-                input: input
-            }
-        })
-        await this._client.processing.send_message({
-            message: encodedMessage.message,
             send_events: false
         })
-
-        ////////////////////////////////////////
-        // Waiting for deployment transaction //
-        ////////////////////////////////////////
-        return await this.waitForTransaction()
+        this._lastTransactionLogicTime = resultOfProcessMessage.transaction.lt ?? this._lastTransactionLogicTime
+        return resultOfProcessMessage
     }
 
 

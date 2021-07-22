@@ -1,6 +1,6 @@
 import {TonClient} from '@tonclient/core'
 import {libNode} from '@tonclient/lib-node'
-import {KeyPair} from '@tonclient/core/dist/modules'
+import {KeyPair, ResultOfProcessMessage} from '@tonclient/core/dist/modules'
 import {Printer} from '../../printer'
 import {AccountType, Contract, ResultOfCall} from '../../contract'
 import transferAbi from '../../contract/abi/transfer.abi.json'
@@ -199,7 +199,7 @@ export class DeployWithGiver {
      * Deploy contract.
      * @param contract
      */
-    protected async _deploy(contract: Contract): Promise<boolean> {
+    protected async _deploy(contract: Contract): Promise<ResultOfProcessMessage> {
         return await contract.deploy()
     }
 }
