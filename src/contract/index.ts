@@ -338,8 +338,14 @@ export class Contract {
      *     {
      *         count: 500
      *     }
+     * @param timeout Time in milliseconds. How long to wait before deploying until the contract balance is > 0.
+     * Examples:
+     *     3000
+     *     5000
      */
-    public async deploy(input: Object = {}): Promise<ResultOfProcessMessage> {
+    public async deploy(input: Object = {}, timeout?: number): Promise<ResultOfProcessMessage> {
+        timeout = timeout ?? this._timeout
+
         if (!this._keys)
             throw Error(messages.CONTRACT_KEYS_IS_UNDEFINED)
 
@@ -365,7 +371,8 @@ export class Contract {
                     gt: '0'
                 }
             },
-            result: 'last_trans_lt'
+            result: 'last_trans_lt',
+            timeout: timeout
         })
 
         ////////////
