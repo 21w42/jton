@@ -309,7 +309,7 @@ export class Contract {
         if (!keysPair)
             throw Error(messages.CONTRACT_KEYS_IS_UNDEFINED)
 
-        const processOfMessageResult: ResultOfProcessMessage = await this._client.processing.process_message({
+        const resultOfProcessMessage: ResultOfProcessMessage = await this._client.processing.process_message({
             message_encode_params: {
                 abi: this._abi,
                 signer: {
@@ -324,10 +324,10 @@ export class Contract {
             },
             send_events: false
         })
-        await this.waitForTransaction()
+        this._lastTransactionLogicTime = resultOfProcessMessage.transaction.lt ?? this._lastTransactionLogicTime
         return {
-            out: processOfMessageResult.decoded ? processOfMessageResult.decoded.output ?? {} : {},
-            result: processOfMessageResult
+            out: resultOfProcessMessage.decoded ? resultOfProcessMessage.decoded.output ?? {} : {},
+            result: resultOfProcessMessage
         }
     }
 
