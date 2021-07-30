@@ -51,7 +51,7 @@ export class Call {
      *     3000
      *     5000
      */
-    async run(timeout?: number): Promise<void> {
+    public async run(timeout?: number): Promise<void> {
         const printer: Printer = new Printer(this._config.locale)
 
         ///////////////////////////

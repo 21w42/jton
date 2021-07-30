@@ -30,7 +30,7 @@ export class Info {
      *     3000
      *     5000
      */
-    async run(timeout?: number): Promise<void> {
+    public async run(timeout?: number): Promise<void> {
         const printer: Printer = new Printer(this._config.locale)
         const keys: KeyPair = await createKeysOrRead(this._config.keys, this._client)
         const contract: Contract = this._getContract(keys, timeout)
