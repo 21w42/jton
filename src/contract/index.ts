@@ -141,7 +141,7 @@ export class Contract {
 
     /**
      * Use this if you want to wait for a transaction from one contract to another.
-     * Example:readonly
+     * Example:
      *     const client: TonClient = ...
      *     const keys: KeyPair = ...
      *     const sender: SenderContract = new SenderContract(client, keys)
