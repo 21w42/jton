@@ -1,9 +1,9 @@
 import fs from 'fs'
-import ErrnoException = NodeJS.ErrnoException
 import FastGlob from 'fast-glob'
 import colors from 'colors'
 import path from 'path'
 import {Printer} from '../../printer'
+import ErrnoException = NodeJS.ErrnoException
 
 export interface CopyConfig {
     source: string[] | string

@@ -7,6 +7,6 @@ export interface NetConfig {
 }
 
 export interface Config {
-    net: {[key: string]: NetConfig}
+    net: { [key: string]: NetConfig }
     defaultNet: string
 }
