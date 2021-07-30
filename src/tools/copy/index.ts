@@ -11,7 +11,7 @@ export interface CopyConfig {
 }
 
 /**
- * Search example files, copy and rename.
+ * Searches demonstration files with keyword at end of name, copy and rename.
  *     `config.example.ts` > `config.ts`
  *     `config.local.template.ts` > `config.local.ts`
  * @config config Config params can contains string or string[]
