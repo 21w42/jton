@@ -38,6 +38,5 @@ You can find popular contracts like SafeMultisigWallet that work with jTON in th
 You can find example how to use jTON with your own contracts in [simple-wallet-smart-contract](https://github.com/kokkekpek/simple-wallet-smart-contract) repository. 
 
 ## TODO
-* Use [endpoints](https://github.com/tonlabs/TON-SDK/blob/master/docs/mod_client.md#NetworkConfig) instead network url
-* Tests coverage
+* Tests
 * Docs
