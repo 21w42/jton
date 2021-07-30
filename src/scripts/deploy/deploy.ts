@@ -28,11 +28,15 @@ export class Deploy {
 
     /**
      * Run command.
+     * @param timeout Time in milliseconds. How much time need wait a collection from graphql.
+     * Examples:
+     *     3000
+     *     5000
      */
-    public async run(): Promise<void> {
+    public async run(timeout?: number): Promise<void> {
         const printer: Printer = new Printer(this._config.locale)
         const keys: KeyPair = await createKeysOrRead(this._config.keys, this._client)
-        const contract: Contract = this._getContract(keys)
+        const contract: Contract = this._getContract(keys, timeout)
 
         /////////////
         // Network //
@@ -87,7 +91,7 @@ export class Deploy {
         ///////////////
         // Deploying //
         ///////////////
-        await this._deploy(contract)
+        await this._deploy(contract, timeout)
 
         //////////
         // Mark //
@@ -107,27 +111,35 @@ export class Deploy {
     // MUST BE OVERRIDDEN //
     ////////////////////////
     /**
-     * Create and return contract object.
+     * Creates and returns contract.
      * @param keys
      * Example:
      *     {
      *         public: '0x0000111122223333444455556666777788889999aaaabbbbccccddddeeeeffff',
      *         secret: '0x0000000011111111222222223333333344444444555555556666666677777777'
      *     }
+     * @param timeout Time in milliseconds. How much time need wait a collection from graphql.
+     * Examples:
+     *     3000
+     *     5000
      */
-    protected _getContract(keys: KeyPair): Contract {
+    protected _getContract(keys: KeyPair, timeout?: number): Contract {
         return new Contract(this._client, {
             abi: transferAbi,
             keys: keys,
             address: '0:0000000000000000000000000000000000000000000000000000000000000000'
-        })
+        }, timeout)
     }
 
     /**
-     * Deploy contract.
+     * Deploys contract.
      * @param contract
+     * @param timeout Time in milliseconds. How much time need wait a collection from graphql.
+     * Examples:
+     *     3000
+     *     5000
      */
-    protected async _deploy(contract: Contract): Promise<ResultOfProcessMessage> {
-        return await contract.deploy()
+    protected async _deploy(contract: Contract, timeout?: number): Promise<ResultOfProcessMessage> {
+        return await contract.deploy({}, timeout)
     }
 }
