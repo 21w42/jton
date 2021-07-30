@@ -65,10 +65,10 @@
   resolved "https://registry.yarnpkg.com/@tsconfig/node16/-/node16-1.0.1.tgz#a6ca6a9a0ff366af433f42f5f0e124794ff6b8f1"
   integrity sha512-FTgBI767POY/lKNDNbIzgAX6miIDBs6NTCbdlDb8TrWovHsSvaVIZDlTqym29C6UqhzwcJx4CYr+AlrMywA0cA==
 
-"@types/node@^16.4.0":
-  version "16.4.0"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-16.4.0.tgz#2c219eaa3b8d1e4d04f4dd6e40bc68c7467d5272"
-  integrity sha512-HrJuE7Mlqcjj+00JqMWpZ3tY8w7EUd+S0U3L1+PQSWiXZbOgyQDvi+ogoUxaHApPJq5diKxYBQwA3iIlNcPqOg==
+"@types/node@^16.4.7":
+  version "16.4.7"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-16.4.7.tgz#f7afa78769d4b477f5092d7c3468e2e8653d779c"
+  integrity sha512-aDDY54sst8sx47CWT6QQqIZp45yURq4dic0+HCYfYNcY5Ejlb/CLmFnRLfy3wQuYafOeh3lB/DAKaqRKBtcZmA==
 
 ajv@^6.12.3:
   version "6.12.6"
@@ -781,10 +781,10 @@ to-regex-range@^5.0.1:
   dependencies:
     is-number "^7.0.0"
 
-tondev@^0.7.4:
-  version "0.7.4"
-  resolved "https://registry.yarnpkg.com/tondev/-/tondev-0.7.4.tgz#3f4389604f2d384105a221408215c5ce89009340"
-  integrity sha512-XcmJZV5qRDcqbUrcQponglee7rDqD7zsvg6n99eBYVvCbwEarD4cipc50oYik4+ufzYKrbWCPXszp6QjT9A1ug==
+tondev@^0.8.1:
+  version "0.8.1"
+  resolved "https://registry.yarnpkg.com/tondev/-/tondev-0.8.1.tgz#2ccbea9cc9f2d1479a8787538c5aa56e55b4d349"
+  integrity sha512-i1bXCly0E4pg9l8PocTBIyK1tmcih3QLfwz840DdzTLM0w+/vU9whnAxsXahfF5NCzCVBPqqLCOcOuz/1Mvy0A==
   dependencies:
     "@tonclient/appkit" "^0"
     "@tonclient/core" "^1"
