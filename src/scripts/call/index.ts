@@ -1,18 +1,17 @@
-import {TonClient} from '@tonclient/core'
+import {ClientConfig, TonClient} from '@tonclient/core'
 import {libNode} from '@tonclient/lib-node'
 import {Printer} from '../../printer'
 import {KeyPair} from '@tonclient/core/dist/modules'
 import {AccountType, Contract} from '../../contract'
 import transferAbi from '../../contract/abi/transfer.abi.json'
 import colors from 'colors'
-import {createClient, createKeysOrRead} from '../../utils'
+import {createKeysOrRead} from '../../utils'
 import {StringMap} from '../../types'
-import {NetConfig} from '../../config'
 
 export * from './readers'
 
 export interface CallConfig {
-    net: NetConfig
+    client: ClientConfig
     locale: string | undefined
     keys: string
 }
@@ -31,15 +30,6 @@ export class Call {
 
     /**
      * @param _config
-     * Example:
-     *     {
-     *         net: {
-     *             url: 'http://localhost',
-     *             timeout: 30_000
-     *         },
-     *         locale: 'EN',
-     *         keys: `${__dirname}/../library/keys/GiverV2.se.keys.json`
-     *     }
      * @param _names
      * Example:
      *     [
@@ -51,7 +41,7 @@ export class Call {
     constructor(protected readonly _config: CallConfig, protected readonly _names: string[]) {
         TonClient.useBinaryLibrary(libNode)
         this._args = process.argv.slice(2)
-        this._client = createClient(this._config.net.url)
+        this._client = new TonClient(_config.client)
     }
 
     /**
@@ -82,7 +72,7 @@ export class Call {
         /////////////
         // Network //
         /////////////
-        printer.network(this._config.net.url)
+        printer.network(this._config.client)
 
         ////////////////////
         // Contracts data //
@@ -132,7 +122,7 @@ export class Call {
      * @param contract
      */
     private async _accountInsNotActiveError(printer: Printer, contract: Contract): Promise<void> {
-        await printer.network(this._config.net.url)
+        await printer.network(this._config.client)
         await printer.account(contract)
         await printer.print(messages.ACCOUNT_IS_NOT_ACTIVE)
         process.exit()
@@ -168,7 +158,7 @@ export class Call {
      *     }
      */
     protected _getContract(keys: KeyPair): Contract {
-        return new Contract(this._client, this._config.net.timeout, {
+        return new Contract(this._client, {
             abi: transferAbi,
             keys: keys,
             address: '0:0000000000000000000000000000000000000000000000000000000000000000'
@@ -184,7 +174,7 @@ export class Call {
      *     }
      */
     protected _getTargetContract(map: StringMap): Contract {
-        return new Contract(this._client, this._config.net.timeout, {
+        return new Contract(this._client, {
             abi: {},
             address: map['address']
         })

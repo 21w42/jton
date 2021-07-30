@@ -1,9 +1,12 @@
+import {ClientConfig} from '@tonclient/core'
+
 export interface NetConfig {
-    url: string
-    timeout: number
-    transactionFee: number
-    tolerance: number
-    giver: string
+    client: ClientConfig
+    transactions: {
+        fee: number
+        tolerance: number
+        giver: string
+    }
 }
 
 export interface Config {

@@ -4,7 +4,7 @@ import {KeyPair, ResultOfProcessMessage} from '@tonclient/core/dist/modules'
 import {Printer} from '../../printer'
 import {AccountType, Contract, ResultOfCall} from '../../contract'
 import transferAbi from '../../contract/abi/transfer.abi.json'
-import {B, createClient, createKeysOrRead} from '../../utils'
+import {B, createKeysOrRead} from '../../utils'
 import {messages} from './messages'
 import {DeployConfig} from './deploy'
 
@@ -17,24 +17,10 @@ export class DeployWithGiver {
 
     /**
      * @param _config
-     * Example:
-     *     {
-     *         net: {
-     *             url: 'http://localhost:8080',
-     *             timeout: 30_000,
-     *             transactionFee: 0.02,
-     *             tolerance: 0.000_001,
-     *             giver: 'se'
-     *         },
-     *         locale: 'EN',
-     *         keys: `${__dirname}/../keys/SafeMultisigWallet.keys.json`,
-     *         requiredForDeployment: 0.03,
-     *         giverKeys: `${__dirname}/../keys/GiverV2.keys.json`
-     *     }
      */
     constructor(protected readonly _config: DeployWithGiverConfig) {
         TonClient.useBinaryLibrary(libNode)
-        this._client = createClient(this._config.net.url)
+        this._client = new TonClient(this._config.net.client)
     }
 
     /**
@@ -50,7 +36,7 @@ export class DeployWithGiver {
         /////////////
         // Network //
         /////////////
-        printer.network(this._config.net.url)
+        printer.network(this._config.net.client)
 
         ////////////////////
         // Contracts data //
@@ -82,11 +68,11 @@ export class DeployWithGiver {
         ///////////////////
         const balance: number = parseInt(await contract.balance())
         const requiredBalance: number = this._config.requiredForDeployment * B
-        const tolerance: number = this._config.net.tolerance * B
+        const tolerance: number = this._config.net.transactions.tolerance * B
         if (balance < requiredBalance - tolerance) {
             const giverBalance: number = parseInt(await giver.balance())
             const needSendToTarget: number = requiredBalance - balance
-            const needHaveOnGiver: number = needSendToTarget + this._config.net.transactionFee * B
+            const needHaveOnGiver: number = needSendToTarget + this._config.net.transactions.fee * B
             if (giverBalance < needHaveOnGiver) {
                 printer.print(messages.NOT_ENOUGH_BALANCE)
                 this._client.close()
@@ -154,7 +140,7 @@ export class DeployWithGiver {
      *     }
      */
     protected _getContract(keys: KeyPair): Contract {
-        return new Contract(this._client, this._config.net.timeout, {
+        return new Contract(this._client,{
             abi: transferAbi,
             keys: keys,
             address: '0:0000000000000000000000000000000000000000000000000000000000000000'
@@ -171,7 +157,7 @@ export class DeployWithGiver {
      *     }
      */
     protected _getGiver(keys: KeyPair): Contract {
-        return new Contract(this._client, this._config.net.timeout, {
+        return new Contract(this._client,{
             abi: transferAbi,
             keys: keys,
             address: '0:0000000000000000000000000000000000000000000000000000000000000000'

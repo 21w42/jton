@@ -2,6 +2,7 @@ import {AccountType, Contract} from '../contract'
 import colors, {Color} from 'colors'
 import {B} from '../utils'
 import {StringMap} from '../types'
+import {ClientConfig} from '@tonclient/core'
 
 const contractTypes: StringMap = {
     '-1': 'Not found',
@@ -42,12 +43,16 @@ export class Printer {
     }
 
     /**
-     * @param url
-     * Example:
-     *     'http://localhost'
+     * @param config
      */
-    public network(url: string): void {
-        console.log(`${colors.gray(url)}\n`)
+    public network(config: ClientConfig): void {
+        let text: string = String(undefined)
+        if (config.network)
+            if (config.network.server_address)
+                text = config.network.server_address
+            else if (config.network.endpoints)
+                text = config.network.endpoints.join(' | ')
+        console.log(`${colors.gray(text)}\n`)
     }
 
     /**

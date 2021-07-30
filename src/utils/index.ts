@@ -1,4 +1,3 @@
-export * from './createClient'
 export * from './delay'
 export * from './keys'
 export * from './net'

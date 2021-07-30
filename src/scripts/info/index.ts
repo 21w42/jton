@@ -1,14 +1,13 @@
-import {TonClient} from '@tonclient/core'
+import {ClientConfig, TonClient} from '@tonclient/core'
 import {libNode} from '@tonclient/lib-node'
 import {Contract} from '../../contract'
 import transferAbi from '../../contract/abi/transfer.abi.json'
 import {KeyPair} from '@tonclient/core/dist/modules'
 import {Printer} from '../../printer'
-import {createClient, createKeysOrRead} from '../../utils'
-import {NetConfig} from '../../config'
+import {createKeysOrRead} from '../../utils'
 
 export interface InfoConfig {
-    net: NetConfig
+    client: ClientConfig
     locale: string | undefined
     keys: string
 }
@@ -18,19 +17,10 @@ export class Info {
 
     /**
      * @param _config
-     * Example:
-     *     {
-     *         net: {
-     *             url: 'http://localhost',
-     *             timeout: 30_000
-     *         },
-     *         locale: 'EN',
-     *         keys: `${__dirname}/../library/keys/GiverV2.se.keys.json`
-     *     }
      */
     constructor(protected readonly _config: InfoConfig) {
         TonClient.useBinaryLibrary(libNode)
-        this._client = createClient(this._config.net.url)
+        this._client = new TonClient(this._config.client)
     }
 
     /**
@@ -44,7 +34,7 @@ export class Info {
         /////////////
         // Network //
         /////////////
-        printer.network(this._config.net.url)
+        printer.network(this._config.client)
 
         ///////////////////
         // Contract data //
@@ -68,7 +58,7 @@ export class Info {
      *     }
      */
     protected _getContract(keys: KeyPair): Contract {
-        return new Contract(this._client, this._config.net.timeout, {
+        return new Contract(this._client, {
             abi: transferAbi,
             keys: keys,
             address: '0:0000000000000000000000000000000000000000000000000000000000000000'

@@ -4,7 +4,7 @@ import {KeyPair, ResultOfProcessMessage} from '@tonclient/core/dist/modules'
 import {Printer} from '../../printer'
 import {AccountType, Contract} from '../../contract'
 import transferAbi from '../../contract/abi/transfer.abi.json'
-import {B, createClient, createKeysOrRead} from '../../utils'
+import {B, createKeysOrRead} from '../../utils'
 import {messages} from './messages'
 import {NetConfig} from '../../config'
 
@@ -20,23 +20,10 @@ export class Deploy {
 
     /**
      * @param _config
-     * Example:
-     *     {
-     *         net: {
-     *             url: 'http://localhost:8080',
-     *             timeout: 30_000,
-     *             transactionFee: 0.02,
-     *             tolerance: 0.000_001,
-     *             giver: 'se'
-     *         },
-     *         locale: 'EN',
-     *         keys: `${__dirname}/../keys/GiverV2.keys.json`,
-     *         requiredForDeployment: 0.03
-     *     }
      */
     constructor(protected readonly _config: DeployConfig) {
         TonClient.useBinaryLibrary(libNode)
-        this._client = createClient(this._config.net.url)
+        this._client = new TonClient(this._config.net.client)
     }
 
     /**
@@ -50,7 +37,7 @@ export class Deploy {
         /////////////
         // Network //
         /////////////
-        printer.network(this._config.net.url)
+        printer.network(this._config.net.client)
 
         ///////////////////
         // Contract data //
@@ -85,7 +72,7 @@ export class Deploy {
         ///////////////////
         const balance: number = parseInt(await contract.balance())
         const requiredBalance: number = this._config.requiredForDeployment * B
-        const tolerance: number = this._config.net.tolerance * B
+        const tolerance: number = this._config.net.transactions.tolerance * B
         if (balance < requiredBalance - tolerance) {
             printer.print(messages.NOT_ENOUGH_BALANCE)
             this._client.close()
@@ -129,7 +116,7 @@ export class Deploy {
      *     }
      */
     protected _getContract(keys: KeyPair): Contract {
-        return new Contract(this._client, this._config.net.timeout, {
+        return new Contract(this._client, {
             abi: transferAbi,
             keys: keys,
             address: '0:0000000000000000000000000000000000000000000000000000000000000000'

@@ -1,17 +1,14 @@
-import transferAbi from './abi/transfer.abi.json'
 import {
     Abi,
     AbiContract,
     DecodedMessageBody,
     KeyPair,
     ResultOfEncodeMessage,
-    ResultOfEncodeMessageBody,
     ResultOfProcessMessage,
     ResultOfQueryCollection,
     ResultOfRunTvm
 } from '@tonclient/core/dist/modules'
 import {TonClient} from '@tonclient/core'
-import {stringToHex} from '../utils'
 import {StringMap} from '../types'
 import colors from 'colors'
 
@@ -61,16 +58,11 @@ export class Contract {
     private _lastTransactionLogicTime: number = 0
 
 
-    /**********
-     * PUBLIC *
-     **********/
+    /***************
+     * CONSTRUCTOR *
+     ***************/
     /**
      * @param _client
-     * @param _timeout
-     * Examples:
-     *     3000
-     *     30000
-     *     60000
      * @param config
      * Examples:
      *     // Already deployed contract
@@ -86,27 +78,38 @@ export class Contract {
      *         keys: {public: '...', secret: '...'}
      *         tvc: 'te6ccg...'
      *     }
+     * @param _timeout Time in milliseconds.
+     * Examples:
+     *     3000
+     *     30000
+     *     60000
      */
     constructor(
         private readonly _client: TonClient,
-        private readonly _timeout: number,
-        config: ContractConfig | DeployedContractConfig
+        config: ContractConfig | DeployedContractConfig,
+        private readonly _timeout?: number
     ) {
-        this._abi = Contract._getAbi(config.abi)
+        this._abi = {
+            type: 'Contract',
+            value: config.abi
+        }
         this._initialData = config.initialData
         this._tvc = config.tvc
         this._keys = config.keys
         this._address = config.address
     }
 
+
+    /**********
+     * PUBLIC *
+     **********/
     /**
-     * Calculates the address only once. Next time it returns the already calculated address.
-     * You can use if you want to know the address of the contract before deployment.
+     * Calculates the address only once. Next time returns the already calculated address.
+     * You can use this if you want to know the address of the contract before deploying.
      * Example:
      *     const client: TonClient = ...
-     *     const timeout: number = ...
      *     const keys: KeyPair = ...
-     *     const root: ArtRoot = new ArtRoot(client, timeout, keys)
+     *     const root: ArtRoot = new ArtRoot(client, keys)
      *     const rootAddress: string = await root.address()
      * @return
      * Example:
@@ -138,12 +141,11 @@ export class Contract {
 
     /**
      * Use this if you want to wait for a transaction from one contract to another.
-     * Example:
+     * Example:readonly
      *     const client: TonClient = ...
-     *     const timeout: number = ...
      *     const keys: KeyPair = ...
-     *     const sender: SenderContract = new SenderContract(client, timeout, keys)
-     *     const receiver: ReceiverContract = new ReceiverContract(client, timeout, keys)
+     *     const sender: SenderContract = new SenderContract(client, keys)
+     *     const receiver: ReceiverContract = new ReceiverContract(client, keys)
      *     await sender.send(await receiver.address(), 1_000_000_000)
      *     const waitingResult: boolean = await receiver.waitForTransaction(5000)
      * @param timeout Time in milliseconds.
@@ -165,7 +167,7 @@ export class Contract {
                     }
                 },
                 result: 'last_trans_lt',
-                timeout: timeout
+                ...(timeout && {timeout})
             })
             const result: any = queryCollectionResult.result
             this._lastTransactionLogicTime = parseInt(result['last_trans_lt'] ?? '0')
@@ -179,9 +181,8 @@ export class Contract {
      * Return contract balance.
      * Example:
      *     const client: TonClient = ...
-     *     const timeout: number = ...
      *     const keys: KeyPair = ...
-     *     const safeMultisigWallet: SafeMultisigWallet = new SafeMultisigWallet(client, timeout, keys)
+     *     const safeMultisigWallet: SafeMultisigWallet = new SafeMultisigWallet(client, keys)
      *     const balance: string = await safeMultisigWallet.balance()
      */
     public async balance(): Promise<string> {
@@ -206,9 +207,8 @@ export class Contract {
      * Return contract account type.
      * Example:
      *     const client: TonClient = ...
-     *     const timeout: number = ...
      *     const keys: KeyPair = ...
-     *     const safeMultisigWallet: SafeMultisigWallet = new SafeMultisigWallet(client, timeout, keys)
+     *     const safeMultisigWallet: SafeMultisigWallet = new SafeMultisigWallet(client, keys)
      *     const accountType: AccountType = await safeMultisigWallet.accountType()
      */
     public async accountType(): Promise<AccountType> {
@@ -372,7 +372,7 @@ export class Contract {
                 }
             },
             result: 'last_trans_lt',
-            timeout: timeout
+            ...(timeout && {timeout})
         })
 
         ////////////
@@ -398,77 +398,5 @@ export class Contract {
         })
         this._lastTransactionLogicTime = resultOfProcessMessage.transaction.lt ?? this._lastTransactionLogicTime
         return resultOfProcessMessage
-    }
-
-
-    /*************
-     * PROTECTED *
-     *************/
-    /**
-     * Generate payload message for internal call.
-     * @param abi
-     * Example:
-     *     {'ABI version': 2, '...'}
-     * @param method
-     * Example:
-     *     'bet'
-     * @param input
-     * Example:
-     *     {
-     *         value: 1_000_000_000,
-     *         luckyNumber: 50
-     *     }
-     */
-    protected async _getPayloadToCallAnotherContract(
-        abi: AbiContract,
-        method: string,
-        input: Object = {}
-    ): Promise<string> {
-        const resultOfEncoding: ResultOfEncodeMessageBody = await this._client.abi.encode_message_body({
-            abi: Contract._getAbi(abi),
-            signer: {
-                type: 'None'
-            },
-            call_set: {
-                function_name: method,
-                input: input
-            },
-            is_internal: true
-        })
-        return resultOfEncoding.body
-    }
-
-    /**
-     * Generate payload message with comment for transfer.
-     * @param comment
-     * Example:
-     *     'for homeless'
-     */
-    protected async _getPayloadToTransferWithComment(comment: string = ''): Promise<string> {
-        const resultOfEncoding: ResultOfEncodeMessageBody = await this._client.abi.encode_message_body({
-            abi: Contract._getAbi(transferAbi),
-            signer: {
-                type: 'None'
-            },
-            call_set: {
-                function_name: 'transfer',
-                input: {
-                    comment: stringToHex(comment)
-                }
-            },
-            is_internal: true
-        })
-        return resultOfEncoding.body
-    }
-
-
-    /***********
-     * PRIVATE *
-     ***********/
-    private static _getAbi(abi: AbiContract): Abi {
-        return {
-            type: 'Contract',
-            value: abi
-        }
     }
 }

@@ -1,9 +1,7 @@
 import {consoleTerminal, runCommand} from 'tondev'
-import {TonClient} from '@tonclient/core'
+import {ClientConfig, TonClient} from '@tonclient/core'
 import {libNode} from '@tonclient/lib-node'
 import {StringMap} from '../../types'
-import {createClient} from '../../utils'
-import {NetConfig} from '../../config'
 
 export interface UpConfig {
     node: {
@@ -12,7 +10,7 @@ export interface UpConfig {
         dbPort: string | number
         instance: string
     }
-    net: NetConfig
+    client: ClientConfig
 }
 
 const SE: StringMap = {
@@ -31,9 +29,8 @@ const SE: StringMap = {
  *             dbPort: 'none',
  *             instance: 'default'
  *         },
- *         net: {
- *             url: 'http://localhost',
- *             timeout: 30_000
+ *         client: {
+ *             ...
  *         }
  *     }
  */
@@ -47,19 +44,18 @@ export async function up(config: UpConfig): Promise<void> {
     await runCommand(consoleTerminal, SE.START, {
         instance: config.node.instance
     })
-    await waitAnswerFromNode(config.net)
+    await waitAnswerFromNode(config.client)
 }
 
 /**
  * Wait answer from GraphQL.
  */
-async function waitAnswerFromNode(config: NetConfig): Promise<void> {
+async function waitAnswerFromNode(config: ClientConfig): Promise<void> {
     TonClient.useBinaryLibrary(libNode)
-    const client: TonClient = createClient(config.url)
+    const client: TonClient = new TonClient(config)
     await client.net.wait_for_collection({
         collection: 'accounts',
-        result: 'id',
-        timeout: config.timeout
+        result: 'id'
     })
     client.close()
 }
