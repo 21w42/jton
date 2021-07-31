@@ -46,13 +46,9 @@ export class Printer {
      * @param config
      */
     public network(config: ClientConfig): void {
-        let text: string = String(undefined)
-        if (config.network)
-            if (config.network.server_address)
-                text = config.network.server_address
-            else if (config.network.endpoints)
-                text = config.network.endpoints.join(' | ')
-        console.log(`${colors.gray(text)}\n`)
+        let text: string | undefined = config.network?.server_address ??
+            config.network?.endpoints ? config.network?.endpoints?.join(' | ') : undefined
+        console.log(`${colors.gray(String(text))}\n`)
     }
 
     /**
