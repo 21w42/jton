@@ -8,8 +8,8 @@ import {createKeysOrRead} from '../../utils'
 
 export interface InfoConfig {
     client: ClientConfig
-    locale: string | undefined
     keys: string
+    locale?: string
 }
 
 export class Info {

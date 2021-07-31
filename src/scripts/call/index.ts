@@ -12,8 +12,8 @@ export * from './readers'
 
 export interface CallConfig {
     client: ClientConfig
-    locale: string | undefined
     keys: string
+    locale?: string
 }
 
 const messages: StringMap = {
