@@ -1,6 +1,6 @@
 {
   "name": "jton",
-  "version": "0.10.3",
+  "version": "0.10.4",
   "description": "Framework for compiling, deploying and testing Free TON contracts",
   "main": "dist/index",
   "scripts": {
