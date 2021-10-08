@@ -73,7 +73,8 @@ const FILE: StringMap = {
  *         linker: '0.7.31',
  *         stdlib: '0.45.0',
  *         extension: 'ts',
- *         export: 'es6-default'
+ *         export: 'es6-default',
+ *         suffix: 'Contract'
  *     }
  */
 export async function make(config: MakeConfig): Promise<void> {
