@@ -1,4 +1,4 @@
-import {consoleTerminal, runCommand} from 'tondev'
+import {consoleTerminal, runCommand} from 'everdev'
 import {ClientConfig, TonClient} from '@tonclient/core'
 import {libNode} from '@tonclient/lib-node'
 import {StringMap} from '../../types'

@@ -1,11 +1,11 @@
 import {TonClient} from '@tonclient/core'
 import {libNode} from '@tonclient/lib-node'
 import path from 'path'
-import {runCommand} from 'tondev'
+import {runCommand} from 'everdev'
 import colors from 'colors'
 import {StringMap} from '../../types'
 import {Printer} from '../../printer'
-import {Terminal} from 'tondev/dist/core'
+import {Terminal} from 'everdev/dist/core'
 
 export interface MakeConfig {
     root: string,
