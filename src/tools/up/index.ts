@@ -20,7 +20,7 @@ const SE: StringMap = {
 
 /**
  * @param config
- * You can get version from `tondev se version`
+ * You can get version from `everdev se version`
  * Example:
  *     {
  *         node: {

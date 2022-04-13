@@ -16,7 +16,7 @@ Framework for compiling, deploying and testing Free TON contracts
 ![requirements](docs/images/requirements.svg)
 * [Node.js](https://nodejs.org) >= `16.x`
 * [Yarn](https://classic.yarnpkg.com) >= `1.22.x`
-* [Free TON Development Environment](https://github.com/tonlabs/tondev) >= `0.7.x`
+* [EverDev](https://github.com/tonlabs/everdev) >= `0.7.x`
 
 ## Installation
 ### yarn

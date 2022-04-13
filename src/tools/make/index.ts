@@ -13,7 +13,6 @@ export interface MakeConfig {
     wrap?: string[]
     compiler?: string
     linker?: string
-    stdlib?: string
     extension?: Extension
     export?: Export
     suffix?: string
@@ -58,7 +57,7 @@ const FILE: StringMap = {
 
 /**
  * @param config Config contains relative paths without `.sol` and `.tvc` extension.
- * You can get compiler, linker and stdlib versions from `tondev sol version`
+ * You can get compiler and linker versions from `everdev sol version`
  * Example:
  *     {
  *         root: '/home/user/project/',
@@ -71,7 +70,6 @@ const FILE: StringMap = {
  *         ],
  *         compiler: '0.45.0',
  *         linker: '0.7.31',
- *         stdlib: '0.45.0',
  *         extension: 'ts',
  *         export: 'es6-default',
  *         suffix: 'Contract'
@@ -86,8 +84,7 @@ export async function make(config: MakeConfig): Promise<void> {
 
     await runCommand(errorConsoleTerminal, COMMAND.SOL_SET, {
         compiler: config.compiler,
-        linker: config.linker,
-        stdlib: config.stdlib
+        linker: config.linker
     })
 
     const compileFiles: string[] = config.compile ?? []
